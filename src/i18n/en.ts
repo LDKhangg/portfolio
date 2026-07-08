@@ -5,6 +5,7 @@ export interface Dict {
     skills: string;
     experience: string;
     contact: string;
+    langToggle: string;
   };
   hero: {
     greeting: string;
@@ -48,7 +49,7 @@ export interface Dict {
 }
 
 export const en: Dict = {
-  nav: { work: "Work", about: "About", skills: "Skills", experience: "Experience", contact: "Contact" },
+  nav: { work: "Work", about: "About", skills: "Skills", experience: "Experience", contact: "Contact", langToggle: "Switch language" },
   hero: {
     greeting: "Hi, I'm",
     name: "Le Duy Khang",

@@ -1,7 +1,7 @@
 import type { Dict } from "./en";
 
 export const vi: Dict = {
-  nav: { work: "Dự án", about: "Giới thiệu", skills: "Kỹ năng", experience: "Kinh nghiệm", contact: "Liên hệ" },
+  nav: { work: "Dự án", about: "Giới thiệu", skills: "Kỹ năng", experience: "Kinh nghiệm", contact: "Liên hệ", langToggle: "Đổi ngôn ngữ" },
   hero: {
     greeting: "Xin chào, tôi là",
     name: "Lê Duy Khang",

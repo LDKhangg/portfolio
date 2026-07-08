@@ -51,7 +51,7 @@ export function Navbar() {
           <a href="#skills" className="hide-sm">{t.nav.skills}</a>
           <a href="#experience" className="hide-sm">{t.nav.experience}</a>
           <a href="#contact">{t.nav.contact}</a>
-          <LangBtn onClick={toggle} aria-label="Switch language">
+          <LangBtn onClick={toggle} aria-label={t.nav.langToggle}>
             {lang === "en" ? "VN" : "EN"}
           </LangBtn>
         </Links>

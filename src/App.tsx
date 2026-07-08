@@ -7,33 +7,35 @@ import { SkillsTech } from "./sections/SkillsTech";
 import { Experience } from "./sections/Experience";
 import { Project } from "./sections/Project";
 import { CourseworkCertifications } from "./sections/CourseworkCertifications";
-function App() {
-  return (
-    <div className="min-h-screen text-white">
-      <GlobalStyle />
-      <DarkVeil
-        className="fixed top-0 left-0 -z-10"
-        noiseIntensity={0.05}
-        scanlineIntensity={0.02}
-        warpAmount={0.1}
-        speed={0.3}
-      />
+import { ContactFooter } from "./sections/ContactFooter";
+import { useReducedMotion } from "./hooks/useReducedMotion";
 
+function App() {
+  const reduced = useReducedMotion();
+  return (
+    <>
+      <GlobalStyle />
+      {!reduced && (
+        <DarkVeil
+          className="veil"
+          hueShift={20}
+          noiseIntensity={0.03}
+          scanlineIntensity={0}
+          warpAmount={0.08}
+          speed={0.25}
+        />
+      )}
       <Navbar />
       <main>
         <HeroSection />
-        <AboutMe />
-
-        <SkillsTech />
-
-        <Experience />
-
         <Project />
-
-        {/* <CourseworkCertifications /> */}
+        <AboutMe />
+        <SkillsTech />
+        <Experience />
+        <CourseworkCertifications />
+        <ContactFooter />
       </main>
-      {/* <Footer /> */}
-    </div>
+    </>
   );
 }
 

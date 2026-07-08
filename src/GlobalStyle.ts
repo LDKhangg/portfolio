@@ -23,6 +23,8 @@ const GlobalStyle = createGlobalStyle`
   a { color: ${({ theme }) => theme.colors.accent}; text-decoration: none; }
   a:hover { text-decoration: underline; text-underline-offset: 4px; }
   ::selection { background: ${({ theme }) => theme.colors.accent}; color: ${({ theme }) => theme.colors.bg0}; }
+
+  .veil { position: fixed; inset: 0; z-index: -1; opacity: 0.5; }
 `;
 
 export default GlobalStyle;

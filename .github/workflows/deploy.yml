@@ -41,5 +41,5 @@ jobs:
       # Bước 5: Đẩy (Deploy) file đã build lên S3
       - name: Deploy static site to S3
         run: |
-          aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
-          # Chỗ './build' này đã đúng với package.json của bạn
+          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
+          # Chỗ './dist' này đã đúng với package.json của bạn

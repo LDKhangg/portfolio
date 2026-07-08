@@ -1,10 +1,10 @@
 import React from "react";
 import SocialButton from "./SocialButton";
 
-import { ReactComponent as FacebookIcon } from "../assets/facebook-svgrepo-com.svg";
-import { ReactComponent as GithubIcon } from "../assets/github-142-svgrepo-com.svg";
-import { ReactComponent as GmailIcon } from "../assets/gmail-old-svgrepo-com.svg";
-import { ReactComponent as LinkedinIcon } from "../assets/linkedin-svgrepo-com.svg";
+import FacebookIcon from "../assets/facebook-svgrepo-com.svg?react";
+import GithubIcon from "../assets/github-142-svgrepo-com.svg?react";
+import GmailIcon from "../assets/gmail-old-svgrepo-com.svg?react";
+import LinkedinIcon from "../assets/linkedin-svgrepo-com.svg?react";
 
 const SocialButtonGroup: React.FC = () => {
   return (

@@ -7,12 +7,15 @@ import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/600.css";
 import App from "./App";
 import { theme } from "./theme";
+import { LanguageProvider } from "./i18n";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

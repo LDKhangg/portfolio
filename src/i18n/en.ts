@@ -1,4 +1,53 @@
-export const en = {
+export interface Dict {
+  nav: {
+    work: string;
+    about: string;
+    skills: string;
+    experience: string;
+    contact: string;
+  };
+  hero: {
+    greeting: string;
+    name: string;
+    tagline: string;
+    ctaWork: string;
+    ctaCv: string;
+  };
+  about: {
+    title: string;
+    body: string[];
+  };
+  projects: {
+    title: string;
+    items: {
+      name: string;
+      role: string;
+      description: string;
+      stack: string[];
+      link: string | null;
+    }[];
+  };
+  skills: {
+    title: string;
+    groups: { label: string; items: string }[];
+  };
+  experience: {
+    title: string;
+    items: { org: string; role: string; time: string; note: string }[];
+  };
+  certs: {
+    title: string;
+    items: { name: string; detail: string }[];
+  };
+  contact: {
+    title: string;
+    blurb: string;
+    email: string;
+    footer: string;
+  };
+}
+
+export const en: Dict = {
   nav: { work: "Work", about: "About", skills: "Skills", experience: "Experience", contact: "Contact" },
   hero: {
     greeting: "Hi, I'm",
@@ -73,6 +122,4 @@ export const en = {
     email: "contact.ldkhang@gmail.com",
     footer: "Built with React · Deployed on AWS S3",
   },
-} as const;
-
-export type Dict = typeof en;
+};

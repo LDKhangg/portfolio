@@ -45,6 +45,8 @@ export interface Dict {
     blurb: string;
     email: string;
     footer: string;
+    statsAlt: string;
+    langsAlt: string;
   };
 }
 
@@ -122,5 +124,7 @@ export const en: Dict = {
     blurb: "Open to fullstack / backend opportunities. Let's talk.",
     email: "contact.ldkhang@gmail.com",
     footer: "Built with React · Deployed on AWS S3",
+    statsAlt: "GitHub stats",
+    langsAlt: "Top languages",
   },
 };

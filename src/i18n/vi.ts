@@ -74,5 +74,7 @@ export const vi: Dict = {
     blurb: "Sẵn sàng cho cơ hội fullstack / backend. Liên hệ nhé.",
     email: "contact.ldkhang@gmail.com",
     footer: "Xây bằng React · Deploy trên AWS S3",
+    statsAlt: "Thống kê GitHub",
+    langsAlt: "Ngôn ngữ dùng nhiều nhất",
   },
 };

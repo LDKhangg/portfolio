@@ -39,11 +39,11 @@ export function ContactFooter() {
         <Blurb>{t.contact.blurb}</Blurb>
         <Email href={`mailto:${t.contact.email}`}>{t.contact.email}</Email>
         <Stats>
-          <img src={STATS} alt="GitHub stats" loading="lazy" height={165} />
-          <img src={LANGS} alt="Top languages" loading="lazy" height={165} />
+          <img src={STATS} alt={t.contact.statsAlt} loading="lazy" height={165} />
+          <img src={LANGS} alt={t.contact.langsAlt} loading="lazy" height={165} />
         </Stats>
         <Foot>
-          <span>© {year} Le Duy Khang</span>
+          <span>© {year} {t.hero.name}</span>
           <span>
             <a href="https://github.com/LDKhangg" target="_blank" rel="noreferrer">GitHub</a>
             {" · "}

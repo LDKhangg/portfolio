@@ -1,4 +1,4 @@
-name: Deploy Portfolio to S3
+name: Deploy Portfolio to GitHub Pages
 
 # KÍCH HOẠT:
 # 1. Khi push lên nhánh 'main'
@@ -6,40 +6,52 @@ name: Deploy Portfolio to S3
 on:
   push:
     branches:
-      - main # <-- ĐÃ SỬA CÚ PHÁP LỖI
+      - main
 
-  workflow_dispatch: # <-- ĐÃ THÊM VÀO ĐỂ CHẠY BẰNG TAY
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # Bước 1: Lấy code từ repo về máy ảo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Bước 2: Cài đặt Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: "npm"
 
-      # Bước 3: Cài đặt dependencies và Build project
-      - name: Install and Build
+      - name: Install and build
         run: |
-          npm install
+          npm ci
           npm run build
 
-      # Bước 4: Cấu hình "Chìa khóa" AWS
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      # Bước 5: Đẩy (Deploy) file đã build lên S3
-      - name: Deploy static site to S3
-        run: |
-          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
-          # Chỗ './dist' này đã đúng với package.json của bạn
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

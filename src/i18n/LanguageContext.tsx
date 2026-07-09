@@ -10,8 +10,12 @@ interface LangValue { lang: Lang; toggle: () => void; t: Dict; }
 const LanguageContext = createContext<LangValue | null>(null);
 
 function initialLang(): Lang {
-  const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-  return stored === "vi" ? "vi" : "en";
+  try {
+    const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
+    return stored === "vi" ? "vi" : "en";
+  } catch {
+    return "en";
+  }
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -19,7 +23,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const toggle = useCallback(() => {
     setLang((prev) => {
       const next = prev === "en" ? "vi" : "en";
-      localStorage.setItem(STORAGE_KEY, next);
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // storage unavailable; language still switches in-memory for this session
+      }
       return next;
     });
   }, []);

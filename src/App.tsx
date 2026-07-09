@@ -18,7 +18,7 @@ function App() {
       {!reduced && (
         <DarkVeil
           className="veil"
-          hueShift={20}
+          hueShift={20} // empirically tuned via screenshot sweep — 210 (spec's suggested value) renders amber/orange, 20 renders the intended navy/slate blue
           noiseIntensity={0.03}
           scanlineIntensity={0}
           warpAmount={0.08}

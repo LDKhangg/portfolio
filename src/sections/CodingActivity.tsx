@@ -17,7 +17,7 @@ type ActivityData = {
     hard: number;
     repoUrl: string;
   };
-  latestUpdate: {
+  latestUpdates: {
     repo: string;
     repoLabel: string;
     url: string;
@@ -25,7 +25,7 @@ type ActivityData = {
     pushedAt: string;
     relativeRepo: string;
     available: boolean;
-  };
+  }[];
 };
 
 const FALLBACK: ActivityData = {
@@ -37,15 +37,7 @@ const FALLBACK: ActivityData = {
     hard: 0,
     repoUrl: "https://github.com/LDKhangg/leetcode",
   },
-  latestUpdate: {
-    repo: "",
-    repoLabel: "",
-    url: "https://github.com/LDKhangg",
-    message: "",
-    pushedAt: "",
-    relativeRepo: "",
-    available: false,
-  },
+  latestUpdates: [],
 };
 
 const Shell = styled.div`
@@ -87,6 +79,26 @@ const LatestPanel = styled(Panel)`
   display: grid;
   gap: 14px;
   align-content: start;
+`;
+
+const UpdatesList = styled.div`
+  display: grid;
+  gap: 12px;
+`;
+
+const UpdateItem = styled.a`
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  border-radius: 20px;
+  background: ${({ theme }) => theme.colors.surface};
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
 `;
 
 const GraphPanel = styled(Panel)`
@@ -236,8 +248,8 @@ const BreakdownValue = styled.span`
 `;
 
 const UpdateMessage = styled.p`
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 0.96rem;
+  line-height: 1.65;
 `;
 
 const RepoLine = styled.div`
@@ -250,28 +262,6 @@ const RepoLine = styled.div`
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.body};
-`;
-
-const Action = styled.a`
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 999px;
-  background: ${({ theme }) => theme.colors.surface};
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.text};
-
-  &:hover {
-    text-decoration: none;
-    border-color: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.accent};
-  }
 `;
 
 const FooterLine = styled.div`
@@ -336,7 +326,7 @@ export function CodingActivity() {
 
   const data = activity ?? FALLBACK;
   const { totalSolved, easy, medium, hard, repoUrl } = data.leetcodeProgress;
-  const latest = data.latestUpdate;
+  const latestUpdates = data.latestUpdates;
   const maxBucket = Math.max(easy, medium, hard, 1);
   const ring = ringOffsets(totalSolved, easy, medium, hard);
   const progressStateLabel = status === "loading"
@@ -460,26 +450,25 @@ export function CodingActivity() {
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
             <Kicker>{t.activity.latestLabel}</Kicker>
-            <UpdateMessage>
-              {status === "loading"
-                ? t.activity.loadingLabel
-                : latest.available && latest.message
-                  ? latest.message
-                  : t.activity.unavailableLabel}
-            </UpdateMessage>
-            <RepoLine>
-              <span>{t.activity.repositoryLabel}</span>
-              <span>{status === "loading" ? t.activity.loadingLabel : latest.available ? latest.repoLabel || latest.relativeRepo : t.activity.unavailableLabel}</span>
-            </RepoLine>
-            <RepoLine>
-              <span>{t.activity.updatedLabel}</span>
-              <span>{status === "loading" ? t.activity.loadingLabel : latest.available ? formatDate(latest.pushedAt, lang) : t.activity.unavailableLabel}</span>
-            </RepoLine>
             <UpdateMessage>{t.activity.latestNote}</UpdateMessage>
-            {status === "ready" && latest.available ? (
-              <Action href={latest.url} target="_blank" rel="noreferrer">
-                {t.activity.latestAction} ↗
-              </Action>
+            {status === "loading" ? <UpdateMessage>{t.activity.loadingLabel}</UpdateMessage> : null}
+            {status === "error" ? <UpdateMessage>{t.activity.unavailableLabel}</UpdateMessage> : null}
+            {status === "ready" ? (
+              latestUpdates.length > 0 ? <UpdatesList>
+                {latestUpdates.slice(0, 3).map((update) => (
+                  <UpdateItem key={`${update.repo}-${update.pushedAt}`} href={update.url} target="_blank" rel="noreferrer">
+                    <RepoLine>
+                      <span>{update.repoLabel || update.relativeRepo}</span>
+                      <span>{formatDate(update.pushedAt, lang)}</span>
+                    </RepoLine>
+                    <UpdateMessage>{update.message}</UpdateMessage>
+                    <RepoLine>
+                      <span>{t.activity.latestListLabel}</span>
+                      <span>{t.activity.latestAction} ↗</span>
+                    </RepoLine>
+                  </UpdateItem>
+                ))}
+              </UpdatesList> : <UpdateMessage>{t.activity.unavailableLabel}</UpdateMessage>
             ) : null}
           </LatestPanel>
         </Shell>

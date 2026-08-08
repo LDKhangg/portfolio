@@ -48,6 +48,7 @@ export interface Dict {
     updatedLabel: string;
     unavailableLabel: string;
     latestAction: string;
+    latestListLabel: string;
   };
   projects: {
     title: string;
@@ -141,11 +142,12 @@ export const en: Dict = {
     contributionAlt: "GitHub contribution chart for LDKhangg",
     contributionAction: "View on GitHub",
     latestLabel: "Latest update",
-    latestNote: "The most recent commit between the repos I update most often right now.",
+    latestNote: "The three repos that moved most recently, based on the newest public commits.",
     repositoryLabel: "Repository",
     updatedLabel: "Updated",
     unavailableLabel: "Unavailable",
     latestAction: "Open commit",
+    latestListLabel: "Recent repos",
   },
   projects: {
     title: "Selected work",

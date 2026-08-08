@@ -44,41 +44,23 @@ const Logo = styled.a`
   }
 `;
 
-const Mark = styled.span`
+const Avatar = styled.img`
   width: 24px;
   height: 24px;
-  display: grid;
-  place-items: center;
   border-radius: 999px;
-  background: ${({ theme }) => theme.colors.text};
-  color: ${({ theme }) => theme.colors.surface};
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  object-fit: cover;
+  border: 1px solid ${({ theme }) => theme.colors.line};
 `;
 
 const Wordmark = styled.span`
-  display: grid;
-  gap: 1px;
   line-height: 1;
-
-  strong {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  span {
-    font-size: 0.54rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.body};
-  }
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
 
   @media (max-width: 640px) {
-    span {
-      display: none;
-    }
+    display: none;
   }
 `;
 
@@ -113,15 +95,13 @@ const LangBtn = styled.button`
 
 export function Navbar() {
   const { lang, toggle, t } = useLang();
+  const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
   return (
     <Bar>
       <Inner>
         <Logo href="#top" aria-label="Le Duy Khang portfolio">
-          <Mark>LK</Mark>
-          <Wordmark>
-            <strong>LDK</strong>
-            <span>portfolio</span>
-          </Wordmark>
+          <Avatar src={avatarSrc} alt="Le Duy Khang" />
+          <Wordmark>LDK</Wordmark>
         </Logo>
         <Links>
           <a href="#work">{t.nav.work}</a>

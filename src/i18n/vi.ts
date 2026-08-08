@@ -53,11 +53,12 @@ export const vi: Dict = {
     contributionAlt: "Biểu đồ contribution GitHub của LDKhangg",
     contributionAction: "Xem trên GitHub",
     latestLabel: "Cập nhật mới nhất",
-    latestNote: "Commit mới nhất giữa các repo tôi đang cập nhật thường xuyên nhất lúc này.",
+    latestNote: "Ba repo được cập nhật gần nhất, dựa trên các commit công khai mới nhất.",
     repositoryLabel: "Repository",
     updatedLabel: "Cập nhật",
     unavailableLabel: "Chưa có dữ liệu",
     latestAction: "Mở commit",
+    latestListLabel: "Repo gần đây",
   },
   projects: {
     title: "Dự án nổi bật",

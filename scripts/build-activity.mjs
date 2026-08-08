@@ -19,15 +19,7 @@ function defaultActivity() {
       hard: 0,
       repoUrl: `https://github.com/${USER}/leetcode`,
     },
-    latestUpdate: {
-      repo: "",
-      repoLabel: "",
-      url: `https://github.com/${USER}`,
-      message: "",
-      pushedAt: "",
-      relativeRepo: "",
-      available: false,
-    },
+    latestUpdates: [],
   };
 }
 
@@ -101,21 +93,38 @@ async function fetchLatestCommit(name, repoLabel) {
   };
 }
 
+async function fetchRecentRepoUpdates(limit = 3) {
+  const repos = await fetchJson(`${API}/users/${USER}/repos?per_page=100&sort=updated`);
+  const candidates = Array.isArray(repos)
+    ? repos
+        .filter((repo) => !repo.fork)
+        .sort((a, b) => new Date(b.pushed_at ?? 0).getTime() - new Date(a.pushed_at ?? 0).getTime())
+        .slice(0, limit)
+    : [];
+
+  const updates = await Promise.all(
+    candidates.map(async (repo) => {
+      const commit = await fetchLatestCommit(repo.name, repo.name);
+      return {
+        ...commit,
+        repoLabel: repo.name,
+      };
+    }),
+  );
+
+  return updates.filter((update) => update.available && update.pushedAt);
+}
+
 async function buildActivity() {
   const existing = await readExisting();
 
   try {
-    const [{ repo: leetcodeRepo, tree }, leetcodeCommit, goCommit] = await Promise.all([
+    const [{ repo: leetcodeRepo, tree }, recentUpdates] = await Promise.all([
       fetchRepoTree("leetcode"),
-      fetchLatestCommit("leetcode", "LeetCode"),
-      fetchLatestCommit("go-playground", "Go"),
+      fetchRecentRepoUpdates(3),
     ]);
 
     const { easy, medium, hard } = countDifficultyFiles(tree);
-    const latestUpdate = [leetcodeCommit, goCommit]
-      .filter((item) => item.pushedAt)
-      .sort((a, b) => new Date(b.pushedAt).getTime() - new Date(a.pushedAt).getTime())[0] ??
-      defaultActivity().latestUpdate;
 
     return {
       generatedAt: new Date().toISOString(),
@@ -126,7 +135,7 @@ async function buildActivity() {
         hard,
         repoUrl: leetcodeRepo.html_url,
       },
-      latestUpdate,
+      latestUpdates: recentUpdates,
     };
   } catch (error) {
     console.warn("[activity] Falling back to existing activity data.");

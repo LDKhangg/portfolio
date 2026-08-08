@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T17:02:45.998Z",
+  "generatedAt": "2026-08-08T17:08:10.821Z",
   "leetcodeProgress": {
     "totalSolved": 122,
     "easy": 90,
@@ -7,13 +7,33 @@
     "hard": 6,
     "repoUrl": "https://github.com/LDKhangg/leetcode"
   },
-  "latestUpdate": {
-    "repo": "go-playground",
-    "repoLabel": "Go",
-    "url": "https://github.com/LDKhangg/go-playground/commit/65e9a4f5368fb9d0e35d3a445c3e7412a059d99e",
-    "message": "exercise 7",
-    "pushedAt": "2026-08-07T16:28:23Z",
-    "relativeRepo": "go-playground",
-    "available": true
-  }
+  "latestUpdates": [
+    {
+      "repo": "portfolio",
+      "repoLabel": "portfolio",
+      "url": "https://github.com/LDKhangg/portfolio/commit/eacd6c8bb148cacc81a1579aab833270802b8448",
+      "message": "feat: add hero avatar and update learning copy",
+      "pushedAt": "2026-08-08T17:03:14Z",
+      "relativeRepo": "portfolio",
+      "available": true
+    },
+    {
+      "repo": "nvim-config",
+      "repoLabel": "nvim-config",
+      "url": "https://github.com/LDKhangg/nvim-config/commit/25cf7f25d395c817c8f50b1107b42761d4048185",
+      "message": "feat: nvim config as standalone repo",
+      "pushedAt": "2026-08-08T04:40:29Z",
+      "relativeRepo": "nvim-config",
+      "available": true
+    },
+    {
+      "repo": "go-playground",
+      "repoLabel": "go-playground",
+      "url": "https://github.com/LDKhangg/go-playground/commit/65e9a4f5368fb9d0e35d3a445c3e7412a059d99e",
+      "message": "exercise 7",
+      "pushedAt": "2026-08-07T16:28:23Z",
+      "relativeRepo": "go-playground",
+      "available": true
+    }
+  ]
 }

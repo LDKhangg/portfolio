@@ -6,7 +6,7 @@ export const vi: Dict = {
     greeting: "Đang ở TP.HCM",
     name: "Lê Duy Khang",
     tagline: "Tôi thích học bằng cách làm, giữ sự tò mò, và để mỗi dự án rõ ràng hơn lúc bắt đầu.",
-    facts: ["TP.HCM", "WALA-ICT", "Đang học Go"],
+    facts: ["TP.HCM", "WALA-ICT", "Java là chính, học Go"],
     ctaWork: "Xem dự án",
     ctaCv: "Tải CV",
     console: {
@@ -17,7 +17,7 @@ export const vi: Dict = {
         { label: "tên", value: "Lê Duy Khang" },
         { label: "địa điểm", value: "TP. Hồ Chí Minh" },
         { label: "hiện tại", value: "WALA-ICT" },
-        { label: "đang học", value: "Go" },
+        { label: "đang học", value: "Go trước, rồi thêm ngôn ngữ mới nữa" },
         { label: "trạng thái", value: "đang xây dựng và học hỏi" },
       ],
     },
@@ -34,7 +34,7 @@ export const vi: Dict = {
       { label: "Địa điểm", value: "TP.HCM" },
       { label: "Hiện tại", value: "WALA-ICT" },
       { label: "Tập trung", value: "Spring Boot, React, TypeScript" },
-      { label: "Hiện học", value: "Go" },
+      { label: "Hiện học", value: "Java là chính, đang học Go" },
     ],
   },
   activity: {

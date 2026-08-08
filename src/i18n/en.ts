@@ -94,7 +94,7 @@ export const en: Dict = {
     greeting: "Based in Ho Chi Minh City",
     name: "Le Duy Khang",
     tagline: "I like learning by building, staying curious, and leaving every project clearer than I found it.",
-    facts: ["Ho Chi Minh City", "WALA-ICT", "Learning Go"],
+    facts: ["Ho Chi Minh City", "WALA-ICT", "Java first, learning Go"],
     ctaWork: "View work",
     ctaCv: "Download CV",
     console: {
@@ -105,7 +105,7 @@ export const en: Dict = {
         { label: "name", value: "Le Duy Khang" },
         { label: "location", value: "Ho Chi Minh City" },
         { label: "current", value: "WALA-ICT" },
-        { label: "learning", value: "Go" },
+        { label: "learning", value: "Go now, more languages next" },
         { label: "mode", value: "building and learning" },
       ],
     },
@@ -122,7 +122,7 @@ export const en: Dict = {
       { label: "Location", value: "Ho Chi Minh City" },
       { label: "Current", value: "WALA-ICT" },
       { label: "Focus", value: "Spring Boot, React, TypeScript" },
-      { label: "Now", value: "Learning Go" },
+      { label: "Now", value: "Java first, learning Go" },
     ],
   },
   activity: {

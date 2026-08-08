@@ -30,6 +30,34 @@ const Copy = styled.div`
   max-width: 44rem;
 `;
 
+const Intro = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;
+
+const Avatar = styled.img`
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: ${({ theme }) => theme.colors.surface};
+  box-shadow: 0 18px 36px ${({ theme }) => theme.colors.shadow};
+  flex: 0 0 auto;
+
+  @media (max-width: 640px) {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+  }
+`;
+
+const IntroText = styled.div`
+  display: grid;
+  gap: 8px;
+`;
+
 const Greeting = styled.p`
   font-family: ${({ theme }) => theme.fonts.mono};
   color: ${({ theme }) => theme.colors.accent};
@@ -114,11 +142,18 @@ const Ghost = styled(Action)``;
 export function HeroSection() {
   const { t } = useLang();
   const reduced = useReducedMotion();
+  const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
+  const cvSrc = `${import.meta.env.BASE_URL}LeDuyKhang_FullStack_Developer.pdf`;
   return (
     <Wrap id="top">
       <HeroShell>
         <Copy>
-          <Greeting>{t.hero.greeting}</Greeting>
+          <Intro>
+            <Avatar src={avatarSrc} alt={t.hero.name} />
+            <IntroText>
+              <Greeting>{t.hero.greeting}</Greeting>
+            </IntroText>
+          </Intro>
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 14 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
@@ -134,7 +169,7 @@ export function HeroSection() {
           </Facts>
           <Ctas>
             <Primary href="#work">{t.hero.ctaWork}</Primary>
-            <Ghost href="/LeDuyKhang_FullStack_Developer.pdf" target="_blank" rel="noreferrer">{t.hero.ctaCv}</Ghost>
+            <Ghost href={cvSrc} target="_blank" rel="noreferrer">{t.hero.ctaCv}</Ghost>
           </Ctas>
         </Copy>
         <PersonalConsole />

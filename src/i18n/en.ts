@@ -128,7 +128,7 @@ export const en: Dict = {
   },
   activity: {
     title: "Coding activity",
-    description: "A quick view of LeetCode progress and the repo that moved most recently.",
+    description: "A quick view of LeetCode progress and the repos that moved most recently.",
     refreshed: "Refreshed from public GitHub data",
     loadingLabel: "Loading",
     progressLabel: "Progress",
@@ -142,7 +142,7 @@ export const en: Dict = {
     contributionAlt: "GitHub contribution chart for LDKhangg",
     contributionAction: "View on GitHub",
     latestLabel: "Latest update",
-    latestNote: "The three repos that moved most recently, based on the newest public commits.",
+    latestNote: "The four repos that moved most recently, based on the newest public commits.",
     repositoryLabel: "Repository",
     updatedLabel: "Updated",
     unavailableLabel: "Unavailable",

@@ -93,7 +93,7 @@ async function fetchLatestCommit(name, repoLabel) {
   };
 }
 
-async function fetchRecentRepoUpdates(limit = 3) {
+async function fetchRecentRepoUpdates(limit = 4) {
   const repos = await fetchJson(`${API}/users/${USER}/repos?per_page=100&sort=updated`);
   const candidates = Array.isArray(repos)
     ? repos
@@ -121,7 +121,7 @@ async function buildActivity() {
   try {
     const [{ repo: leetcodeRepo, tree }, recentUpdates] = await Promise.all([
       fetchRepoTree("leetcode"),
-      fetchRecentRepoUpdates(3),
+      fetchRecentRepoUpdates(4),
     ]);
 
     const { easy, medium, hard } = countDifficultyFiles(tree);

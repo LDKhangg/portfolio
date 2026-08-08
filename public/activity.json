@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T17:08:10.821Z",
+  "generatedAt": "2026-08-08T17:10:59.107Z",
   "leetcodeProgress": {
     "totalSolved": 122,
     "easy": 90,
@@ -11,9 +11,9 @@
     {
       "repo": "portfolio",
       "repoLabel": "portfolio",
-      "url": "https://github.com/LDKhangg/portfolio/commit/eacd6c8bb148cacc81a1579aab833270802b8448",
-      "message": "feat: add hero avatar and update learning copy",
-      "pushedAt": "2026-08-08T17:03:14Z",
+      "url": "https://github.com/LDKhangg/portfolio/commit/da2120e20a160d8e20caf6dc67e6b8ee0f69b773",
+      "message": "feat: refine navbar brand and repo activity",
+      "pushedAt": "2026-08-08T17:09:58Z",
       "relativeRepo": "portfolio",
       "available": true
     },
@@ -33,6 +33,15 @@
       "message": "exercise 7",
       "pushedAt": "2026-08-07T16:28:23Z",
       "relativeRepo": "go-playground",
+      "available": true
+    },
+    {
+      "repo": "dotfiles-vim",
+      "repoLabel": "dotfiles-vim",
+      "url": "https://github.com/LDKhangg/dotfiles-vim/commit/e2fa4212ef2eeac0856d2262fd26f4ca70a9796c",
+      "message": "fix: run Go linting on demand",
+      "pushedAt": "2026-07-30T07:36:44Z",
+      "relativeRepo": "dotfiles-vim",
       "available": true
     }
   ]

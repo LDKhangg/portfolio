@@ -280,9 +280,38 @@ function formatDate(value: string, locale: string) {
 function ringOffsets(total: number, easy: number, medium: number, hard: number) {
   const circumference = 2 * Math.PI * 84;
   const safeTotal = Math.max(total, 1);
-  const easyLength = (easy / safeTotal) * circumference;
-  const mediumLength = (medium / safeTotal) * circumference;
-  const hardLength = (hard / safeTotal) * circumference;
+  const minVisibleLength = 16;
+  const rawLengths = [easy, medium, hard].map((value) => (value / safeTotal) * circumference);
+  const nonZeroIndexes = rawLengths
+    .map((value, index) => ({ value, index }))
+    .filter(({ value }) => value > 0)
+    .map(({ index }) => index);
+
+  let lengths = [...rawLengths];
+
+  if (nonZeroIndexes.length > 0) {
+    const boosted = nonZeroIndexes.filter((index) => lengths[index] < minVisibleLength);
+
+    if (boosted.length > 0) {
+      let extraNeeded = 0;
+      for (const index of boosted) {
+        extraNeeded += minVisibleLength - lengths[index];
+        lengths[index] = minVisibleLength;
+      }
+
+      const shrinkable = nonZeroIndexes.filter((index) => !boosted.includes(index));
+      const shrinkableTotal = shrinkable.reduce((sum, index) => sum + lengths[index], 0);
+
+      if (shrinkableTotal > 0) {
+        for (const index of shrinkable) {
+          const ratio = lengths[index] / shrinkableTotal;
+          lengths[index] = Math.max(minVisibleLength, lengths[index] - extraNeeded * ratio);
+        }
+      }
+    }
+  }
+
+  const [easyLength, mediumLength, hardLength] = lengths;
 
   return {
     circumference,
@@ -357,7 +386,7 @@ export function CodingActivity() {
                     fill="none"
                     stroke="#67C587"
                     strokeWidth="20"
-                    strokeLinecap="round"
+                     strokeLinecap="butt"
                     strokeDasharray={`${ring.easyLength} ${ring.circumference}`}
                     strokeDashoffset="0"
                     transform="rotate(-90 110 110)"
@@ -369,7 +398,7 @@ export function CodingActivity() {
                     fill="none"
                     stroke="#E7B44C"
                     strokeWidth="20"
-                    strokeLinecap="round"
+                     strokeLinecap="butt"
                     strokeDasharray={`${ring.mediumLength} ${ring.circumference}`}
                     strokeDashoffset={ring.mediumOffset}
                     transform="rotate(-90 110 110)"
@@ -381,7 +410,7 @@ export function CodingActivity() {
                     fill="none"
                     stroke="#D96262"
                     strokeWidth="20"
-                    strokeLinecap="round"
+                     strokeLinecap="butt"
                     strokeDasharray={`${ring.hardLength} ${ring.circumference}`}
                     strokeDashoffset={ring.hardOffset}
                     transform="rotate(-90 110 110)"
@@ -455,7 +484,7 @@ export function CodingActivity() {
             {status === "error" ? <UpdateMessage>{t.activity.unavailableLabel}</UpdateMessage> : null}
             {status === "ready" ? (
               latestUpdates.length > 0 ? <UpdatesList>
-                {latestUpdates.slice(0, 3).map((update) => (
+                {latestUpdates.slice(0, 4).map((update) => (
                   <UpdateItem key={`${update.repo}-${update.pushedAt}`} href={update.url} target="_blank" rel="noreferrer">
                     <RepoLine>
                       <span>{update.repoLabel || update.relativeRepo}</span>

@@ -39,7 +39,7 @@ export const vi: Dict = {
   },
   activity: {
     title: "Hoạt động code",
-    description: "Góc nhìn nhanh về tiến độ LeetCode và repo vừa được cập nhật gần nhất.",
+    description: "Góc nhìn nhanh về tiến độ LeetCode và các repo vừa được cập nhật gần nhất.",
     refreshed: "Cập nhật từ dữ liệu GitHub công khai",
     loadingLabel: "Đang tải",
     progressLabel: "Tiến độ",
@@ -53,7 +53,7 @@ export const vi: Dict = {
     contributionAlt: "Biểu đồ contribution GitHub của LDKhangg",
     contributionAction: "Xem trên GitHub",
     latestLabel: "Cập nhật mới nhất",
-    latestNote: "Ba repo được cập nhật gần nhất, dựa trên các commit công khai mới nhất.",
+    latestNote: "Bốn repo được cập nhật gần nhất, dựa trên các commit công khai mới nhất.",
     repositoryLabel: "Repository",
     updatedLabel: "Cập nhật",
     unavailableLabel: "Chưa có dữ liệu",

@@ -122,16 +122,36 @@ const GaugeWrap = styled.a`
   color: inherit;
 `;
 
-const GaugeSvg = styled.svg`
+const GaugeVisual = styled.div`
+  position: relative;
   width: min(100%, 280px);
-  height: auto;
-  overflow: visible;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
 `;
 
 const CenterCopy = styled.div`
+  position: relative;
+  z-index: 1;
   display: grid;
   justify-items: center;
   gap: 6px;
+`;
+
+const GaugeRing = styled.div<{ $gradient: string }>`
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: ${({ $gradient }) => $gradient};
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.colors.surface};
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.line};
+  }
 `;
 
 const Total = styled.div`
@@ -277,11 +297,9 @@ function formatDate(value: string, locale: string) {
   return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", year: "numeric" }).format(new Date(value));
 }
 
-function ringOffsets(total: number, easy: number, medium: number, hard: number) {
-  const circumference = 2 * Math.PI * 84;
+function allocateSegments(values: number[], total: number, minVisible: number, full: number) {
   const safeTotal = Math.max(total, 1);
-  const minVisibleLength = 16;
-  const rawLengths = [easy, medium, hard].map((value) => (value / safeTotal) * circumference);
+  const rawLengths = values.map((value) => (value / safeTotal) * full);
   const nonZeroIndexes = rawLengths
     .map((value, index) => ({ value, index }))
     .filter(({ value }) => value > 0)
@@ -290,13 +308,13 @@ function ringOffsets(total: number, easy: number, medium: number, hard: number) 
   let lengths = [...rawLengths];
 
   if (nonZeroIndexes.length > 0) {
-    const boosted = nonZeroIndexes.filter((index) => lengths[index] < minVisibleLength);
+    const boosted = nonZeroIndexes.filter((index) => lengths[index] < minVisible);
 
     if (boosted.length > 0) {
       let extraNeeded = 0;
       for (const index of boosted) {
-        extraNeeded += minVisibleLength - lengths[index];
-        lengths[index] = minVisibleLength;
+        extraNeeded += minVisible - lengths[index];
+        lengths[index] = minVisible;
       }
 
       const shrinkable = nonZeroIndexes.filter((index) => !boosted.includes(index));
@@ -305,22 +323,22 @@ function ringOffsets(total: number, easy: number, medium: number, hard: number) 
       if (shrinkableTotal > 0) {
         for (const index of shrinkable) {
           const ratio = lengths[index] / shrinkableTotal;
-          lengths[index] = Math.max(minVisibleLength, lengths[index] - extraNeeded * ratio);
+          lengths[index] = Math.max(minVisible, lengths[index] - extraNeeded * ratio);
         }
       }
     }
   }
 
-  const [easyLength, mediumLength, hardLength] = lengths;
+  return lengths;
+}
 
-  return {
-    circumference,
-    easyLength,
-    mediumLength,
-    hardLength,
-    mediumOffset: circumference - easyLength,
-    hardOffset: circumference - easyLength - mediumLength,
-  };
+function ringGradient(total: number, easy: number, medium: number, hard: number) {
+  const [easyDeg, mediumDeg, hardDeg] = allocateSegments([easy, medium, hard], total, 10, 360);
+  const easyEnd = easyDeg;
+  const mediumEnd = easyEnd + mediumDeg;
+  const hardEnd = mediumEnd + hardDeg;
+
+  return `conic-gradient(from -90deg, #67C587 0deg ${easyEnd}deg, #E7B44C ${easyEnd}deg ${mediumEnd}deg, #D96262 ${mediumEnd}deg ${hardEnd}deg, rgba(16, 19, 24, 0.08) ${hardEnd}deg 360deg)`;
 }
 
 export function CodingActivity() {
@@ -357,7 +375,7 @@ export function CodingActivity() {
   const { totalSolved, easy, medium, hard, repoUrl } = data.leetcodeProgress;
   const latestUpdates = data.latestUpdates;
   const maxBucket = Math.max(easy, medium, hard, 1);
-  const ring = ringOffsets(totalSolved, easy, medium, hard);
+  const ring = ringGradient(totalSolved, easy, medium, hard);
   const progressStateLabel = status === "loading"
     ? t.activity.loadingLabel
     : status === "error"
@@ -377,51 +395,15 @@ export function CodingActivity() {
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             >
               <GaugeWrap href={repoUrl} target="_blank" rel="noreferrer">
-                <GaugeSvg viewBox="0 0 220 220" aria-hidden="true">
-                  <circle cx="110" cy="110" r="84" fill="none" stroke="rgba(16, 19, 24, 0.08)" strokeWidth="20" />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="84"
-                    fill="none"
-                    stroke="#67C587"
-                    strokeWidth="20"
-                     strokeLinecap="butt"
-                    strokeDasharray={`${ring.easyLength} ${ring.circumference}`}
-                    strokeDashoffset="0"
-                    transform="rotate(-90 110 110)"
-                  />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="84"
-                    fill="none"
-                    stroke="#E7B44C"
-                    strokeWidth="20"
-                     strokeLinecap="butt"
-                    strokeDasharray={`${ring.mediumLength} ${ring.circumference}`}
-                    strokeDashoffset={ring.mediumOffset}
-                    transform="rotate(-90 110 110)"
-                  />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="84"
-                    fill="none"
-                    stroke="#D96262"
-                    strokeWidth="20"
-                     strokeLinecap="butt"
-                    strokeDasharray={`${ring.hardLength} ${ring.circumference}`}
-                    strokeDashoffset={ring.hardOffset}
-                    transform="rotate(-90 110 110)"
-                  />
-                  <foreignObject x="42" y="58" width="136" height="106">
+                <GaugeVisual aria-hidden="true">
+                  <GaugeRing $gradient={ring} />
+                  <div>
                     <CenterCopy>
                       <Total>{status === "ready" ? totalSolved : "--"}</Total>
                       <Unit>{progressStateLabel}</Unit>
                     </CenterCopy>
-                  </foreignObject>
-                </GaugeSvg>
+                  </div>
+                </GaugeVisual>
               </GaugeWrap>
 
               <ProgressMeta>

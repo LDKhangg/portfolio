@@ -19,6 +19,9 @@
     "tailwind-merge": "^3.3.1"
   },
   "scripts": {
+    "activity": "node scripts/build-activity.mjs",
+    "predev": "node scripts/build-activity.mjs",
+    "prebuild": "node scripts/build-activity.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

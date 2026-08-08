@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -14,17 +14,65 @@ const GlobalStyle = createGlobalStyle`
     background-attachment: fixed;
     color: ${({ theme }) => theme.colors.body};
     font-family: ${({ theme }) => theme.fonts.sans};
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.7;
+    min-height: 100vh;
+    position: relative;
+    isolation: isolate;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 { font-family: ${({ theme }) => theme.fonts.serif}; color: ${({ theme }) => theme.colors.text}; font-weight: 600; line-height: 1.15; }
-  a { color: ${({ theme }) => theme.colors.accent}; text-decoration: none; }
-  a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(0, 122, 255, 0.12), transparent 32%),
+      radial-gradient(circle at 85% 10%, rgba(16, 19, 24, 0.08), transparent 26%),
+      radial-gradient(circle at 50% 100%, rgba(0, 122, 255, 0.05), transparent 24%);
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: radial-gradient(rgba(16, 19, 24, 0.55) 0.6px, transparent 0.6px);
+    background-size: 3px 3px;
+    mix-blend-mode: soft-light;
+  }
+
+  h1, h2, h3 { font-family: ${({ theme }) => theme.fonts.serif}; color: ${({ theme }) => theme.colors.text}; font-weight: 600; line-height: 0.94; letter-spacing: -0.06em; text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: ${({ theme }) => theme.colors.accent}; text-decoration: none; }
+  button, input, textarea, select { font: inherit; }
+  img { display: block; max-width: 100%; }
   ::selection { background: ${({ theme }) => theme.colors.accent}; color: ${({ theme }) => theme.colors.bg0}; }
 
-  .veil { position: fixed; inset: 0; z-index: -1; opacity: 0.5; }
+  section { scroll-margin-top: 96px; }
+
+  .skip-link {
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    z-index: 30;
+    transform: translateY(-180%);
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: ${({ theme }) => theme.colors.surface};
+    border: 1px solid ${({ theme }) => theme.colors.line};
+    color: ${({ theme }) => theme.colors.text};
+    box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
 `;
 
 export default GlobalStyle;

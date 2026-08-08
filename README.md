@@ -1,37 +1,41 @@
 # Portfolio — Le Duy Khang
 
-Personal portfolio website showcasing my projects, skills, experience, and certifications as a fullstack developer (Java Spring Boot · ReactJS).
+Personal portfolio website showcasing projects, skills, experience, and certifications as a fullstack developer.
 
 > 🇻🇳 Website portfolio cá nhân — giới thiệu dự án, kỹ năng, kinh nghiệm và chứng chỉ. Tóm tắt tiếng Việt ở [cuối trang](#-tóm-tắt-tiếng-việt).
 
 ## Sections
 
 - **Hero** — introduction and quick links
-- **About Me** — background and what I work with
-- **Skills & Tech** — backend (Spring Boot, JPA, Redis, RabbitMQ), frontend (React, TypeScript), databases, DevOps
-- **Experience** — work history and training programs
-- **Projects** — selected projects with tech stack and links
+- **Projects** — selected work and stack
+- **About Me** — background and current focus
+- **Skills & Tech** — backend, frontend, data, DevOps
+- **Coding Activity** — GitHub contribution graph and repo stats
+- **Experience** — work history and training
 - **Coursework & Certifications**
 
 ## Tech stack
 
-- **React 19 + TypeScript** (Create React App)
+- **React 19 + TypeScript** (Vite)
 - **styled-components** for component styling
-- **lucide-react** icons
+- **motion** for lightweight reveals
+- **OGL** for the optional visual layer
+- Daily GitHub activity JSON refresh via script + GitHub Pages workflow
 
 ## Run locally
 
 ```bash
 npm install
-npm start        # dev server at http://localhost:3000
+npm run dev      # dev server
 npm run build    # production build
+npm run test     # unit tests
 ```
 
 ---
 
 ## 🇻🇳 Tóm tắt tiếng Việt
 
-Website portfolio cá nhân viết bằng **React 19 + TypeScript**, style bằng styled-components. Gồm các phần: giới thiệu bản thân, kỹ năng công nghệ, kinh nghiệm làm việc, dự án nổi bật và chứng chỉ. Chạy local: `npm install && npm start`.
+Website portfolio cá nhân viết bằng **React 19 + TypeScript**, style bằng styled-components. Gồm các phần: giới thiệu bản thân, dự án nổi bật, kỹ năng công nghệ, kinh nghiệm làm việc và chứng chỉ. Chạy local: `npm install && npm run dev`.
 
 ## Contact
 

@@ -24,7 +24,7 @@ beforeEach(() => localStorage.clear());
 test("defaults to en and exposes dictionary", () => {
   renderProbe();
   expect(screen.getByTestId("lang").textContent).toBe("en");
-  expect(screen.getByTestId("tagline").textContent).toMatch(/Fullstack/);
+  expect(screen.getByTestId("tagline").textContent).toMatch(/learning by building/i);
 });
 
 test("toggle switches to vi and persists", () => {

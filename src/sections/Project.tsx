@@ -1,81 +1,178 @@
 import styled from "styled-components";
+import { motion } from "motion/react";
 import { Container, Section, SectionHeading } from "@/components/layout";
 import { useLang } from "@/i18n";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-const Rows = styled.div` display: grid; `;
-
-const Row = styled.a`
+const Rows = styled.div`
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 24px;
-  padding: 40px 0;
+  gap: 18px;
+`;
+
+const Row = styled(motion.article)`
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  gap: 28px;
+  padding: 30px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   border-bottom: 1px solid ${({ theme }) => theme.colors.line};
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
   color: inherit;
-  transition: background 0.25s ease;
-  &:first-of-type { border-top: 1px solid ${({ theme }) => theme.colors.line}; }
-  &:hover { text-decoration: none; background: ${({ theme }) => theme.colors.card}; }
-  &:hover h3 { color: ${({ theme }) => theme.colors.accent}; }
-  @media (max-width: 640px) { grid-template-columns: 1fr; gap: 8px; }
+  align-items: start;
+
+  &:hover { text-decoration: none; }
+
+  &[data-reverse="true"] {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  &[data-reverse="true"] > :first-child {
+    order: 2;
+  }
+
+  &[data-reverse="true"] > :last-child {
+    order: 1;
+  }
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+
+    &[data-reverse="true"] > :first-child,
+    &[data-reverse="true"] > :last-child {
+      order: 0;
+    }
+  }
+`;
+
+const Meta = styled.div`
+  display: grid;
+  gap: 10px;
 `;
 
 const Num = styled.span`
   font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 1rem; color: ${({ theme }) => theme.colors.accent};
-  padding-top: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.accent};
 `;
 
 const Name = styled.h3`
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  transition: color 0.25s ease;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  max-width: 14ch;
 `;
 
 const Role = styled.div`
   font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: ${({ theme }) => theme.colors.body};
-  margin: 6px 0 12px;
 `;
 
-const Desc = styled.p` max-width: 720px; font-size: 0.97rem; margin-bottom: 16px; `;
+const Desc = styled.p`
+  max-width: 62ch;
+  font-size: 1rem;
+  margin-top: 16px;
+`;
 
 const Tags = styled.div`
   display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 18px;
+
   span {
     font-family: ${({ theme }) => theme.fonts.mono};
-    font-size: 0.72rem; padding: 3px 10px;
+    font-size: 0.7rem;
+    padding: 4px 10px;
     border: 1px solid ${({ theme }) => theme.colors.line};
     border-radius: 999px;
     color: ${({ theme }) => theme.colors.body};
+    background: ${({ theme }) => theme.colors.surface};
+  }
+`;
+
+const Link = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.accent};
+
+  &:hover {
+    text-decoration: none;
   }
 `;
 
 export function Project() {
   const { t } = useLang();
+  const reduced = useReducedMotion();
   return (
     <Section id="work">
       <Container>
-        <SectionHeading index="01" title={t.projects.title} />
+        <SectionHeading index="01" title={t.projects.title} description={t.projects.description} />
         <Rows>
           {t.projects.items.map((p, i) => (
-            <Row
-              key={p.name}
-              href={p.link ?? undefined}
-              target={p.link ? "_blank" : undefined}
-              rel={p.link ? "noreferrer" : undefined}
-              as={p.link ? "a" : "div"}
-            >
-              <Num>{String(i + 1).padStart(2, "0")}</Num>
-              <div>
-                <Name>{p.name} {p.link ? "↗" : ""}</Name>
-                <Role>{p.role}</Role>
-                <Desc>{p.description}</Desc>
-                <Tags>
-                  {p.stack.map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
-                </Tags>
-              </div>
-            </Row>
+            p.link ? (
+              <Row
+                key={p.name}
+                as="a"
+                href={p.link}
+                target="_blank"
+                rel="noreferrer"
+                data-reverse={i % 2 === 1}
+                initial={reduced ? false : { opacity: 0, y: 18 }}
+                whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.65, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Meta>
+                  <Num>{String(i + 1).padStart(2, "0")}</Num>
+                  <Name>{p.name}</Name>
+                  <Role>{p.role}</Role>
+                  <Desc>{p.description}</Desc>
+                 <Link>{t.projects.openProject} ↗</Link>
+                </Meta>
+                <div>
+                  <Role>{t.projects.stackLabel}</Role>
+                  <Tags>
+                    {p.stack.map((s) => (
+                      <span key={s}>{s}</span>
+                    ))}
+                  </Tags>
+                </div>
+              </Row>
+            ) : (
+              <Row
+                key={p.name}
+                as="article"
+                data-reverse={i % 2 === 1}
+                initial={reduced ? false : { opacity: 0, y: 18 }}
+                whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.65, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Meta>
+                  <Num>{String(i + 1).padStart(2, "0")}</Num>
+                  <Name>{p.name}</Name>
+                  <Role>{p.role}</Role>
+                  <Desc>{p.description}</Desc>
+                </Meta>
+                <div>
+                  <Role>{t.projects.stackLabel}</Role>
+                  <Tags>
+                    {p.stack.map((s) => (
+                      <span key={s}>{s}</span>
+                    ))}
+                  </Tags>
+                </div>
+              </Row>
+            )
           ))}
         </Rows>
       </Container>

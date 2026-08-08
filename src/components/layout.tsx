@@ -4,6 +4,10 @@ export const Container = styled.div`
   max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
   padding: 0 24px;
+
+  @media (max-width: 640px) {
+    padding: 0 18px;
+  }
 `;
 
 export const Section = styled.section`
@@ -12,30 +16,36 @@ export const Section = styled.section`
 `;
 
 const HeadingWrap = styled.div`
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.line};
-  padding-bottom: 16px;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 32px;
+  max-width: 760px;
 `;
 
 const Index = styled.span`
   font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   color: ${({ theme }) => theme.colors.accent};
-  letter-spacing: 0.1em;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 `;
 
 const Title = styled.h2`
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(2rem, 4.6vw, 4rem);
+  max-width: 12ch;
 `;
 
-export function SectionHeading({ index, title }: { index: string; title: string }) {
+const Description = styled.p`
+  max-width: 60ch;
+  font-size: 1.05rem;
+`;
+
+export function SectionHeading({ index, title, description }: { index: string; title: string; description?: string }) {
   return (
     <HeadingWrap>
-      <Index>{index} —</Index>
+      <Index>{index}</Index>
       <Title>{title}</Title>
+      {description ? <Description>{description}</Description> : null}
     </HeadingWrap>
   );
 }

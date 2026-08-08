@@ -1,20 +1,23 @@
 export const theme = {
   colors: {
-    bg0: "#0F1216",
-    bg1: "#12161C",
-    text: "#E2E8F0",   // silver — headings
-    body: "#94A3B8",   // slate — body copy
-    accent: "#7DD3FC", // ice blue — ONLY accent
-    line: "rgba(148,163,184,0.15)",
-    card: "rgba(148,163,184,0.06)",
+    bg0: "#F7F7F4",
+    bg1: "#EFEDE6",
+    surface: "#FFFFFF",
+    surfaceSoft: "#FAFAF7",
+    text: "#101318",
+    body: "#596170",
+    accent: "#007AFF",
+    line: "rgba(16,19,24,0.12)",
+    card: "rgba(255,255,255,0.92)",
+    shadow: "rgba(16,19,24,0.08)",
   },
   fonts: {
-    serif: "'Fraunces Variable', Georgia, serif",
-    sans: "'Inter Variable', -apple-system, sans-serif",
+    serif: "'JetBrains Mono', Consolas, monospace",
+    sans: "'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     mono: "'JetBrains Mono', Consolas, monospace",
   },
-  maxWidth: "1100px",
-  sectionGap: "clamp(80px, 12vw, 120px)",
+  maxWidth: "1200px",
+  sectionGap: "clamp(96px, 12vw, 156px)",
 } as const;
 
 export type AppTheme = typeof theme;

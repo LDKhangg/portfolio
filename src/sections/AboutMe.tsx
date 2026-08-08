@@ -6,6 +6,7 @@ const Wrap = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
   gap: 24px;
+  align-items: start;
 
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
@@ -16,6 +17,7 @@ const Body = styled.div`
   max-width: 680px;
   display: grid;
   gap: 18px;
+  align-content: start;
   font-size: 1.06rem;
 `;
 

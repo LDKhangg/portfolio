@@ -28,6 +28,7 @@ export const vi: Dict = {
     body: [
       "Tôi là lập trình viên fullstack ở TP.HCM, đang xây dựng nền tảng B2B tại WALA-ICT và hoàn thành ngành Kỹ thuật phần mềm tại Đại học FPT.",
       "Backend là thế mạnh của tôi — Spring Boot, REST API, JPA/MyBatis, Redis, RabbitMQ và microservices. Frontend tôi làm React + TypeScript và ưu tiên giao diện rõ ràng trong môi trường vận hành.",
+      "Ngoài giờ làm, tôi còn đang cố biến mình thành một con người full-keyboard trên CachyOS. Ý tưởng thì rất thanh lịch, còn số lần tay vẫn vô thức chụp con chuột thì bớt thanh lịch hơn nhiều.",
     ],
     facts: [
       { label: "Địa điểm", value: "TP.HCM" },

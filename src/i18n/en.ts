@@ -116,6 +116,7 @@ export const en: Dict = {
     body: [
       "I'm a fullstack developer in Ho Chi Minh City, currently building B2B platforms at WALA-ICT and finishing Software Engineering at FPT University.",
       "On the backend I work with Spring Boot, REST APIs, JPA/MyBatis, Redis, RabbitMQ, and microservices. On the frontend I ship React with TypeScript and care about interfaces that stay readable in production.",
+      "Outside work, I'm also trying to become a full-keyboard human on CachyOS. The ambition is elegant; the number of times I still reach for the mouse is less elegant.",
     ],
     facts: [
       { label: "Location", value: "Ho Chi Minh City" },

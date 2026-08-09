@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { Container } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PersonalConsole } from "@/components/PersonalConsole";
 
@@ -140,7 +140,6 @@ const Primary = styled(Action)`
 const Ghost = styled(Action)``;
 
 export function HeroSection() {
-  const { t } = useLang();
   const reduced = useReducedMotion();
   const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
   const cvSrc = `${import.meta.env.BASE_URL}LeDuyKhang_FullStack_Developer.pdf`;
@@ -149,9 +148,9 @@ export function HeroSection() {
       <HeroShell>
         <Copy>
           <Intro>
-            <Avatar src={avatarSrc} alt={t.hero.name} />
+            <Avatar src={avatarSrc} alt={content.hero.name} />
             <IntroText>
-              <Greeting>{t.hero.greeting}</Greeting>
+              <Greeting>{content.hero.greeting}</Greeting>
             </IntroText>
           </Intro>
           <motion.div
@@ -159,17 +158,17 @@ export function HeroSection() {
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Name>{t.hero.name}</Name>
+            <Name>{content.hero.name}</Name>
           </motion.div>
-          <Tagline>{t.hero.tagline}</Tagline>
+          <Tagline>{content.hero.tagline}</Tagline>
           <Facts>
-            {t.hero.facts.map((fact) => (
+            {content.hero.facts.map((fact) => (
               <Fact key={fact}>{fact}</Fact>
             ))}
           </Facts>
           <Ctas>
-            <Primary href="#work">{t.hero.ctaWork}</Primary>
-            <Ghost href={cvSrc} target="_blank" rel="noreferrer">{t.hero.ctaCv}</Ghost>
+            <Primary href="#work">{content.hero.ctaWork}</Primary>
+            <Ghost href={cvSrc} target="_blank" rel="noreferrer">{content.hero.ctaCv}</Ghost>
           </Ctas>
         </Copy>
         <PersonalConsole />

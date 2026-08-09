@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T17:15:23.937Z",
+  "generatedAt": "2026-08-09T04:01:21.645Z",
   "leetcodeProgress": {
     "totalSolved": 122,
     "easy": 90,
@@ -11,9 +11,9 @@
     {
       "repo": "portfolio",
       "repoLabel": "portfolio",
-      "url": "https://github.com/LDKhangg/portfolio/commit/4da172f62b393f6de11a40f8f6c9f94e8aa70d2a",
-      "message": "feat: refine activity progress and repo list",
-      "pushedAt": "2026-08-08T17:14:01Z",
+      "url": "https://github.com/LDKhangg/portfolio/commit/9edf6310539e2fc8431d0df55b844af22e86a409",
+      "message": "fix: render activity progress ring reliably",
+      "pushedAt": "2026-08-08T17:15:37Z",
       "relativeRepo": "portfolio",
       "available": true
     },

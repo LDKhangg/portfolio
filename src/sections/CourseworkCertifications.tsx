@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 
 const Grid = styled.div`
   display: grid;
@@ -34,13 +34,12 @@ const Detail = styled.span`
 `;
 
 export function CourseworkCertifications() {
-  const { t } = useLang();
   return (
     <Section>
       <Container>
-        <SectionHeading index="06" title={t.certs.title} description={t.certs.description} />
+        <SectionHeading index="07" title={content.certs.title} description={content.certs.description} />
         <Grid>
-          {t.certs.items.map((c) => (
+          {content.certs.items.map((c) => (
             <Row key={c.name}>
               <Name>{c.name}</Name>
               <Detail>{c.detail}</Detail>

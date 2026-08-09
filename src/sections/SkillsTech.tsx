@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 
 const Grid = styled.div`
   display: grid;
@@ -42,13 +42,12 @@ const Items = styled.div`
 `;
 
 export function SkillsTech() {
-  const { t } = useLang();
   return (
     <Section id="skills">
       <Container>
-        <SectionHeading index="03" title={t.skills.title} description={t.skills.description} />
+        <SectionHeading index="04" title={content.skills.title} description={content.skills.description} />
         <Grid>
-          {t.skills.groups.map((g) => (
+          {content.skills.groups.map((g) => (
             <Cell key={g.label}>
               <Label>{g.label}</Label>
               <Items>

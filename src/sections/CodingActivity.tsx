@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const CONTRIBUTION_GRAPH_URL = "https://ghchart.rshah.org/007AFF/LDKhangg";
@@ -292,9 +292,9 @@ const FooterLine = styled.div`
   color: ${({ theme }) => theme.colors.body};
 `;
 
-function formatDate(value: string, locale: string) {
+function formatDate(value: string) {
   if (!value) return "";
-  return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", year: "numeric" }).format(new Date(value));
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value));
 }
 
 function allocateSegments(values: number[], total: number, minVisible: number, full: number) {
@@ -342,7 +342,6 @@ function ringGradient(total: number, easy: number, medium: number, hard: number)
 }
 
 export function CodingActivity() {
-  const { lang, t } = useLang();
   const reduced = useReducedMotion();
   const [activity, setActivity] = useState<ActivityData | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -377,15 +376,15 @@ export function CodingActivity() {
   const maxBucket = Math.max(easy, medium, hard, 1);
   const ring = ringGradient(totalSolved, easy, medium, hard);
   const progressStateLabel = status === "loading"
-    ? t.activity.loadingLabel
+    ? content.activity.loadingLabel
     : status === "error"
-      ? t.activity.unavailableLabel
-      : t.activity.solvedLabel;
+      ? content.activity.unavailableLabel
+      : content.activity.solvedLabel;
 
   return (
     <Section id="activity">
       <Container>
-        <SectionHeading index="04" title={t.activity.title} description={t.activity.description} />
+        <SectionHeading index="05" title={content.activity.title} description={content.activity.description} />
         <Shell>
           <MainStack>
             <ProgressPanel
@@ -408,28 +407,28 @@ export function CodingActivity() {
 
               <ProgressMeta>
                 <LabelBlock>
-                  <Kicker>{t.activity.progressLabel}</Kicker>
-                  <ProgressNote>{t.activity.progressNote}</ProgressNote>
+                  <Kicker>{content.activity.progressLabel}</Kicker>
+                  <ProgressNote>{content.activity.progressNote}</ProgressNote>
                 </LabelBlock>
                 <Breakdown>
                   <BreakdownRow>
-                    <BreakdownLabel>{t.activity.easyLabel}</BreakdownLabel>
+                    <BreakdownLabel>{content.activity.easyLabel}</BreakdownLabel>
                     <BreakdownBar $color="#67C587" $width={status === "ready" ? (easy / maxBucket) * 100 : 0} />
                     <BreakdownValue>{status === "ready" ? easy : "--"}</BreakdownValue>
                   </BreakdownRow>
                   <BreakdownRow>
-                    <BreakdownLabel>{t.activity.mediumLabel}</BreakdownLabel>
+                    <BreakdownLabel>{content.activity.mediumLabel}</BreakdownLabel>
                     <BreakdownBar $color="#E7B44C" $width={status === "ready" ? (medium / maxBucket) * 100 : 0} />
                     <BreakdownValue>{status === "ready" ? medium : "--"}</BreakdownValue>
                   </BreakdownRow>
                   <BreakdownRow>
-                    <BreakdownLabel>{t.activity.hardLabel}</BreakdownLabel>
+                    <BreakdownLabel>{content.activity.hardLabel}</BreakdownLabel>
                     <BreakdownBar $color="#D96262" $width={status === "ready" ? (hard / maxBucket) * 100 : 0} />
                     <BreakdownValue>{status === "ready" ? hard : "--"}</BreakdownValue>
                   </BreakdownRow>
                 </Breakdown>
                 <FooterLine>
-                  {t.activity.refreshed} · {status === "ready" ? formatDate(data.generatedAt, lang) : status === "loading" ? t.activity.loadingLabel : t.activity.unavailableLabel}
+                  {content.activity.refreshed} · {status === "ready" ? formatDate(data.generatedAt) : status === "loading" ? content.activity.loadingLabel : content.activity.unavailableLabel}
                 </FooterLine>
               </ProgressMeta>
             </ProgressPanel>
@@ -441,15 +440,15 @@ export function CodingActivity() {
               transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
               <LabelBlock>
-                <Kicker>{t.activity.contributionLabel}</Kicker>
-                <ProgressNote>{t.activity.contributionNote}</ProgressNote>
+                <Kicker>{content.activity.contributionLabel}</Kicker>
+                <ProgressNote>{content.activity.contributionNote}</ProgressNote>
               </LabelBlock>
               <GraphFrame href={GITHUB_PROFILE_URL} target="_blank" rel="noreferrer">
                 <GraphMeta>
                   <span>LDKhangg</span>
-                  <span>{t.activity.contributionAction}</span>
+                  <span>{content.activity.contributionAction}</span>
                 </GraphMeta>
-                <GraphImg src={CONTRIBUTION_GRAPH_URL} alt={t.activity.contributionAlt} loading="lazy" />
+                <GraphImg src={CONTRIBUTION_GRAPH_URL} alt={content.activity.contributionAlt} loading="lazy" />
               </GraphFrame>
             </GraphPanel>
           </MainStack>
@@ -460,26 +459,26 @@ export function CodingActivity() {
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Kicker>{t.activity.latestLabel}</Kicker>
-            <UpdateMessage>{t.activity.latestNote}</UpdateMessage>
-            {status === "loading" ? <UpdateMessage>{t.activity.loadingLabel}</UpdateMessage> : null}
-            {status === "error" ? <UpdateMessage>{t.activity.unavailableLabel}</UpdateMessage> : null}
+            <Kicker>{content.activity.latestLabel}</Kicker>
+            <UpdateMessage>{content.activity.latestNote}</UpdateMessage>
+            {status === "loading" ? <UpdateMessage>{content.activity.loadingLabel}</UpdateMessage> : null}
+            {status === "error" ? <UpdateMessage>{content.activity.unavailableLabel}</UpdateMessage> : null}
             {status === "ready" ? (
               latestUpdates.length > 0 ? <UpdatesList>
                 {latestUpdates.slice(0, 4).map((update) => (
                   <UpdateItem key={`${update.repo}-${update.pushedAt}`} href={update.url} target="_blank" rel="noreferrer">
                     <RepoLine>
                       <span>{update.repoLabel || update.relativeRepo}</span>
-                      <span>{formatDate(update.pushedAt, lang)}</span>
+                      <span>{formatDate(update.pushedAt)}</span>
                     </RepoLine>
                     <UpdateMessage>{update.message}</UpdateMessage>
                     <RepoLine>
-                      <span>{t.activity.latestListLabel}</span>
-                      <span>{t.activity.latestAction} ↗</span>
+                      <span>{content.activity.latestListLabel}</span>
+                      <span>{content.activity.latestAction} ↗</span>
                     </RepoLine>
                   </UpdateItem>
                 ))}
-              </UpdatesList> : <UpdateMessage>{t.activity.unavailableLabel}</UpdateMessage>
+              </UpdatesList> : <UpdateMessage>{content.activity.unavailableLabel}</UpdateMessage>
             ) : null}
           </LatestPanel>
         </Shell>

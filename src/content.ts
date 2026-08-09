@@ -1,129 +1,69 @@
-export interface Dict {
-  nav: {
-    work: string;
-    about: string;
-    skills: string;
-    experience: string;
-    contact: string;
-    langToggle: string;
-  };
-  hero: {
-    greeting: string;
-    name: string;
-    tagline: string;
-    facts: string[];
-    ctaWork: string;
-    ctaCv: string;
-    console: {
-      title: string;
-      version: string;
-      command: string;
-      rows: { label: string; value: string }[];
-    };
-  };
-  about: {
-    title: string;
-    body: string[];
-    facts: { label: string; value: string }[];
-    description: string;
-  };
-  activity: {
-    title: string;
-    description: string;
-    refreshed: string;
-    loadingLabel: string;
-    progressLabel: string;
-    solvedLabel: string;
-    easyLabel: string;
-    mediumLabel: string;
-    hardLabel: string;
-    progressNote: string;
-    contributionLabel: string;
-    contributionNote: string;
-    contributionAlt: string;
-    contributionAction: string;
-    latestLabel: string;
-    latestNote: string;
-    repositoryLabel: string;
-    updatedLabel: string;
-    unavailableLabel: string;
-    latestAction: string;
-    latestListLabel: string;
-  };
-  projects: {
-    title: string;
-    description: string;
-    openProject: string;
-    stackLabel: string;
-    items: {
-      name: string;
-      role: string;
-      description: string;
-      stack: string[];
-      link: string | null;
-    }[];
-  };
-  skills: {
-    title: string;
-    description: string;
-    groups: { label: string; items: string }[];
-  };
-  experience: {
-    title: string;
-    description: string;
-    items: { org: string; role: string; time: string; note: string }[];
-  };
-  certs: {
-    title: string;
-    description: string;
-    items: { name: string; detail: string }[];
-  };
-  contact: {
-    title: string;
-    blurb: string;
-    email: string;
-    footer: string;
-    description: string;
-    statsAlt: string;
-    langsAlt: string;
-  };
-}
-
-export const en: Dict = {
-  nav: { work: "Work", about: "About", skills: "Skills", experience: "Experience", contact: "Contact", langToggle: "Switch language" },
+export const content = {
+  nav: { work: "Work", about: "About", config: "Config", skills: "Skills", experience: "Experience", contact: "Contact" },
   hero: {
     greeting: "Based in Ho Chi Minh City",
-    name: "Le Duy Khang",
-    tagline: "I like learning by building, staying curious, and leaving every project clearer than I found it.",
-    facts: ["Ho Chi Minh City", "WALA-ICT", "Java first, learning Go"],
+    name: "Kane",
+    tagline: "I build with a backend-first mindset, keep the workflow keyboard-heavy, and like interfaces that stay clear under real use.",
+    facts: ["Ho Chi Minh City", "WALA-ICT", "Keyboard-first workflow"],
     ctaWork: "View work",
     ctaCv: "Download CV",
     console: {
-      title: "run profile",
+      title: "boot kane",
       version: "v1.0",
-      command: "./khang",
+      command: "./kane",
       rows: [
-        { label: "name", value: "Le Duy Khang" },
+        { label: "alias", value: "Kane" },
+        { label: "formal", value: "Le Duy Khang" },
         { label: "location", value: "Ho Chi Minh City" },
         { label: "current", value: "WALA-ICT" },
-        { label: "learning", value: "Go now, more languages next" },
-        { label: "mode", value: "building and learning" },
+        { label: "editor", value: "Neovim + IdeaVim" },
+        { label: "mode", value: "shipping with clean loops" },
       ],
     },
   },
   about: {
     title: "About",
-    description: "A short version of what I do, what I care about, and where I am now.",
+    description: "A short intro to Kane and the work I ship.",
     body: [
-      "I'm a fullstack developer in Ho Chi Minh City, currently building B2B platforms at WALA-ICT and finishing Software Engineering at FPT University.",
-      "On the backend I work with Spring Boot, REST APIs, JPA/MyBatis, Redis, RabbitMQ, and microservices. On the frontend I ship React with TypeScript and care about interfaces that stay readable in production.",
-      "Outside work, I'm also trying to become a full-keyboard human on CachyOS. The ambition is elegant; the number of times I still reach for the mouse is less elegant.",
+      "I'm Kane, a fullstack developer in Ho Chi Minh City with over 1 year of real project experience.",
+      "I build B2B products at WALA-ICT and work across React, TypeScript, Java, and Spring Boot.",
     ],
     facts: [
       { label: "Location", value: "Ho Chi Minh City" },
       { label: "Current", value: "WALA-ICT" },
       { label: "Focus", value: "Spring Boot, React, TypeScript" },
-      { label: "Now", value: "Java first, learning Go" },
+      { label: "Experience", value: "1y+ real projects" },
+    ],
+  },
+  config: {
+    title: "Config",
+    description: "The setup behind the work: a small look at the editor habits, keymaps, and defaults I keep close every day.",
+    intro: "I treat config as working infrastructure, not decoration. The goal is faster navigation, less context switching, and muscle memory that survives across lightweight editors and full IDE sessions.",
+    cards: [
+      {
+        title: "Neovim",
+        kicker: "Daily driver",
+        items: [
+          "LSP, completion, and diagnostics tuned for getting feedback early instead of after a broken build.",
+          "Terminal-first editing flow with quick project movement, grep-heavy navigation, and low-friction file switching.",
+          "UI choices stay quiet on purpose: readable contrast, sensible motion, and just enough signal to avoid visual noise.",
+        ],
+      },
+      {
+        title: "IdeaVim",
+        kicker: "Same muscle memory in the IDE",
+        items: [
+          "Core motions and leader habits stay close to Neovim so IntelliJ does not feel like a context reset.",
+          "Used when deep Java work needs richer inspections, debugging, and refactors without losing keyboard flow.",
+          "The point is consistency: the editor can change, but how I think and move through code should not.",
+        ],
+      },
+    ],
+    principlesLabel: "Principles",
+    principles: [
+      "Optimize for clarity before novelty.",
+      "Keep muscle memory portable across tools.",
+      "Use config to remove friction, not add ceremony.",
     ],
   },
   activity: {
@@ -217,4 +157,4 @@ export const en: Dict = {
     statsAlt: "GitHub stats",
     langsAlt: "Top languages",
   },
-};
+} as const;

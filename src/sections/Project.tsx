@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const Rows = styled.div`
@@ -110,14 +110,13 @@ const Link = styled.span`
 `;
 
 export function Project() {
-  const { t } = useLang();
   const reduced = useReducedMotion();
   return (
     <Section id="work">
       <Container>
-        <SectionHeading index="01" title={t.projects.title} description={t.projects.description} />
+        <SectionHeading index="01" title={content.projects.title} description={content.projects.description} />
         <Rows>
-          {t.projects.items.map((p, i) => (
+          {content.projects.items.map((p, i) => (
             p.link ? (
               <Row
                 key={p.name}
@@ -136,10 +135,10 @@ export function Project() {
                   <Name>{p.name}</Name>
                   <Role>{p.role}</Role>
                   <Desc>{p.description}</Desc>
-                 <Link>{t.projects.openProject} ↗</Link>
+                  <Link>{content.projects.openProject} ↗</Link>
                 </Meta>
                 <div>
-                  <Role>{t.projects.stackLabel}</Role>
+                  <Role>{content.projects.stackLabel}</Role>
                   <Tags>
                     {p.stack.map((s) => (
                       <span key={s}>{s}</span>
@@ -164,7 +163,7 @@ export function Project() {
                   <Desc>{p.description}</Desc>
                 </Meta>
                 <div>
-                  <Role>{t.projects.stackLabel}</Role>
+                  <Role>{content.projects.stackLabel}</Role>
                   <Tags>
                     {p.stack.map((s) => (
                       <span key={s}>{s}</span>

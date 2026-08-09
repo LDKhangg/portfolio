@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 
 const List = styled.div`
   display: grid;
@@ -49,13 +49,12 @@ const Note = styled.p`
 `;
 
 export function Experience() {
-  const { t } = useLang();
   return (
     <Section id="experience">
       <Container>
-        <SectionHeading index="05" title={t.experience.title} description={t.experience.description} />
+        <SectionHeading index="06" title={content.experience.title} description={content.experience.description} />
         <List>
-          {t.experience.items.map((e) => (
+          {content.experience.items.map((e) => (
             <Item key={e.org}>
               <Time>{e.time}</Time>
               <div>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "motion/react";
+import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { useLang } from "@/i18n";
 
 const Panel = styled(motion.section)`
   border: 1px solid ${({ theme }) => theme.colors.line};
@@ -96,8 +96,7 @@ const Cursor = styled.span`
 
 export function PersonalConsole() {
   const reduced = useReducedMotion();
-  const { t } = useLang();
-  const heroConsole = t.hero.console;
+  const heroConsole = content.hero.console;
 
   return (
     <Panel

@@ -2,6 +2,7 @@ import GlobalStyle from "./GlobalStyle";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./sections/HeroSection";
 import { AboutMe } from "./sections/AboutMe";
+import { ConfigSetup } from "./sections/ConfigSetup";
 import { SkillsTech } from "./sections/SkillsTech";
 import { CodingActivity } from "./sections/CodingActivity";
 import { Experience } from "./sections/Experience";
@@ -19,6 +20,7 @@ function App() {
         <HeroSection />
         <Project />
         <AboutMe />
+        <ConfigSetup />
         <SkillsTech />
         <CodingActivity />
         <Experience />

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 
 const Wrap = styled.div`
   display: grid;
@@ -51,19 +51,18 @@ const FactValue = styled.div`
 `;
 
 export function AboutMe() {
-  const { t } = useLang();
   return (
     <Section id="about">
       <Container>
-        <SectionHeading index="02" title={t.about.title} description={t.about.description} />
+        <SectionHeading index="02" title={content.about.title} description={content.about.description} />
         <Wrap>
           <Body>
-            {t.about.body.map((p) => (
+            {content.about.body.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </Body>
           <Panel>
-            {t.about.facts.map((fact) => (
+            {content.about.facts.map((fact) => (
               <Fact key={fact.label}>
                 <FactLabel>{fact.label}</FactLabel>
                 <FactValue>{fact.value}</FactValue>

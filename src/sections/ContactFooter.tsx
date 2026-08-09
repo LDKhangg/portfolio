@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Section, SectionHeading } from "@/components/layout";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 
 const Blurb = styled.p`
   max-width: 560px;
@@ -34,22 +34,21 @@ const Foot = styled.footer`
 `;
 
 export function ContactFooter() {
-  const { t } = useLang();
   const year = new Date().getFullYear();
   return (
     <Section id="contact">
       <Container>
-        <SectionHeading index="07" title={t.contact.title} description={t.contact.description} />
-        <Blurb>{t.contact.blurb}</Blurb>
-        <Email href={`mailto:${t.contact.email}`}>{t.contact.email}</Email>
+        <SectionHeading index="08" title={content.contact.title} description={content.contact.description} />
+        <Blurb>{content.contact.blurb}</Blurb>
+        <Email href={`mailto:${content.contact.email}`}>{content.contact.email}</Email>
         <Foot>
-          <span>© {year} {t.hero.name}</span>
+          <span>© {year} {content.hero.name}</span>
           <span>
             <a href="https://github.com/LDKhangg" target="_blank" rel="noreferrer">GitHub</a>
             {" · "}
             <a href="https://www.linkedin.com/in/kane06092004/" target="_blank" rel="noreferrer">LinkedIn</a>
           </span>
-          <span>{t.contact.footer}</span>
+          <span>{content.contact.footer}</span>
         </Foot>
       </Container>
     </Section>

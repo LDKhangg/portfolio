@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLang } from "@/i18n";
+import { content } from "@/content";
 
 const Bar = styled.header`
   position: sticky;
@@ -80,38 +80,22 @@ const Links = styled.div`
   @media (max-width: 640px) { gap: 12px; a.hide-sm { display: none; } }
 `;
 
-const LangBtn = styled.button`
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  padding: 6px 9px;
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.accent};
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 999px;
-  &:hover { border-color: ${({ theme }) => theme.colors.accent}; background: rgba(0, 122, 255, 0.06); }
-`;
-
 export function Navbar() {
-  const { lang, toggle, t } = useLang();
   const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
   return (
     <Bar>
       <Inner>
-        <Logo href="#top" aria-label="Le Duy Khang portfolio">
-          <Avatar src={avatarSrc} alt="Le Duy Khang" />
-          <Wordmark>LDK</Wordmark>
+        <Logo href="#top" aria-label="Kane portfolio">
+          <Avatar src={avatarSrc} alt="Kane" />
+          <Wordmark>Kane</Wordmark>
         </Logo>
         <Links>
-          <a href="#work">{t.nav.work}</a>
-          <a href="#about" className="hide-sm hide-md">{t.nav.about}</a>
-          <a href="#skills" className="hide-sm hide-md">{t.nav.skills}</a>
-          <a href="#experience" className="hide-sm hide-md">{t.nav.experience}</a>
-          <a href="#contact">{t.nav.contact}</a>
-          <LangBtn type="button" onClick={toggle} aria-label={t.nav.langToggle}>
-            {lang === "en" ? "VI" : "EN"}
-          </LangBtn>
+          <a href="#work">{content.nav.work}</a>
+          <a href="#about" className="hide-sm hide-md">{content.nav.about}</a>
+          <a href="#config" className="hide-sm hide-md">{content.nav.config}</a>
+          <a href="#skills" className="hide-sm hide-md">{content.nav.skills}</a>
+          <a href="#experience" className="hide-sm hide-md">{content.nav.experience}</a>
+          <a href="#contact">{content.nav.contact}</a>
         </Links>
       </Inner>
     </Bar>

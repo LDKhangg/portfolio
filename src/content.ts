@@ -23,10 +23,10 @@ export const content = {
   },
   about: {
     title: "About",
-    description: "A short intro to Kane and the work I ship.",
+    description: "A short intro to Kane, the work I ship, and how I like to build.",
     body: [
       "I'm Kane, a fullstack developer in Ho Chi Minh City with over 1 year of real project experience.",
-      "I build B2B products at WALA-ICT and work across React, TypeScript, Java, and Spring Boot.",
+      "I build B2B products at WALA-ICT and work across React, TypeScript, Java, and Spring Boot, with a focus on practical products that stay clear, useful, and reliable.",
     ],
     facts: [
       { label: "Location", value: "Ho Chi Minh City" },

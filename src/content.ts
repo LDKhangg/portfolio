@@ -26,7 +26,9 @@ export const content = {
     description: "A short intro to Kane, the work I ship, and how I like to build.",
     body: [
       "I'm Kane, a fullstack developer in Ho Chi Minh City with over 1 year of real project experience.",
-      "I build B2B products at WALA-ICT and work across React, TypeScript, Java, and Spring Boot, with a focus on practical products that stay clear, useful, and reliable.",
+      "I like building things that are actually useful, not just nice to look at. Most of my time goes into figuring out cleaner workflows, keeping my hands on the keyboard, and slowly learning how to make the editor work for me instead of the other way around.",
+      "Lately I’ve also been trying to level up beyond my comfort zone, especially by learning Go and sharpening the way I work every day.",
+      "I still like to keep things simple though: less ceremony, more shipping, and enough curiosity left over to keep improving the setup as I go.",
     ],
     facts: [
       { label: "Location", value: "Ho Chi Minh City" },

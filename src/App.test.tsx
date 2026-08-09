@@ -61,5 +61,5 @@ test("surfaces Kane branding and a config section entry point", () => {
   expect(screen.getByRole("link", { name: /config/i }).getAttribute("href")).toBe("#config");
   expect(screen.getByRole("heading", { name: /config/i, level: 2 })).toBeTruthy();
   expect(screen.getByText(/over 1 year of real project experience/i)).toBeTruthy();
-  expect(screen.getByText(/practical products that stay clear, useful, and reliable/i)).toBeTruthy();
+  expect(screen.getByText(/learning how to make the editor work for me instead of the other way around/i)).toBeTruthy();
 });

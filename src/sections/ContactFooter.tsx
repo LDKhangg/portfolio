@@ -48,7 +48,6 @@ export function ContactFooter() {
             {" · "}
             <a href="https://www.linkedin.com/in/kane06092004/" target="_blank" rel="noreferrer">LinkedIn</a>
           </span>
-          <span>{content.contact.footer}</span>
         </Foot>
       </Container>
     </Section>

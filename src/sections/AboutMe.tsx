@@ -20,6 +20,12 @@ const Body = styled.div`
   font-size: 1.06rem;
 `;
 
+const IntroShell = styled.div`
+  position: relative;
+  display: grid;
+  gap: 16px;
+`;
+
 const SideColumn = styled.div`
   display: grid;
   gap: 16px;
@@ -32,6 +38,16 @@ const BodyCard = styled.div`
   border-radius: 24px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 42%);
+    pointer-events: none;
+  }
 
   p + p {
     margin-top: 16px;
@@ -49,6 +65,16 @@ const Panel = styled.aside`
 const ContactPanel = styled(Panel)`
   display: grid;
   gap: 14px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.06), transparent 36%);
+    pointer-events: none;
+  }
 `;
 
 const ContactEyebrow = styled.p`
@@ -116,20 +142,44 @@ const ContactFoot = styled.div`
 `;
 
 const IntroCard = styled.div`
+  position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 18px;
-  align-items: center;
-  padding: 20px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 22px;
   border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 24px;
+  border-radius: 28px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  overflow: hidden;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 36%), linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 48%);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 48px ${({ theme }) => theme.colors.shadow};
+    border-color: rgba(255, 255, 255, 0.18);
+  }
 
   @media (max-width: 560px) {
     grid-template-columns: 1fr;
     justify-items: start;
   }
+`;
+
+const IntroRail = styled.div`
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.04) 100%);
 `;
 
 const Avatar = styled.img`
@@ -144,7 +194,7 @@ const Avatar = styled.img`
 
 const IntroMeta = styled.div`
   display: grid;
-  gap: 8px;
+  gap: 10px;
 `;
 
 const Eyebrow = styled.p`
@@ -160,9 +210,37 @@ const IntroName = styled.h3`
   line-height: 1;
 `;
 
+const IntroLead = styled.p`
+  max-width: 46ch;
+  color: ${({ theme }) => theme.colors.text};
+  line-height: 1.7;
+  font-size: 1rem;
+`;
+
 const IntroRole = styled.p`
   color: ${({ theme }) => theme.colors.body};
   line-height: 1.7;
+`;
+
+const FocusRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+const FocusPill = styled.span`
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: rgba(255, 255, 255, 0.05);
+  color: ${({ theme }) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 `;
 
 const Fact = styled.div`
@@ -195,14 +273,25 @@ export function AboutMe() {
         <SectionHeading index="02" title={content.about.title} description={content.about.description} />
         <Wrap>
           <Body>
-            <IntroCard>
-              <Avatar src={avatarSrc} alt={content.hero.name} />
-              <IntroMeta>
-                <Eyebrow>{content.hero.greeting}</Eyebrow>
-                <IntroName>{content.hero.name}</IntroName>
-                <IntroRole>Fullstack developer focused on backend-heavy systems, practical product work, and clean keyboard-first workflows.</IntroRole>
-              </IntroMeta>
-            </IntroCard>
+            <IntroShell>
+              <IntroCard>
+                <IntroRail aria-hidden="true" />
+                <Avatar src={avatarSrc} alt={content.hero.name} />
+                <IntroMeta>
+                  <Eyebrow>Software Engineer</Eyebrow>
+                  <IntroName>{content.hero.name}</IntroName>
+                  <IntroLead>Backend-heavy product work, practical system design, and a workflow that stays fast under real use.</IntroLead>
+                  <IntroRole>I spend most of my time around Java and Spring, while actively growing into Go and Python without losing the frontend and product sense needed to ship complete work.</IntroRole>
+                  <FocusRow aria-label="Current focus">
+                    <FocusPill>Java</FocusPill>
+                    <FocusPill>Spring Boot</FocusPill>
+                    <FocusPill>Go</FocusPill>
+                    <FocusPill>Python</FocusPill>
+                    <FocusPill>React</FocusPill>
+                  </FocusRow>
+                </IntroMeta>
+              </IntroCard>
+            </IntroShell>
             <BodyCard>
               {content.about.body.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>

@@ -33,7 +33,7 @@ export const content = {
     facts: [
       { label: "Location", value: "Ho Chi Minh City" },
       { label: "Current", value: "WALA-ICT" },
-      { label: "Focus", value: "Spring Boot, React, TypeScript" },
+      { label: "Focus", value: "Java, Spring Boot, Go, Python, React, TypeScript" },
       { label: "Experience", value: "1y+ real projects" },
     ],
   },

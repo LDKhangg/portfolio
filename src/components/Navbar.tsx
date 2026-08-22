@@ -5,10 +5,10 @@ import { content } from "@/content";
 const NAV_ITEMS = [
   { id: "work", label: content.nav.work },
   { id: "about", label: content.nav.about, className: "hide-sm hide-md" },
-  { id: "config", label: content.nav.config, className: "hide-sm hide-md" },
   { id: "skills", label: content.nav.skills, className: "hide-sm hide-md" },
   { id: "experience", label: content.nav.experience, className: "hide-sm hide-md" },
   { id: "contact", label: content.nav.contact },
+  { id: "config", label: content.nav.config, className: "hide-sm hide-md" },
 ] as const;
 
 const Bar = styled.header`
@@ -117,19 +117,9 @@ const NavLink = styled.a<{ $active: boolean }>`
     box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.accent}, 0 0 0 3px rgba(215, 211, 227, 0.14);
   }
 
-  ${({ $active, theme }) =>
+  ${({ $active }) =>
     $active && css`
-      &::after {
-        content: "";
-        position: absolute;
-        left: 10px;
-        right: 10px;
-        bottom: 6px;
-        height: 1px;
-        border-radius: 999px;
-        background: ${theme.colors.accent};
-        opacity: 0.95;
-      }
+      font-weight: 600;
     `}
 `;
 

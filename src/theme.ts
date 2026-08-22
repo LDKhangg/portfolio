@@ -6,7 +6,7 @@ export const theme = {
     surfaceSoft: "rgba(53, 51, 66, 0.96)",
     text: "#f3f5fb",
     body: "rgba(234, 237, 245, 0.78)",
-    accent: "#007AFF",
+    accent: "#d7d3e3",
     line: "rgba(255,255,255,0.12)",
     card: "rgba(56, 53, 68, 0.92)",
     shadow: "rgba(7, 8, 12, 0.34)",

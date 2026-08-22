@@ -146,8 +146,8 @@ const FolderLayer = styled.span<{ $tone: "back-1" | "back-2" | "front"; $active?
     if ($tone === "back-1") {
       return css`
         inset: 1px 0 0 0;
-        border: 1px solid rgba(125, 211, 252, ${$active ? 0.65 : 0.42});
-        background: rgba(186, 230, 253, 0.9);
+        border: 1px solid rgba(227, 231, 242, ${$active ? 0.5 : 0.3});
+        background: rgba(205, 208, 221, 0.72);
         box-shadow: 0 8px 12px rgba(0, 0, 0, 0.16);
       `;
     }
@@ -155,16 +155,16 @@ const FolderLayer = styled.span<{ $tone: "back-1" | "back-2" | "front"; $active?
     if ($tone === "back-2") {
       return css`
         inset: 0.5px;
-        border: 1px solid rgba(125, 211, 252, ${$active ? 0.72 : 0.5});
-        background: rgba(224, 242, 254, 0.96);
+        border: 1px solid rgba(227, 231, 242, ${$active ? 0.58 : 0.38});
+        background: rgba(226, 228, 237, 0.84);
         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.14);
       `;
     }
 
     return css`
-      border: 1px solid ${$active ? theme.colors.accent : "rgba(125, 211, 252, 0.72)"};
-      background: linear-gradient(180deg, rgba(240, 249, 255, 1) 0%, rgba(224, 242, 254, 1) 100%);
-      box-shadow: ${$active ? "inset 0 10px 14px rgba(186, 230, 253, 0.98), inset 0 -10px 14px rgba(125, 211, 252, 0.56), 0 8px 12px rgba(0, 0, 0, 0.16)" : "0 3px 8px rgba(0, 0, 0, 0.14)"};
+      border: 1px solid ${$active ? theme.colors.accent : "rgba(227, 231, 242, 0.5)"};
+      background: linear-gradient(180deg, rgba(239, 240, 245, 0.96) 0%, rgba(219, 221, 231, 0.96) 100%);
+      box-shadow: ${$active ? "inset 0 10px 14px rgba(235, 237, 244, 0.7), inset 0 -10px 14px rgba(179, 181, 194, 0.34), 0 8px 12px rgba(0, 0, 0, 0.16)" : "0 3px 8px rgba(0, 0, 0, 0.14)"};
 
       &::before {
         content: "";
@@ -174,9 +174,9 @@ const FolderLayer = styled.span<{ $tone: "back-1" | "back-2" | "front"; $active?
         width: ${$small ? "8px" : "9px"};
         height: ${$small ? "4px" : "5px"};
         border-radius: 3px 3px 0 0;
-        border: 1px solid ${$active ? theme.colors.accent : "rgba(125, 211, 252, 0.72)"};
+        border: 1px solid ${$active ? theme.colors.accent : "rgba(227, 231, 242, 0.5)"};
         border-bottom: 0;
-        background: rgba(240, 249, 255, 1);
+        background: rgba(239, 240, 245, 0.96);
       }
     `;
   }}

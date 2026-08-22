@@ -5,7 +5,7 @@ import { Container, Section, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-const CONTRIBUTION_GRAPH_URL = "https://ghchart.rshah.org/007AFF/LDKhangg";
+const CONTRIBUTION_GRAPH_URL = "https://ghchart.rshah.org/d7d3e3/LDKhangg";
 const GITHUB_PROFILE_URL = "https://github.com/LDKhangg";
 
 type ActivityData = {

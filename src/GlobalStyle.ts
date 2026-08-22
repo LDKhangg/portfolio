@@ -29,9 +29,9 @@ const GlobalStyle = createGlobalStyle`
     z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(circle at 20% 0%, rgba(0, 122, 255, 0.12), transparent 32%),
-      radial-gradient(circle at 85% 10%, rgba(16, 19, 24, 0.08), transparent 26%),
-      radial-gradient(circle at 50% 100%, rgba(0, 122, 255, 0.05), transparent 24%);
+      radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 32%),
+      radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.05), transparent 24%),
+      radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.06), transparent 24%);
   }
 
   body::after {
@@ -40,8 +40,8 @@ const GlobalStyle = createGlobalStyle`
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.08;
-    background-image: radial-gradient(rgba(16, 19, 24, 0.55) 0.6px, transparent 0.6px);
+    opacity: 0.1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.38) 0.6px, transparent 0.6px);
     background-size: 3px 3px;
     mix-blend-mode: soft-light;
   }

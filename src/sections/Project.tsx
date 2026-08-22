@@ -4,6 +4,10 @@ import { Container, Section, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
+const WorkSection = styled(Section)`
+  padding-top: clamp(88px, 10vw, 120px);
+`;
+
 const Layout = styled.div`
   display: grid;
   grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
@@ -20,7 +24,7 @@ const TreePanel = styled.div`
   border-radius: 28px;
   padding: 22px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
-  box-shadow: 0 22px 48px rgba(16, 19, 24, 0.12);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
 `;
 
 const TreeHeading = styled.div`
@@ -144,7 +148,7 @@ const FolderLayer = styled.span<{ $tone: "back-1" | "back-2" | "front"; $active?
         inset: 1px 0 0 0;
         border: 1px solid rgba(125, 211, 252, ${$active ? 0.65 : 0.42});
         background: rgba(186, 230, 253, 0.9);
-        box-shadow: 0 8px 12px rgba(16, 19, 24, 0.04);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.16);
       `;
     }
 
@@ -153,14 +157,14 @@ const FolderLayer = styled.span<{ $tone: "back-1" | "back-2" | "front"; $active?
         inset: 0.5px;
         border: 1px solid rgba(125, 211, 252, ${$active ? 0.72 : 0.5});
         background: rgba(224, 242, 254, 0.96);
-        box-shadow: 0 6px 10px rgba(16, 19, 24, 0.04);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.14);
       `;
     }
 
     return css`
       border: 1px solid ${$active ? theme.colors.accent : "rgba(125, 211, 252, 0.72)"};
       background: linear-gradient(180deg, rgba(240, 249, 255, 1) 0%, rgba(224, 242, 254, 1) 100%);
-      box-shadow: ${$active ? "inset 0 10px 14px rgba(186, 230, 253, 0.98), inset 0 -10px 14px rgba(125, 211, 252, 0.56), 0 8px 12px rgba(16, 19, 24, 0.06)" : "0 3px 8px rgba(16, 19, 24, 0.05)"};
+      box-shadow: ${$active ? "inset 0 10px 14px rgba(186, 230, 253, 0.98), inset 0 -10px 14px rgba(125, 211, 252, 0.56), 0 8px 12px rgba(0, 0, 0, 0.16)" : "0 3px 8px rgba(0, 0, 0, 0.14)"};
 
       &::before {
         content: "";
@@ -229,7 +233,7 @@ const Shell = styled.div`
   border-radius: 28px;
   overflow: hidden;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.bg0} 0%, ${({ theme }) => theme.colors.bg1} 100%);
-  box-shadow: 0 22px 48px rgba(16, 19, 24, 0.12);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
 `;
 
 const ShellBar = styled.div`
@@ -239,7 +243,7 @@ const ShellBar = styled.div`
   gap: 16px;
   padding: 14px 18px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.line};
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.05);
 `;
 
 const Dots = styled.div`
@@ -283,9 +287,9 @@ const Prompt = styled.div`
 const DetailCard = styled.div`
   border-radius: 22px;
   padding: 22px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(16, 19, 24, 0.12);
-  box-shadow: 0 18px 36px rgba(16, 19, 24, 0.1);
+  background: linear-gradient(180deg, rgba(27, 26, 37, 0.94) 0%, rgba(20, 19, 28, 0.98) 100%);
+  border: 1px solid rgba(227, 233, 248, 0.1);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.32);
   display: grid;
   gap: 16px;
 `;
@@ -307,6 +311,7 @@ const DetailHeader = styled.div`
 
   h3 {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: ${({ theme }) => theme.colors.text};
   }
 
   span {
@@ -373,7 +378,7 @@ const Tags = styled.div`
     padding: 6px 10px;
     border-radius: 999px;
     border: 1px solid ${({ theme }) => theme.colors.line};
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.05);
     font-family: ${({ theme }) => theme.fonts.mono};
     font-size: 0.68rem;
     color: ${({ theme }) => theme.colors.body};
@@ -444,7 +449,7 @@ export function Project() {
   const bullets = projectBullets(selectedProject.name, selectedProject.description);
 
   return (
-    <Section id="work">
+    <WorkSection id="work">
       <Container>
         <SectionHeading index="01" title={content.projects.title} description={content.projects.description} />
         <Layout>
@@ -526,6 +531,6 @@ export function Project() {
           </Shell>
         </Layout>
       </Container>
-    </Section>
+    </WorkSection>
   );
 }

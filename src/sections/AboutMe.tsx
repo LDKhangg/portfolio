@@ -29,7 +29,7 @@ const IntroCard = styled.div`
   padding: 20px;
   border: 1px solid ${({ theme }) => theme.colors.line};
   border-radius: 24px;
-  background: ${({ theme }) => theme.colors.surface};
+  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
 
   @media (max-width: 560px) {
@@ -75,7 +75,7 @@ const Panel = styled.aside`
   padding: 24px;
   border: 1px solid ${({ theme }) => theme.colors.line};
   border-radius: 24px;
-  background: ${({ theme }) => theme.colors.surface};
+  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
 `;
 

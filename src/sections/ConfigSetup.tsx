@@ -8,6 +8,37 @@ const Intro = styled.p`
   font-size: 1.05rem;
 `;
 
+const RepoLinks = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -8px 0 24px;
+`;
+
+const RepoLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: ${({ theme }) => theme.colors.surfaceSoft};
+  color: ${({ theme }) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    border-color: ${({ theme }) => theme.colors.accent};
+    background: rgba(255, 255, 255, 0.06);
+    color: ${({ theme }) => theme.colors.accent};
+  }
+`;
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -73,6 +104,13 @@ export function ConfigSetup() {
       <Container>
         <SectionHeading index="03" title={content.config.title} description={content.config.description} />
         <Intro>{content.config.intro}</Intro>
+        <RepoLinks aria-label="Configuration repositories">
+          {content.config.repoLinks.map((repo) => (
+            <RepoLink key={repo.href} href={repo.href} target="_blank" rel="noreferrer">
+              {repo.label}
+            </RepoLink>
+          ))}
+        </RepoLinks>
         <Grid>
           {content.config.cards.map((card) => (
             <Card key={card.title}>

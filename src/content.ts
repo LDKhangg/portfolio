@@ -41,6 +41,10 @@ export const content = {
     title: "Config",
     description: "The setup behind the work: a small look at the editor habits, keymaps, and defaults I keep close every day.",
     intro: "I treat config as working infrastructure, not decoration. The goal is faster navigation, less context switching, and muscle memory that survives across lightweight editors and full IDE sessions.",
+    repoLinks: [
+      { label: "Neovim config", href: "https://github.com/LDKhangg/nvim-config" },
+      { label: "IdeaVim config", href: "https://github.com/LDKhangg/dotfiles-vim" },
+    ],
     cards: [
       {
         title: "Neovim",

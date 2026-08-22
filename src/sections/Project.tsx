@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import { AnimatePresence, motion } from "motion/react";
 import { Container, Section, SectionHeading } from "@/components/layout";
@@ -411,12 +411,18 @@ const DetailMotion = styled(motion.div)`
   z-index: 1;
 `;
 
+const StaggerBlock = styled(motion.div)`
+  position: relative;
+  z-index: 1;
+`;
+
 const Prompt = styled.div`
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.85rem;
   color: rgba(223, 227, 239, 0.72);
   position: relative;
   z-index: 1;
+  min-height: 1.5em;
 
   strong {
     color: ${({ theme }) => theme.colors.accent};
@@ -424,18 +430,36 @@ const Prompt = styled.div`
   }
 `;
 
+const TypedText = styled.span`
+  white-space: pre-wrap;
+`;
+
+const Cursor = styled.span`
+  display: inline-block;
+  width: 0.62ch;
+  margin-left: 2px;
+  color: ${({ theme }) => theme.colors.accent};
+  animation: shell-caret-blink 1s steps(1) infinite;
+
+  @keyframes shell-caret-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+`;
+
 const DetailCard = styled.div`
   border-radius: 22px;
   padding: 22px;
   background:
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 26%),
-    linear-gradient(180deg, rgba(24, 23, 33, 0.98) 0%, rgba(17, 16, 24, 0.99) 100%);
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.04), transparent 26%),
+    linear-gradient(180deg, rgba(87, 83, 105, 0.22) 0%, rgba(61, 58, 75, 0.12) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 36px rgba(0, 0, 0, 0.36);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 14px 28px rgba(0, 0, 0, 0.16);
   display: grid;
   gap: 16px;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(12px);
 
   &::before {
     content: "";
@@ -612,6 +636,39 @@ export function Project() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedProject = content.projects.items[selectedIndex];
   const bullets = projectBullets(selectedProject.name, selectedProject.description);
+  const commandText = useMemo(() => `open ${slugify(treeLabel(selectedProject.name))}`, [selectedProject.name]);
+  const [typedCommand, setTypedCommand] = useState(reduced ? commandText : "");
+  const [commandDone, setCommandDone] = useState(reduced);
+
+  useEffect(() => {
+    if (reduced) {
+      setTypedCommand(commandText);
+      setCommandDone(true);
+      return;
+    }
+
+    setTypedCommand("");
+    setCommandDone(false);
+
+    let timer = 0;
+    let index = 0;
+
+    const tick = () => {
+      index += 1;
+      setTypedCommand(commandText.slice(0, index));
+
+      if (index >= commandText.length) {
+        setCommandDone(true);
+        return;
+      }
+
+      timer = window.setTimeout(tick, index < 6 ? 38 : 26);
+    };
+
+    timer = window.setTimeout(tick, 120);
+
+    return () => window.clearTimeout(timer);
+  }, [commandText, reduced]);
 
   return (
     <WorkSection id="work">
@@ -676,40 +733,53 @@ export function Project() {
             </ShellBar>
             <ShellBody>
               <Prompt>
-                <strong>kane</strong>@portfolio:~$ open {slugify(treeLabel(selectedProject.name))}
+                <strong>kane</strong>@portfolio:~$ <TypedText>{typedCommand}</TypedText>
+                {!commandDone ? <Cursor aria-hidden="true">_</Cursor> : null}
               </Prompt>
 
               <AnimatePresence mode="wait">
                 <DetailMotion
                   key={selectedProject.name}
                   initial={reduced ? false : { opacity: 0, y: 18, filter: "blur(6px)" }}
-                  animate={reduced ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+                  animate={reduced ? { opacity: 1, y: 0, filter: "blur(0px)" } : commandDone ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 10, filter: "blur(4px)" }}
                   exit={reduced ? undefined : { opacity: 0, y: -14, filter: "blur(4px)" }}
                   transition={{ duration: reduced ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <DetailCard>
-                    <DetailLabel>Selected project</DetailLabel>
-                    <DetailHeader>
-                      <h3>{selectedProject.name}</h3>
-                      <span>case file</span>
-                    </DetailHeader>
-                    <Role>{selectedProject.role}</Role>
-                    <BulletList>
-                      {bullets.map((item) => (
-                        <Bullet key={item}>
-                          <span>{item}</span>
-                        </Bullet>
-                      ))}
-                    </BulletList>
-                    <Tags>
-                      {selectedProject.stack.map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
-                    </Tags>
-                    <Footer>
-                      {selectedProject.link ? <ProjectLink href={selectedProject.link} target="_blank" rel="noreferrer">{content.projects.openProject} ↗</ProjectLink> : <span />}
-                      <Hint>Open another folder to swap the view.</Hint>
-                    </Footer>
+                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }} transition={{ duration: 0.2, delay: commandDone ? 0.02 : 0 }}>
+                      <DetailLabel>Selected project</DetailLabel>
+                    </StaggerBlock>
+                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.06 : 0 }}>
+                      <DetailHeader>
+                        <h3>{selectedProject.name}</h3>
+                        <span>case file</span>
+                      </DetailHeader>
+                    </StaggerBlock>
+                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.1 : 0 }}>
+                      <Role>{selectedProject.role}</Role>
+                    </StaggerBlock>
+                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }} transition={{ duration: 0.24, delay: commandDone ? 0.14 : 0 }}>
+                      <BulletList>
+                        {bullets.map((item) => (
+                          <Bullet key={item}>
+                            <span>{item}</span>
+                          </Bullet>
+                        ))}
+                      </BulletList>
+                    </StaggerBlock>
+                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.2 : 0 }}>
+                      <Tags>
+                        {selectedProject.stack.map((item) => (
+                          <span key={item}>{item}</span>
+                        ))}
+                      </Tags>
+                    </StaggerBlock>
+                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.24 : 0 }}>
+                      <Footer>
+                        {selectedProject.link ? <ProjectLink href={selectedProject.link} target="_blank" rel="noreferrer">{content.projects.openProject} ↗</ProjectLink> : <span />}
+                        <Hint>Open another folder to swap the view.</Hint>
+                      </Footer>
+                    </StaggerBlock>
                   </DetailCard>
                 </DetailMotion>
               </AnimatePresence>

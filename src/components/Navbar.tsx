@@ -36,6 +36,16 @@ const Inner = styled.nav`
   background: linear-gradient(180deg, rgba(84, 80, 101, 0.82) 0%, rgba(58, 55, 72, 0.9) 100%);
   backdrop-filter: blur(12px) saturate(165%);
   box-shadow: 0 12px 28px rgba(7, 8, 12, 0.28);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 42%);
+    pointer-events: none;
+  }
 
   @media (max-width: 640px) {
     padding: 10px 12px;
@@ -94,19 +104,47 @@ const NavLink = styled.a<{ $active: boolean }>`
   position: relative;
   display: inline-flex;
   align-items: center;
+  gap: 7px;
   min-height: 34px;
-  padding: 0 10px;
+  padding: 0 12px;
   border-radius: 999px;
   color: ${({ $active, theme }) => ($active ? theme.colors.text : "rgba(241, 243, 250, 0.82)")};
-  background: ${({ $active }) => ($active ? "rgba(255, 255, 255, 0.12)" : "transparent")};
-  box-shadow: ${({ $active }) => ($active ? "inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 6px 18px rgba(7, 8, 12, 0.14)" : "none")};
-  transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  background: ${({ $active }) => ($active ? "linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%)" : "transparent")};
+  box-shadow: ${({ $active }) => ($active ? "inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.12), 0 8px 18px rgba(7, 8, 12, 0.16)" : "none")};
+  transition: color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+
+  &::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: ${({ $active, theme }) => ($active ? theme.colors.accent : "rgba(255, 255, 255, 0.18)")};
+    box-shadow: ${({ $active, theme }) => ($active ? `0 0 0 4px ${theme.colors.line}` : "none")};
+    transform: scale(${({ $active }) => ($active ? 1 : 0.72)});
+    opacity: ${({ $active }) => ($active ? 1 : 0.72)};
+    transition: transform 180ms ease, opacity 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    border: 1px solid ${({ $active }) => ($active ? "rgba(255, 255, 255, 0.08)" : "transparent")};
+    pointer-events: none;
+  }
 
   &:hover {
     text-decoration: none;
     color: ${({ theme }) => theme.colors.text};
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-1px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+    transform: translateY(-1px) scale(1.01);
+
+    &::before {
+      background: ${({ theme }) => theme.colors.accent};
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   &:focus-visible {
@@ -119,6 +157,7 @@ const NavLink = styled.a<{ $active: boolean }>`
   ${({ $active }) =>
     $active && css`
       font-weight: 600;
+      letter-spacing: 0.14em;
     `}
 `;
 

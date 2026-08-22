@@ -232,8 +232,20 @@ const Shell = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.line};
   border-radius: 28px;
   overflow: hidden;
-  background: linear-gradient(180deg, ${({ theme }) => theme.colors.bg0} 0%, ${({ theme }) => theme.colors.bg1} 100%);
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, rgba(61, 58, 75, 0.98) 0%, rgba(41, 39, 52, 0.98) 100%);
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.34);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, transparent 16%, transparent 84%, rgba(255, 255, 255, 0.02) 100%);
+    opacity: 0.85;
+  }
 `;
 
 const ShellBar = styled.div`
@@ -243,7 +255,18 @@ const ShellBar = styled.div`
   gap: 16px;
   padding: 14px 18px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.line};
-  background: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  }
 `;
 
 const Dots = styled.div`
@@ -254,7 +277,20 @@ const Dots = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    background: ${({ theme }) => theme.colors.line};
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    &:nth-child(1) {
+      background: rgba(255, 204, 214, 0.32);
+    }
+
+    &:nth-child(2) {
+      background: rgba(253, 223, 176, 0.28);
+    }
+
+    &:nth-child(3) {
+      background: rgba(210, 240, 214, 0.26);
+    }
   }
 `;
 
@@ -263,7 +299,7 @@ const Path = styled.div`
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.body};
+  color: rgba(242, 244, 250, 0.58);
 `;
 
 const ShellBody = styled.div`
@@ -271,12 +307,26 @@ const ShellBody = styled.div`
   display: grid;
   gap: 18px;
   min-height: 360px;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 32px;
+    opacity: 0.45;
+  }
 `;
 
 const Prompt = styled.div`
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.85rem;
-  color: ${({ theme }) => theme.colors.body};
+  color: rgba(223, 227, 239, 0.72);
+  position: relative;
+  z-index: 1;
 
   strong {
     color: ${({ theme }) => theme.colors.accent};
@@ -287,11 +337,23 @@ const Prompt = styled.div`
 const DetailCard = styled.div`
   border-radius: 22px;
   padding: 22px;
-  background: linear-gradient(180deg, rgba(27, 26, 37, 0.94) 0%, rgba(20, 19, 28, 0.98) 100%);
-  border: 1px solid rgba(227, 233, 248, 0.1);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.32);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 26%),
+    linear-gradient(180deg, rgba(24, 23, 33, 0.98) 0%, rgba(17, 16, 24, 0.99) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 36px rgba(0, 0, 0, 0.36);
   display: grid;
   gap: 16px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 14%);
+  }
 `;
 
 const DetailLabel = styled.div`
@@ -299,7 +361,9 @@ const DetailLabel = styled.div`
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.accent};
+  color: rgba(236, 238, 245, 0.7);
+  position: relative;
+  z-index: 1;
 `;
 
 const DetailHeader = styled.div`
@@ -319,7 +383,7 @@ const DetailHeader = styled.div`
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.body};
+    color: rgba(228, 232, 243, 0.56);
   }
 `;
 
@@ -328,7 +392,9 @@ const Role = styled.div`
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.body};
+  color: rgba(232, 236, 245, 0.72);
+  position: relative;
+  z-index: 1;
 `;
 
 const Description = styled.p`
@@ -340,11 +406,13 @@ const Description = styled.p`
 
 const BulletList = styled.ul`
   display: grid;
-  gap: 10px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
   max-width: 68ch;
+  position: relative;
+  z-index: 1;
 `;
 
 const Bullet = styled.li`
@@ -352,12 +420,12 @@ const Bullet = styled.li`
   grid-template-columns: auto 1fr;
   gap: 10px;
   align-items: start;
-  color: ${({ theme }) => theme.colors.body};
+  color: rgba(231, 235, 244, 0.78);
   font-size: 0.95rem;
   line-height: 1.7;
 
   &::before {
-    content: "*";
+    content: ">";
     color: ${({ theme }) => theme.colors.accent};
     font-family: ${({ theme }) => theme.fonts.mono};
     transform: translateY(1px);
@@ -373,15 +441,18 @@ const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  position: relative;
+  z-index: 1;
 
   span {
     padding: 6px 10px;
     border-radius: 999px;
-    border: 1px solid ${({ theme }) => theme.colors.line};
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.035);
     font-family: ${({ theme }) => theme.fonts.mono};
     font-size: 0.68rem;
-    color: ${({ theme }) => theme.colors.body};
+    color: rgba(238, 241, 248, 0.7);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 `;
 
@@ -391,6 +462,10 @@ const Footer = styled.div`
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 `;
 
 const ProjectLink = styled.a`
@@ -403,7 +478,7 @@ const ProjectLink = styled.a`
 
 const Hint = styled.span`
   font-size: 0.85rem;
-  color: ${({ theme }) => theme.colors.body};
+  color: rgba(231, 235, 244, 0.58);
 `;
 
 const treeLabel = (name: string) => {

@@ -53,14 +53,6 @@ const Copy = styled.div`
   text-align: center;
 `;
 
-const Greeting = styled.p`
-  font-family: ${({ theme }) => theme.fonts.mono};
-  color: #8ab4ff;
-  font-size: 0.7rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-`;
-
 const Name = styled.h1`
   font-size: clamp(4.2rem, 10vw, 8.6rem);
   letter-spacing: -0.09em;
@@ -175,7 +167,6 @@ export function HeroSection() {
       <BackgroundVeil aria-hidden="true" />
       <HeroShell>
         <Copy>
-          <Greeting>{content.hero.greeting}</Greeting>
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 14 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}

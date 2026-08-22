@@ -94,10 +94,10 @@ const ContactEmail = styled.a`
   width: fit-content;
   max-width: 100%;
   font-family: ${({ theme }) => theme.fonts.serif};
-  font-size: clamp(1.2rem, 3.1vw, 2.1rem);
-  line-height: 1.08;
+  font-size: clamp(1rem, 2.2vw, 1.55rem);
+  line-height: 1.12;
   color: ${({ theme }) => theme.colors.text};
-  letter-spacing: -0.04em;
+  letter-spacing: -0.025em;
   overflow-wrap: anywhere;
 
   &:hover {

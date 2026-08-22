@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
+import { AnimatePresence, motion } from "motion/react";
 import { Container, Section, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -27,6 +28,44 @@ const TreePanel = styled.div`
   box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
 `;
 
+const ExplorerBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.line};
+`;
+
+const ExplorerTitle = styled.div`
+  display: grid;
+  gap: 2px;
+
+  strong {
+    font-family: ${({ theme }) => theme.fonts.mono};
+    font-size: 0.76rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.colors.text};
+  }
+
+  span {
+    font-family: ${({ theme }) => theme.fonts.mono};
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: ${({ theme }) => theme.colors.body};
+  }
+`;
+
+const ExplorerMeta = styled.span`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.body};
+`;
+
 const TreeHeading = styled.div`
   display: grid;
   gap: 6px;
@@ -49,13 +88,13 @@ const TreeHeading = styled.div`
 
 const TreeRoot = styled.div`
   display: grid;
-  gap: 8px;
+  gap: 4px;
 `;
 
 const TreeLine = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px;
+  gap: 8px;
   align-items: start;
 `;
 
@@ -89,9 +128,32 @@ const RootRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.92rem;
   color: ${({ theme }) => theme.colors.text};
+`;
+
+const Caret = styled.span<{ $open?: boolean }>`
+  width: 10px;
+  height: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.body};
+  transform: rotate(${({ $open }) => ($open ? "90deg" : "0deg")});
+  transform-origin: center;
+  transition: transform 160ms ease;
+
+  &::before {
+    content: ">";
+    font-family: ${({ theme }) => theme.fonts.mono};
+    font-size: 0.7rem;
+    line-height: 1;
+  }
 `;
 
 const FolderStack = styled.span<{ $active?: boolean; $small?: boolean; $reduced?: boolean }>`
@@ -186,20 +248,22 @@ const EntryButton = styled.button<{ $active: boolean; $reduced: boolean }>`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
-  padding: 2px 8px 2px 0;
+  min-height: 34px;
+  padding: 5px 10px 5px 0;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 12px;
 
   ${({ $active, theme }) =>
     $active
       ? css`
           color: ${theme.colors.accent};
+          background: rgba(255, 255, 255, 0.05);
         `
       : null}
 
@@ -209,6 +273,7 @@ const EntryButton = styled.button<{ $active: boolean; $reduced: boolean }>`
 
       &:hover {
         transform: translateX(2px);
+        background: rgba(255, 255, 255, 0.03);
       }
     `}
 
@@ -216,6 +281,15 @@ const EntryButton = styled.button<{ $active: boolean; $reduced: boolean }>`
     outline: 2px solid ${({ theme }) => theme.colors.accent};
     outline-offset: 4px;
   }
+`;
+
+const EntryPrefix = styled.span<{ $active: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  color: ${({ theme, $active }) => ($active ? theme.colors.text : theme.colors.body)};
+  opacity: ${({ $active }) => ($active ? 0.92 : 0.72)};
+  flex: none;
 `;
 
 const EntryText = styled.span<{ $active: boolean }>`
@@ -226,6 +300,17 @@ const EntryText = styled.span<{ $active: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
+`;
+
+const EntryState = styled.span<{ $active: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${({ theme, $active }) => ($active ? theme.colors.text : theme.colors.body)};
+  opacity: ${({ $active }) => ($active ? 0.76 : 0.5)};
+  flex: none;
 `;
 
 const Shell = styled.div`
@@ -319,6 +404,11 @@ const ShellBody = styled.div`
     background-size: 100% 32px;
     opacity: 0.45;
   }
+`;
+
+const DetailMotion = styled(motion.div)`
+  position: relative;
+  z-index: 1;
 `;
 
 const Prompt = styled.div`
@@ -529,6 +619,13 @@ export function Project() {
         <SectionHeading index="01" title={content.projects.title} description={content.projects.description} />
         <Layout>
           <TreePanel>
+            <ExplorerBar>
+              <ExplorerTitle>
+                <strong>Explorer</strong>
+                <span>custom shell index</span>
+              </ExplorerTitle>
+              <ExplorerMeta>3 entries</ExplorerMeta>
+            </ExplorerBar>
             <TreeHeading>
               <h3>Work index</h3>
               <p>`projects/` is already open. Pick a folder on the left to swap the project in the shell.</p>
@@ -536,6 +633,7 @@ export function Project() {
 
             <TreeRoot>
               <RootRow>
+                <Caret $open />
                 <FolderStack $small $reduced={reduced}>
                   <FolderLayer data-folder-layer="back-1" $tone="back-1" $small />
                   <FolderLayer data-folder-layer="back-2" $tone="back-2" $small />
@@ -551,12 +649,15 @@ export function Project() {
                   <TreeLine key={project.name}>
                     <TreeSpine aria-hidden="true" />
                     <EntryButton type="button" onClick={() => setSelectedIndex(index)} $active={active} $reduced={reduced} aria-pressed={active}>
+                      <Caret $open={active} />
                       <FolderStack $active={active} $reduced={reduced}>
                         <FolderLayer data-folder-layer="back-1" $tone="back-1" $active={active} />
                         <FolderLayer data-folder-layer="back-2" $tone="back-2" $active={active} />
                         <FolderLayer data-folder-layer="front" $tone="front" $active={active} />
                       </FolderStack>
-                      <EntryText $active={active}>{String(index + 1).padStart(2, "0")} {treeLabel(project.name)}</EntryText>
+                      <EntryPrefix $active={active}>{String(index + 1).padStart(2, "0")}</EntryPrefix>
+                      <EntryText $active={active}>{treeLabel(project.name)}</EntryText>
+                      <EntryState $active={active}>{active ? "open" : "file"}</EntryState>
                     </EntryButton>
                   </TreeLine>
                 );
@@ -578,30 +679,40 @@ export function Project() {
                 <strong>kane</strong>@portfolio:~$ open {slugify(treeLabel(selectedProject.name))}
               </Prompt>
 
-              <DetailCard>
-                <DetailLabel>Selected project</DetailLabel>
-                <DetailHeader>
-                  <h3>{selectedProject.name}</h3>
-                  <span>case file</span>
-                </DetailHeader>
-                <Role>{selectedProject.role}</Role>
-                <BulletList>
-                  {bullets.map((item) => (
-                    <Bullet key={item}>
-                      <span>{item}</span>
-                    </Bullet>
-                  ))}
-                </BulletList>
-                <Tags>
-                  {selectedProject.stack.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </Tags>
-                <Footer>
-                  {selectedProject.link ? <ProjectLink href={selectedProject.link} target="_blank" rel="noreferrer">{content.projects.openProject} ↗</ProjectLink> : <span />}
-                  <Hint>Open another folder to swap the view.</Hint>
-                </Footer>
-              </DetailCard>
+              <AnimatePresence mode="wait">
+                <DetailMotion
+                  key={selectedProject.name}
+                  initial={reduced ? false : { opacity: 0, y: 18, filter: "blur(6px)" }}
+                  animate={reduced ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={reduced ? undefined : { opacity: 0, y: -14, filter: "blur(4px)" }}
+                  transition={{ duration: reduced ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <DetailCard>
+                    <DetailLabel>Selected project</DetailLabel>
+                    <DetailHeader>
+                      <h3>{selectedProject.name}</h3>
+                      <span>case file</span>
+                    </DetailHeader>
+                    <Role>{selectedProject.role}</Role>
+                    <BulletList>
+                      {bullets.map((item) => (
+                        <Bullet key={item}>
+                          <span>{item}</span>
+                        </Bullet>
+                      ))}
+                    </BulletList>
+                    <Tags>
+                      {selectedProject.stack.map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </Tags>
+                    <Footer>
+                      {selectedProject.link ? <ProjectLink href={selectedProject.link} target="_blank" rel="noreferrer">{content.projects.openProject} ↗</ProjectLink> : <span />}
+                      <Hint>Open another folder to swap the view.</Hint>
+                    </Footer>
+                  </DetailCard>
+                </DetailMotion>
+              </AnimatePresence>
             </ShellBody>
           </Shell>
         </Layout>

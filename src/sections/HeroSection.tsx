@@ -4,7 +4,6 @@ import { Container } from "@/components/layout";
 import GradientWaves from "@/components/GradientWaves";
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { PersonalConsole } from "@/components/PersonalConsole";
 
 const Wrap = styled.section`
   position: relative;
@@ -43,26 +42,22 @@ const HeroShell = styled(Container)`
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  align-items: center;
-  gap: clamp(24px, 4vw, 56px);
-
-  @media (max-width: 980px) {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+  justify-items: center;
 `;
 
 const Copy = styled.div`
   display: grid;
   gap: 20px;
-  max-width: 44rem;
+  width: min(100%, 52rem);
+  justify-items: center;
+  text-align: center;
 `;
 
 const Intro = styled.div`
   display: flex;
   align-items: center;
   gap: 14px;
+  justify-content: center;
 `;
 
 const Avatar = styled.img`
@@ -85,6 +80,7 @@ const Avatar = styled.img`
 const IntroText = styled.div`
   display: grid;
   gap: 8px;
+  justify-items: center;
 `;
 
 const Greeting = styled.p`
@@ -102,6 +98,7 @@ const Name = styled.h1`
   max-width: 8ch;
   color: #f7f9ff;
   text-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  text-align: center;
 `;
 
 const Tagline = styled.p`
@@ -109,12 +106,14 @@ const Tagline = styled.p`
   font-size: 1.08rem;
   line-height: 1.9;
   color: rgba(229, 234, 246, 0.82);
+  text-align: center;
 `;
 
 const Facts = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 `;
 
 const Fact = styled.span`
@@ -137,6 +136,7 @@ const Ctas = styled.div`
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const Action = styled.a`
@@ -230,7 +230,6 @@ export function HeroSection() {
             <Ghost href={cvSrc} target="_blank" rel="noreferrer">{content.hero.ctaCv}</Ghost>
           </Ctas>
         </Copy>
-        <PersonalConsole />
       </HeroShell>
     </Wrap>
   );

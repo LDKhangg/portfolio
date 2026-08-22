@@ -21,6 +21,75 @@ const Body = styled.div`
   font-size: 1.06rem;
 `;
 
+const ContactBlock = styled.div`
+  display: grid;
+  gap: 14px;
+  margin-top: 6px;
+  padding-top: 22px;
+  border-top: 1px solid ${({ theme }) => theme.colors.line};
+`;
+
+const ContactEyebrow = styled.p`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.accent};
+`;
+
+const ContactBlurb = styled.p`
+  color: ${({ theme }) => theme.colors.body};
+  line-height: 1.7;
+`;
+
+const ContactEmail = styled.a`
+  width: fit-content;
+  font-family: ${({ theme }) => theme.fonts.serif};
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  color: ${({ theme }) => theme.colors.text};
+  letter-spacing: -0.05em;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+    text-decoration: none;
+  }
+`;
+
+const ContactLinks = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const ContactLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 13px;
+  border-radius: 999px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: ${({ theme }) => theme.colors.surfaceSoft};
+  color: ${({ theme }) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.accent};
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
+`;
+
+const ContactFoot = styled.div`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.body};
+`;
+
 const IntroCard = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
@@ -120,6 +189,16 @@ export function AboutMe() {
             {content.about.body.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
+            <ContactBlock>
+              <ContactEyebrow>{content.contact.title}</ContactEyebrow>
+              <ContactBlurb>{content.contact.blurb}</ContactBlurb>
+              <ContactEmail href={`mailto:${content.contact.email}`}>{content.contact.email}</ContactEmail>
+              <ContactLinks>
+                <ContactLink href="https://github.com/LDKhangg" target="_blank" rel="noreferrer">GitHub</ContactLink>
+                <ContactLink href="https://www.linkedin.com/in/kane06092004/" target="_blank" rel="noreferrer">LinkedIn</ContactLink>
+              </ContactLinks>
+              <ContactFoot>{content.contact.footer}</ContactFoot>
+            </ContactBlock>
           </Body>
           <Panel>
             {content.about.facts.map((fact) => (

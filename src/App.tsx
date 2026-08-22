@@ -8,7 +8,6 @@ import { CodingActivity } from "./sections/CodingActivity";
 import { Experience } from "./sections/Experience";
 import { Project } from "./sections/Project";
 import { CourseworkCertifications } from "./sections/CourseworkCertifications";
-import { ContactFooter } from "./sections/ContactFooter";
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
         <CodingActivity />
         <Experience />
         <CourseworkCertifications />
-        <ContactFooter />
       </main>
     </>
   );

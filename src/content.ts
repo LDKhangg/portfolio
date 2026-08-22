@@ -92,8 +92,8 @@ export const content = {
     latestListLabel: "Recent repos",
   },
   projects: {
-    title: "Selected work",
-    description: "Three projects, three different kinds of product work: IoT, procurement, and internal admin systems.",
+    title: "Project folders",
+    description: "Open a folder to inspect the product, what I owned, and the stack behind it.",
     openProject: "Open project",
     stackLabel: "Stack",
     items: [

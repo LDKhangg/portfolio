@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { content } from "@/content";
 
 const Bar = styled.header`
-  position: sticky;
+  position: fixed;
   top: 10px;
+  left: 0;
+  right: 0;
   z-index: 20;
   display: flex;
   justify-content: center;

@@ -4,8 +4,8 @@ import { content } from "@/content";
 
 const Wrap = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+  gap: 26px;
   align-items: start;
 
   @media (max-width: 860px) {
@@ -14,19 +14,41 @@ const Wrap = styled.div`
 `;
 
 const Body = styled.div`
-  max-width: 680px;
   display: grid;
-  gap: 18px;
+  gap: 20px;
   align-content: start;
   font-size: 1.06rem;
 `;
 
-const ContactBlock = styled.div`
+const SideColumn = styled.div`
+  display: grid;
+  gap: 16px;
+  align-content: start;
+`;
+
+const BodyCard = styled.div`
+  padding: 22px 24px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  border-radius: 24px;
+  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
+  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+
+  p + p {
+    margin-top: 16px;
+  }
+`;
+
+const Panel = styled.aside`
+  padding: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  border-radius: 24px;
+  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
+  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+`;
+
+const ContactPanel = styled(Panel)`
   display: grid;
   gap: 14px;
-  margin-top: 6px;
-  padding-top: 22px;
-  border-top: 1px solid ${({ theme }) => theme.colors.line};
 `;
 
 const ContactEyebrow = styled.p`
@@ -44,10 +66,13 @@ const ContactBlurb = styled.p`
 
 const ContactEmail = styled.a`
   width: fit-content;
+  max-width: 100%;
   font-family: ${({ theme }) => theme.fonts.serif};
-  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-size: clamp(1.2rem, 3.1vw, 2.1rem);
+  line-height: 1.08;
   color: ${({ theme }) => theme.colors.text};
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
 
   &:hover {
     color: ${({ theme }) => theme.colors.accent};
@@ -140,14 +165,6 @@ const IntroRole = styled.p`
   line-height: 1.7;
 `;
 
-const Panel = styled.aside`
-  padding: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 24px;
-  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
-  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
-`;
-
 const Fact = styled.div`
   padding: 14px 0;
 
@@ -186,10 +203,22 @@ export function AboutMe() {
                 <IntroRole>Fullstack developer focused on backend-heavy systems, practical product work, and clean keyboard-first workflows.</IntroRole>
               </IntroMeta>
             </IntroCard>
-            {content.about.body.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-            <ContactBlock>
+            <BodyCard>
+              {content.about.body.map((p) => (
+                <p key={p.slice(0, 24)}>{p}</p>
+              ))}
+            </BodyCard>
+          </Body>
+          <SideColumn>
+            <Panel>
+              {content.about.facts.map((fact) => (
+                <Fact key={fact.label}>
+                  <FactLabel>{fact.label}</FactLabel>
+                  <FactValue>{fact.value}</FactValue>
+                </Fact>
+              ))}
+            </Panel>
+            <ContactPanel>
               <ContactEyebrow>{content.contact.title}</ContactEyebrow>
               <ContactBlurb>{content.contact.blurb}</ContactBlurb>
               <ContactEmail href={`mailto:${content.contact.email}`}>{content.contact.email}</ContactEmail>
@@ -198,16 +227,8 @@ export function AboutMe() {
                 <ContactLink href="https://www.linkedin.com/in/kane06092004/" target="_blank" rel="noreferrer">LinkedIn</ContactLink>
               </ContactLinks>
               <ContactFoot>{content.contact.footer}</ContactFoot>
-            </ContactBlock>
-          </Body>
-          <Panel>
-            {content.about.facts.map((fact) => (
-              <Fact key={fact.label}>
-                <FactLabel>{fact.label}</FactLabel>
-                <FactValue>{fact.value}</FactValue>
-              </Fact>
-            ))}
-          </Panel>
+            </ContactPanel>
+          </SideColumn>
         </Wrap>
       </Container>
     </Section>

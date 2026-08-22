@@ -47,40 +47,10 @@ const HeroShell = styled(Container)`
 
 const Copy = styled.div`
   display: grid;
-  gap: 20px;
+  gap: 18px;
   width: min(100%, 52rem);
   justify-items: center;
   text-align: center;
-`;
-
-const Intro = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: center;
-`;
-
-const Avatar = styled.img`
-  width: 84px;
-  height: 84px;
-  object-fit: cover;
-  border-radius: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background: ${({ theme }) => theme.colors.surface};
-  box-shadow: 0 18px 36px ${({ theme }) => theme.colors.shadow};
-  flex: 0 0 auto;
-
-  @media (max-width: 640px) {
-    width: 72px;
-    height: 72px;
-    border-radius: 20px;
-  }
-`;
-
-const IntroText = styled.div`
-  display: grid;
-  gap: 8px;
-  justify-items: center;
 `;
 
 const Greeting = styled.p`
@@ -175,7 +145,6 @@ const Ghost = styled(Action)``;
 
 export function HeroSection() {
   const reduced = useReducedMotion();
-  const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
   const cvSrc = `${import.meta.env.BASE_URL}LeDuyKhang_FullStack_Developer.pdf`;
   return (
     <Wrap id="top">
@@ -206,12 +175,7 @@ export function HeroSection() {
       <BackgroundVeil aria-hidden="true" />
       <HeroShell>
         <Copy>
-          <Intro>
-            <Avatar src={avatarSrc} alt={content.hero.name} />
-            <IntroText>
-              <Greeting>{content.hero.greeting}</Greeting>
-            </IntroText>
-          </Intro>
+          <Greeting>{content.hero.greeting}</Greeting>
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 14 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}

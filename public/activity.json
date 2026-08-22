@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T18:56:26.150Z",
+  "generatedAt": "2026-08-22T19:49:08.596Z",
   "leetcodeProgress": {
     "totalSolved": 122,
     "easy": 90,
@@ -11,9 +11,9 @@
     {
       "repo": "portfolio",
       "repoLabel": "portfolio",
-      "url": "https://github.com/LDKhangg/portfolio/commit/68dd2ac73a529064c4f3b9608e72403463c87865",
-      "message": "feat: add hero gradient waves",
-      "pushedAt": "2026-08-22T18:55:06Z",
+      "url": "https://github.com/LDKhangg/portfolio/commit/99f1a43385d7681e0a739dccf9e25399f1d77fc0",
+      "message": "refactor: polish about editorial layout",
+      "pushedAt": "2026-08-22T19:47:35Z",
       "relativeRepo": "portfolio",
       "available": true
     },

@@ -4,7 +4,7 @@ export const content = {
     greeting: "Based in Ho Chi Minh City",
     name: "Kane",
     tagline: "I build with a backend-first mindset, keep the workflow keyboard-heavy, and like interfaces that stay clear under real use.",
-    facts: ["Ho Chi Minh City", "WALA-ICT", "Keyboard-first workflow"],
+    facts: ["Ho Chi Minh City"],
     ctaWork: "View work",
     ctaCv: "Download CV",
     console: {

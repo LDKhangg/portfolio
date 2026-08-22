@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T04:01:21.645Z",
+  "generatedAt": "2026-08-22T18:56:26.150Z",
   "leetcodeProgress": {
     "totalSolved": 122,
     "easy": 90,
@@ -11,37 +11,37 @@
     {
       "repo": "portfolio",
       "repoLabel": "portfolio",
-      "url": "https://github.com/LDKhangg/portfolio/commit/9edf6310539e2fc8431d0df55b844af22e86a409",
-      "message": "fix: render activity progress ring reliably",
-      "pushedAt": "2026-08-08T17:15:37Z",
+      "url": "https://github.com/LDKhangg/portfolio/commit/68dd2ac73a529064c4f3b9608e72403463c87865",
+      "message": "feat: add hero gradient waves",
+      "pushedAt": "2026-08-22T18:55:06Z",
       "relativeRepo": "portfolio",
       "available": true
     },
     {
       "repo": "nvim-config",
       "repoLabel": "nvim-config",
-      "url": "https://github.com/LDKhangg/nvim-config/commit/25cf7f25d395c817c8f50b1107b42761d4048185",
-      "message": "feat: nvim config as standalone repo",
-      "pushedAt": "2026-08-08T04:40:29Z",
+      "url": "https://github.com/LDKhangg/nvim-config/commit/e08a83908eb7393dec79bc8b6561661849c59bfa",
+      "message": "perf(jdtls): reduce max heap from 8g to 4g",
+      "pushedAt": "2026-08-18T05:09:09Z",
       "relativeRepo": "nvim-config",
       "available": true
     },
     {
-      "repo": "go-playground",
-      "repoLabel": "go-playground",
-      "url": "https://github.com/LDKhangg/go-playground/commit/65e9a4f5368fb9d0e35d3a445c3e7412a059d99e",
-      "message": "exercise 7",
-      "pushedAt": "2026-08-07T16:28:23Z",
-      "relativeRepo": "go-playground",
+      "repo": "java-concurrency-job-queue",
+      "repoLabel": "java-concurrency-job-queue",
+      "url": "https://github.com/LDKhangg/java-concurrency-job-queue/commit/33eb3c79e6afd4b545b35219d34e95124975a1f5",
+      "message": "docs: README reflects scaffold state, points to learning roadmap",
+      "pushedAt": "2026-08-17T17:45:34Z",
+      "relativeRepo": "java-concurrency-job-queue",
       "available": true
     },
     {
-      "repo": "dotfiles-vim",
-      "repoLabel": "dotfiles-vim",
-      "url": "https://github.com/LDKhangg/dotfiles-vim/commit/e2fa4212ef2eeac0856d2262fd26f4ca70a9796c",
-      "message": "fix: run Go linting on demand",
-      "pushedAt": "2026-07-30T07:36:44Z",
-      "relativeRepo": "dotfiles-vim",
+      "repo": "leetcode-go",
+      "repoLabel": "leetcode-go",
+      "url": "https://github.com/LDKhangg/leetcode-go/commit/a58977a605813068439875162597a1e96ee68b7e",
+      "message": "two_sum",
+      "pushedAt": "2026-08-16T12:23:53Z",
+      "relativeRepo": "leetcode-go",
       "available": true
     }
   ]

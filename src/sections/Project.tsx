@@ -20,7 +20,7 @@ const TreePanel = styled.div`
   border-radius: 28px;
   padding: 22px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
-  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  box-shadow: 0 22px 48px rgba(16, 19, 24, 0.12);
 `;
 
 const TreeHeading = styled.div`
@@ -90,28 +90,92 @@ const RootRow = styled.div`
   color: ${({ theme }) => theme.colors.text};
 `;
 
-const FolderIcon = styled.span<{ $active?: boolean; $small?: boolean }>`
+const FolderStack = styled.span<{ $active?: boolean; $small?: boolean; $reduced?: boolean }>`
   position: relative;
   width: ${({ $small }) => ($small ? "20px" : "22px")};
   height: ${({ $small }) => ($small ? "15px" : "16px")};
-  border-radius: 4px;
-  border: 1px solid ${({ theme, $active }) => ($active ? theme.colors.accent : theme.colors.line)};
-  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
-  box-shadow: 0 4px 10px ${({ theme }) => theme.colors.shadow};
+  display: inline-block;
+  perspective: 900px;
   flex: none;
 
-  &::before {
-    content: "";
-    position: absolute;
-    left: 1px;
-    bottom: calc(100% - 1px);
-    width: ${({ $small }) => ($small ? "8px" : "9px")};
-    height: ${({ $small }) => ($small ? "4px" : "5px")};
-    border-radius: 3px 3px 0 0;
-    border: 1px solid ${({ theme, $active }) => ($active ? theme.colors.accent : theme.colors.line)};
-    border-bottom: 0;
-    background: ${({ theme }) => theme.colors.surface};
-  }
+  ${({ $reduced }) =>
+    !$reduced && css`
+      &:hover [data-folder-layer="back-1"] {
+        transform: rotateX(-18deg) translateY(-0.5px);
+      }
+
+      &:hover [data-folder-layer="back-2"] {
+        transform: rotateX(-30deg) translateY(-1px);
+      }
+
+      &:hover [data-folder-layer="front"] {
+        transform: rotateX(-46deg) translateY(1px);
+      }
+    `}
+
+  ${({ $active, $reduced }) =>
+    $active &&
+    !$reduced &&
+    css`
+      [data-folder-layer="back-1"] {
+        transform: rotateX(-18deg) translateY(-0.5px);
+      }
+
+      [data-folder-layer="back-2"] {
+        transform: rotateX(-30deg) translateY(-1px);
+      }
+
+      [data-folder-layer="front"] {
+        transform: rotateX(-46deg) translateY(1px);
+      }
+    `}
+`;
+
+const FolderLayer = styled.span<{ $tone: "back-1" | "back-2" | "front"; $active?: boolean; $small?: boolean }>`
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  transform-origin: bottom center;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+
+  ${({ $tone, $active, $small, theme }) => {
+    if ($tone === "back-1") {
+      return css`
+        inset: 1px 0 0 0;
+        border: 1px solid rgba(125, 211, 252, ${$active ? 0.65 : 0.42});
+        background: rgba(186, 230, 253, 0.9);
+        box-shadow: 0 8px 12px rgba(16, 19, 24, 0.04);
+      `;
+    }
+
+    if ($tone === "back-2") {
+      return css`
+        inset: 0.5px;
+        border: 1px solid rgba(125, 211, 252, ${$active ? 0.72 : 0.5});
+        background: rgba(224, 242, 254, 0.96);
+        box-shadow: 0 6px 10px rgba(16, 19, 24, 0.04);
+      `;
+    }
+
+    return css`
+      border: 1px solid ${$active ? theme.colors.accent : "rgba(125, 211, 252, 0.72)"};
+      background: linear-gradient(180deg, rgba(240, 249, 255, 1) 0%, rgba(224, 242, 254, 1) 100%);
+      box-shadow: ${$active ? "inset 0 10px 14px rgba(186, 230, 253, 0.98), inset 0 -10px 14px rgba(125, 211, 252, 0.56), 0 8px 12px rgba(16, 19, 24, 0.06)" : "0 3px 8px rgba(16, 19, 24, 0.05)"};
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 1px;
+        bottom: calc(100% - 1px);
+        width: ${$small ? "8px" : "9px"};
+        height: ${$small ? "4px" : "5px"};
+        border-radius: 3px 3px 0 0;
+        border: 1px solid ${$active ? theme.colors.accent : "rgba(125, 211, 252, 0.72)"};
+        border-bottom: 0;
+        background: rgba(240, 249, 255, 1);
+      }
+    `;
+  }}
 `;
 
 const EntryButton = styled.button<{ $active: boolean; $reduced: boolean }>`
@@ -165,7 +229,7 @@ const Shell = styled.div`
   border-radius: 28px;
   overflow: hidden;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.bg0} 0%, ${({ theme }) => theme.colors.bg1} 100%);
-  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  box-shadow: 0 22px 48px rgba(16, 19, 24, 0.12);
 `;
 
 const ShellBar = styled.div`
@@ -219,9 +283,9 @@ const Prompt = styled.div`
 const DetailCard = styled.div`
   border-radius: 22px;
   padding: 22px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(16, 19, 24, 0.08);
-  box-shadow: 0 14px 28px rgba(16, 19, 24, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(16, 19, 24, 0.12);
+  box-shadow: 0 18px 36px rgba(16, 19, 24, 0.1);
   display: grid;
   gap: 16px;
 `;
@@ -269,6 +333,37 @@ const Description = styled.p`
   max-width: 64ch;
 `;
 
+const BulletList = styled.ul`
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 68ch;
+`;
+
+const Bullet = styled.li`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  color: ${({ theme }) => theme.colors.body};
+  font-size: 0.95rem;
+  line-height: 1.7;
+
+  &::before {
+    content: "*";
+    color: ${({ theme }) => theme.colors.accent};
+    font-family: ${({ theme }) => theme.fonts.mono};
+    transform: translateY(1px);
+  }
+
+  strong {
+    color: ${({ theme }) => theme.colors.text};
+    font-weight: 600;
+  }
+`;
+
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -314,10 +409,39 @@ const treeLabel = (name: string) => {
 
 const slugify = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+const projectBullets = (name: string, description: string) => {
+  if (name.startsWith("Locker R")) {
+    return [
+      "Graduation startup project that received 50 million VND in funding support from FPT University.",
+      "Built a smart-locker IoT platform covering locker usage flow, device communication, and real-time status tracking.",
+      "Implemented the system with Java 21, Spring Boot, Spring Cloud, RabbitMQ, MQTT, PostgreSQL, Docker, and WebSocket/STOMP.",
+    ];
+  }
+
+  if (name.startsWith("B2B Construction")) {
+    return [
+      "B2B procurement system for construction quote, bid, contract, and invoice workflows.",
+      "Focused on backend implementation for the internal business flow and data handling.",
+      description,
+    ];
+  }
+
+  if (name.startsWith("Fitness Studio")) {
+    return [
+      "Operations SaaS for a fitness franchise spanning membership, staff, and branch workflows.",
+      "Worked across product features used by internal teams running day-to-day operations.",
+      description,
+    ];
+  }
+
+  return [description];
+};
+
 export function Project() {
   const reduced = useReducedMotion();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedProject = content.projects.items[selectedIndex];
+  const bullets = projectBullets(selectedProject.name, selectedProject.description);
 
   return (
     <Section id="work">
@@ -332,7 +456,11 @@ export function Project() {
 
             <TreeRoot>
               <RootRow>
-                <FolderIcon $small />
+                <FolderStack $small $reduced={reduced}>
+                  <FolderLayer data-folder-layer="back-1" $tone="back-1" $small />
+                  <FolderLayer data-folder-layer="back-2" $tone="back-2" $small />
+                  <FolderLayer data-folder-layer="front" $tone="front" $small />
+                </FolderStack>
                 <span>projects/</span>
               </RootRow>
 
@@ -343,7 +471,11 @@ export function Project() {
                   <TreeLine key={project.name}>
                     <TreeSpine aria-hidden="true" />
                     <EntryButton type="button" onClick={() => setSelectedIndex(index)} $active={active} $reduced={reduced} aria-pressed={active}>
-                      <FolderIcon $active={active} />
+                      <FolderStack $active={active} $reduced={reduced}>
+                        <FolderLayer data-folder-layer="back-1" $tone="back-1" $active={active} />
+                        <FolderLayer data-folder-layer="back-2" $tone="back-2" $active={active} />
+                        <FolderLayer data-folder-layer="front" $tone="front" $active={active} />
+                      </FolderStack>
                       <EntryText $active={active}>{String(index + 1).padStart(2, "0")} {treeLabel(project.name)}</EntryText>
                     </EntryButton>
                   </TreeLine>
@@ -373,7 +505,13 @@ export function Project() {
                   <span>case file</span>
                 </DetailHeader>
                 <Role>{selectedProject.role}</Role>
-                <Description>{selectedProject.description}</Description>
+                <BulletList>
+                  {bullets.map((item) => (
+                    <Bullet key={item}>
+                      <span>{item}</span>
+                    </Bullet>
+                  ))}
+                </BulletList>
                 <Tags>
                   {selectedProject.stack.map((item) => (
                     <span key={item}>{item}</span>

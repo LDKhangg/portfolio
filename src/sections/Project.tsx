@@ -362,20 +362,38 @@ const Dots = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.14);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 
     &:nth-child(1) {
-      background: rgba(255, 204, 214, 0.32);
+      background: rgba(171, 88, 106, 0.7);
     }
 
     &:nth-child(2) {
-      background: rgba(253, 223, 176, 0.28);
+      background: rgba(181, 147, 91, 0.68);
     }
 
     &:nth-child(3) {
-      background: rgba(210, 240, 214, 0.26);
+      background: rgba(98, 152, 117, 0.68);
     }
+  }
+
+  &:hover span {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  &:hover span:nth-child(1) {
+    background: rgba(208, 106, 129, 0.92);
+  }
+
+  &:hover span:nth-child(2) {
+    background: rgba(223, 183, 112, 0.92);
+  }
+
+  &:hover span:nth-child(3) {
+    background: rgba(123, 194, 145, 0.92);
   }
 `;
 
@@ -409,6 +427,9 @@ const ShellBody = styled.div`
 const DetailMotion = styled(motion.div)`
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: 16px;
+  padding: 10px 6px 2px;
 `;
 
 const StaggerBlock = styled(motion.div)`
@@ -447,29 +468,6 @@ const Cursor = styled.span`
   }
 `;
 
-const DetailCard = styled.div`
-  border-radius: 22px;
-  padding: 22px;
-  background:
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.04), transparent 26%),
-    linear-gradient(180deg, rgba(87, 83, 105, 0.22) 0%, rgba(61, 58, 75, 0.12) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 14px 28px rgba(0, 0, 0, 0.16);
-  display: grid;
-  gap: 16px;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 14%);
-  }
-`;
-
 const DetailLabel = styled.div`
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.68rem;
@@ -478,6 +476,7 @@ const DetailLabel = styled.div`
   color: rgba(236, 238, 245, 0.7);
   position: relative;
   z-index: 1;
+  padding-top: 6px;
 `;
 
 const DetailHeader = styled.div`
@@ -572,13 +571,14 @@ const Tags = styled.div`
 
 const Footer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
-  padding-top: 4px;
+  margin-top: 6px;
+  padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 `;
 
@@ -588,11 +588,6 @@ const ProjectLink = styled.a`
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.accent};
-`;
-
-const Hint = styled.span`
-  font-size: 0.85rem;
-  color: rgba(231, 235, 244, 0.58);
 `;
 
 const treeLabel = (name: string) => {
@@ -745,42 +740,39 @@ export function Project() {
                   exit={reduced ? undefined : { opacity: 0, y: -14, filter: "blur(4px)" }}
                   transition={{ duration: reduced ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <DetailCard>
-                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }} transition={{ duration: 0.2, delay: commandDone ? 0.02 : 0 }}>
-                      <DetailLabel>Selected project</DetailLabel>
-                    </StaggerBlock>
-                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.06 : 0 }}>
-                      <DetailHeader>
-                        <h3>{selectedProject.name}</h3>
-                        <span>case file</span>
-                      </DetailHeader>
-                    </StaggerBlock>
-                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.1 : 0 }}>
-                      <Role>{selectedProject.role}</Role>
-                    </StaggerBlock>
-                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }} transition={{ duration: 0.24, delay: commandDone ? 0.14 : 0 }}>
-                      <BulletList>
-                        {bullets.map((item) => (
-                          <Bullet key={item}>
-                            <span>{item}</span>
-                          </Bullet>
-                        ))}
-                      </BulletList>
-                    </StaggerBlock>
-                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.2 : 0 }}>
-                      <Tags>
-                        {selectedProject.stack.map((item) => (
-                          <span key={item}>{item}</span>
-                        ))}
-                      </Tags>
-                    </StaggerBlock>
-                    <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.24 : 0 }}>
-                      <Footer>
-                        {selectedProject.link ? <ProjectLink href={selectedProject.link} target="_blank" rel="noreferrer">{content.projects.openProject} ↗</ProjectLink> : <span />}
-                        <Hint>Open another folder to swap the view.</Hint>
-                      </Footer>
-                    </StaggerBlock>
-                  </DetailCard>
+                  <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }} transition={{ duration: 0.2, delay: commandDone ? 0.02 : 0 }}>
+                    <DetailLabel>Selected project</DetailLabel>
+                  </StaggerBlock>
+                  <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.06 : 0 }}>
+                    <DetailHeader>
+                      <h3>{selectedProject.name}</h3>
+                      <span>case file</span>
+                    </DetailHeader>
+                  </StaggerBlock>
+                  <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.1 : 0 }}>
+                    <Role>{selectedProject.role}</Role>
+                  </StaggerBlock>
+                  <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }} transition={{ duration: 0.24, delay: commandDone ? 0.14 : 0 }}>
+                    <BulletList>
+                      {bullets.map((item) => (
+                        <Bullet key={item}>
+                          <span>{item}</span>
+                        </Bullet>
+                      ))}
+                    </BulletList>
+                  </StaggerBlock>
+                  <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.2 : 0 }}>
+                    <Tags>
+                      {selectedProject.stack.map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </Tags>
+                  </StaggerBlock>
+                  <StaggerBlock initial={false} animate={reduced ? { opacity: 1, y: 0 } : commandDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ duration: 0.22, delay: commandDone ? 0.24 : 0 }}>
+                    <Footer>
+                      {selectedProject.link ? <ProjectLink href={selectedProject.link} target="_blank" rel="noreferrer">{content.projects.openProject} ↗</ProjectLink> : <span />}
+                    </Footer>
+                  </StaggerBlock>
                 </DetailMotion>
               </AnimatePresence>
             </ShellBody>

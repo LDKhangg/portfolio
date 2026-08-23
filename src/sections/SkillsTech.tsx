@@ -30,23 +30,17 @@ const Flow = styled.div`
 
 const Shell = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 20px;
+`;
+
+const ConfigGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 
   @media (max-width: 980px) {
     grid-template-columns: 1fr;
   }
-`;
-
-const MainColumn = styled.div`
-  display: grid;
-  gap: 16px;
-`;
-
-const SideColumn = styled.div`
-  display: grid;
-  gap: 16px;
-  align-content: start;
 `;
 
 const StackBoard = styled.div`
@@ -74,6 +68,13 @@ const StackBoardHeader = styled.div`
 const StackTitle = styled.h3`
   font-size: 1.45rem;
   line-height: 1.1;
+`;
+
+const StackIntro = styled.p`
+  max-width: 58ch;
+  color: ${({ theme }) => theme.colors.body};
+  font-size: 0.95rem;
+  line-height: 1.6;
 `;
 
 const StackRows = styled.div`
@@ -163,11 +164,13 @@ const ConfigCard = styled.article`
   border-radius: 24px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  display: grid;
+  gap: 14px;
 `;
 
 const ConfigTitle = styled.h3`
   font-size: 1.55rem;
-  margin-bottom: 16px;
+  margin: 0;
 `;
 
 const ConfigList = styled.div`
@@ -178,6 +181,11 @@ const ConfigList = styled.div`
     padding-left: 14px;
     border-left: 2px solid ${({ theme }) => theme.colors.line};
   }
+`;
+
+const CardCopy = styled.p`
+  color: ${({ theme }) => theme.colors.body};
+  line-height: 1.65;
 `;
 
 const Principles = styled.div`
@@ -201,6 +209,8 @@ const Principle = styled.span`
 `;
 
 export function SkillsTech() {
+  const [neovimCard, ideavimCard] = content.config.cards;
+
   return (
     <Section>
       <SectionAnchor id="skills">
@@ -215,54 +225,67 @@ export function SkillsTech() {
             ))}
           </RepoLinks>
           <Shell>
-            <MainColumn>
-                <StackBoard>
-                  <StackBoardHeader>
-                    <Label>Core stack</Label>
-                    <StackTitle>One tighter view of the tools I actually use instead of a wall of scattered chips.</StackTitle>
-                  </StackBoardHeader>
+            <ConfigGrid>
+              <ConfigCard>
+                <Label>{neovimCard.kicker}</Label>
+                <ConfigTitle>{neovimCard.title}</ConfigTitle>
+                <CardCopy>
+                  My main editing environment: LSP feedback, grep-heavy navigation, fast file movement, and a quiet UI that stays out of the way while coding.
+                </CardCopy>
+                <ConfigList>
+                  {neovimCard.items.map((item) => (
+                    <p key={item}>{item}</p>
+                  ))}
+                </ConfigList>
+              </ConfigCard>
 
-                  <StackRows>
-                    {content.skills.groups.map((g) => (
-                      <StackRow key={g.label}>
-                        <Label>{g.label}</Label>
-                        <StackCopy>{g.items}</StackCopy>
-                      </StackRow>
-                    ))}
-                  </StackRows>
+              <ConfigCard>
+                <Label>Shell and workflow</Label>
+                <ConfigTitle>zsh, zim, starship</ConfigTitle>
+                <CardCopy>
+                  The rest of the setup is about keeping terminal work consistent: prompt context stays readable, aliases stay small, and the shell supports the same fast habits as the editor.
+                </CardCopy>
+                <ConfigList>
+                  <p>zsh for the day-to-day shell, kept simple enough that commands stay memorable instead of magical.</p>
+                  <p>zim modules only where they reduce friction, so startup stays light and the shell does not turn into a side project.</p>
+                  <p>starship for a compact prompt with just enough repo and runtime context before jumping back into code.</p>
+                </ConfigList>
+              </ConfigCard>
+            </ConfigGrid>
 
-                  <LoopPanel>
-                    <Label>Tool loop</Label>
-                    <LoopFrame>
-                      <LogoLoop
-                        logos={STACK_LOGOS}
-                        speed={58}
-                        gap={28}
-                        logoHeight={34}
-                        pauseOnHover
-                        fadeOut
-                        fadeOutColor="#403d4d"
-                        scaleOnHover
-                        ariaLabel="Core stack logos"
-                      />
-                    </LoopFrame>
-                  </LoopPanel>
-                </StackBoard>
-            </MainColumn>
+            <StackBoard>
+              <StackBoardHeader>
+                <Label>Core stack</Label>
+                <StackTitle>One tighter view of the tools I actually use instead of a wall of scattered chips.</StackTitle>
+                <StackIntro>The two cards above explain how I work. This part is the actual stack I keep reaching for when shipping backend-heavy product work.</StackIntro>
+              </StackBoardHeader>
 
-            <SideColumn>
-              {content.config.cards.map((card) => (
-                <ConfigCard key={card.title}>
-                  <Label>{card.kicker}</Label>
-                  <ConfigTitle>{card.title}</ConfigTitle>
-                  <ConfigList>
-                    {card.items.map((item) => (
-                      <p key={item}>{item}</p>
-                    ))}
-                  </ConfigList>
-                </ConfigCard>
-              ))}
-            </SideColumn>
+              <StackRows>
+                {content.skills.groups.map((g) => (
+                  <StackRow key={g.label}>
+                    <Label>{g.label}</Label>
+                    <StackCopy>{g.items}</StackCopy>
+                  </StackRow>
+                ))}
+              </StackRows>
+
+              <LoopPanel>
+                <Label>Tool loop</Label>
+                <LoopFrame>
+                  <LogoLoop
+                    logos={STACK_LOGOS}
+                    speed={58}
+                    gap={28}
+                    logoHeight={34}
+                    pauseOnHover
+                    fadeOut
+                    fadeOutColor="#403d4d"
+                    scaleOnHover
+                    ariaLabel="Core stack logos"
+                  />
+                </LoopFrame>
+              </LoopPanel>
+            </StackBoard>
           </Shell>
           <Principles aria-label={content.config.principlesLabel}>
             {content.config.principles.map((principle) => (

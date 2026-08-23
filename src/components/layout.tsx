@@ -32,13 +32,15 @@ const Index = styled.span`
 `;
 
 const Title = styled.h2`
+  display: inline-block;
+  width: fit-content;
   font-size: clamp(2rem, 4.6vw, 4rem);
-  max-width: 12ch;
   line-height: 0.92;
 `;
 
 const TitleDepthWrap = styled.span`
   display: inline-block;
+  width: fit-content;
   max-width: 100%;
 
   .depth-text__face,

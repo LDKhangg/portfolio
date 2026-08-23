@@ -224,7 +224,7 @@ const GraphFrame = styled.a`
 `;
 
 const GraphScroll = styled.div`
-  min-width: 720px;
+  min-width: 620px;
 `;
 
 const GraphMeta = styled.div`
@@ -247,7 +247,7 @@ const GraphMeta = styled.div`
 
 const GraphImg = styled.img`
   width: 100%;
-  min-width: 720px;
+  min-width: 620px;
   display: block;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.72);

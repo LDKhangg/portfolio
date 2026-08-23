@@ -17,12 +17,6 @@ const STACK_LOGOS: LogoLoopItem[] = [
   { src: `${import.meta.env.BASE_URL}tech-logos/githubactions.svg`, alt: "GitHub Actions", href: "https://github.com/features/actions" },
 ];
 
-const Intro = styled.p`
-  max-width: 760px;
-  margin-bottom: 24px;
-  font-size: 1.05rem;
-`;
-
 const Flow = styled.div`
   display: grid;
   gap: 18px;
@@ -68,13 +62,6 @@ const StackBoardHeader = styled.div`
 const StackTitle = styled.h3`
   font-size: 1.45rem;
   line-height: 1.1;
-`;
-
-const StackIntro = styled.p`
-  max-width: 58ch;
-  color: ${({ theme }) => theme.colors.body};
-  font-size: 0.95rem;
-  line-height: 1.6;
 `;
 
 const StackRows = styled.div`
@@ -175,17 +162,20 @@ const ConfigTitle = styled.h3`
 
 const ConfigList = styled.div`
   display: grid;
-  gap: 12px;
+  gap: 10px;
 
   p {
-    padding-left: 14px;
+    padding-left: 12px;
     border-left: 2px solid ${({ theme }) => theme.colors.line};
+    color: ${({ theme }) => theme.colors.body};
+    line-height: 1.55;
   }
 `;
 
 const CardCopy = styled.p`
   color: ${({ theme }) => theme.colors.body};
-  line-height: 1.65;
+  line-height: 1.55;
+  max-width: 40ch;
 `;
 
 const Principles = styled.div`
@@ -214,9 +204,8 @@ export function SkillsTech() {
   return (
     <Section>
       <SectionAnchor id="skills">
-        <SectionHeading index="03" title={content.skills.title} description={content.skills.description} />
+        <SectionHeading index="03" title={content.skills.title} />
         <Flow>
-          <Intro>{content.config.intro}</Intro>
           <RepoLinks aria-label="Configuration repositories">
             {content.config.repoLinks.map((repo) => (
               <RepoLink key={repo.href} href={repo.href} target="_blank" rel="noreferrer">
@@ -229,26 +218,22 @@ export function SkillsTech() {
               <ConfigCard>
                 <Label>{neovimCard.kicker}</Label>
                 <ConfigTitle>{neovimCard.title}</ConfigTitle>
-                <CardCopy>
-                  My main editing environment: LSP feedback, grep-heavy navigation, fast file movement, and a quiet UI that stays out of the way while coding.
-                </CardCopy>
+                <CardCopy>My main editor for fast navigation, early feedback, and a quiet coding flow.</CardCopy>
                 <ConfigList>
-                  {neovimCard.items.map((item) => (
-                    <p key={item}>{item}</p>
-                  ))}
+                  <p>LSP, completion, and diagnostics tuned to surface issues early.</p>
+                  <p>grep-heavy navigation and quick file movement across projects.</p>
+                  <p>UI kept quiet enough to stay readable for long sessions.</p>
                 </ConfigList>
               </ConfigCard>
 
               <ConfigCard>
                 <Label>Shell and workflow</Label>
                 <ConfigTitle>zsh, zim, starship</ConfigTitle>
-                <CardCopy>
-                  The rest of the setup is about keeping terminal work consistent: prompt context stays readable, aliases stay small, and the shell supports the same fast habits as the editor.
-                </CardCopy>
+                <CardCopy>Small shell setup that keeps terminal work consistent with the editor.</CardCopy>
                 <ConfigList>
-                  <p>zsh for the day-to-day shell, kept simple enough that commands stay memorable instead of magical.</p>
-                  <p>zim modules only where they reduce friction, so startup stays light and the shell does not turn into a side project.</p>
-                  <p>starship for a compact prompt with just enough repo and runtime context before jumping back into code.</p>
+                  <p>zsh as the daily shell with simple aliases and predictable behavior.</p>
+                  <p>zim only where it reduces friction without bloating startup.</p>
+                  <p>starship for compact repo and runtime context at a glance.</p>
                 </ConfigList>
               </ConfigCard>
             </ConfigGrid>
@@ -257,7 +242,6 @@ export function SkillsTech() {
               <StackBoardHeader>
                 <Label>Core stack</Label>
                 <StackTitle>One tighter view of the tools I actually use instead of a wall of scattered chips.</StackTitle>
-                <StackIntro>The two cards above explain how I work. This part is the actual stack I keep reaching for when shipping backend-heavy product work.</StackIntro>
               </StackBoardHeader>
 
               <StackRows>

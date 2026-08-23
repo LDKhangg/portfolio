@@ -9,10 +9,10 @@ const Wrap = styled.section`
   position: relative;
   isolation: isolate;
   overflow: clip;
-  min-height: clamp(680px, calc(100dvh - 72px), 860px);
+  min-height: max(100svh, 760px);
   display: flex;
   align-items: flex-start;
-  padding: clamp(104px, 12vw, 148px) 0 clamp(20px, 3vw, 36px);
+  padding: clamp(104px, 12vw, 148px) 0 clamp(36px, 5vw, 56px);
   background:
     radial-gradient(circle at 50% 115%, rgba(255, 255, 255, 0.22), transparent 26%),
     linear-gradient(180deg, #14131b 0%, #111018 42%, #171720 100%);

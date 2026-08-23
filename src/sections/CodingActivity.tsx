@@ -5,7 +5,7 @@ import { Container, Section, SectionAnchor, SectionHeading } from "@/components/
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-const CONTRIBUTION_GRAPH_URL = "https://ghchart.rshah.org/d7d3e3/LDKhangg";
+const CONTRIBUTION_GRAPH_URL = "https://ghchart.rshah.org/6f6a82/LDKhangg";
 const GITHUB_PROFILE_URL = "https://github.com/LDKhangg";
 
 type ActivityData = {
@@ -69,8 +69,8 @@ const Panel = styled(motion.article)`
 const ProgressPanel = styled(Panel)`
   padding: 20px;
   display: grid;
-  grid-template-columns: minmax(200px, 284px) minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: minmax(184px, 248px) minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
 
   @media (max-width: 760px) {
@@ -148,7 +148,7 @@ const GaugeWrap = styled.a`
 
 const GaugeVisual = styled.div`
   position: relative;
-  width: min(100%, 236px);
+  width: min(100%, 208px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -171,7 +171,7 @@ const GaugeRing = styled.div<{ $gradient: string }>`
   &::after {
     content: "";
     position: absolute;
-    inset: 18px;
+    inset: 16px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.surface};
     box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.line};
@@ -179,7 +179,7 @@ const GaugeRing = styled.div<{ $gradient: string }>`
 `;
 
 const Total = styled.div`
-  font-size: clamp(2.2rem, 4.2vw, 3.3rem);
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
   line-height: 0.9;
   letter-spacing: -0.08em;
 `;
@@ -213,7 +213,7 @@ const GraphFrame = styled.a`
   padding: 16px 16px 12px;
   border: 1px solid ${({ theme }) => theme.colors.line};
   border-radius: 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 247, 244, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(250, 249, 252, 0.98) 0%, rgba(236, 232, 244, 0.98) 100%);
   color: inherit;
   overflow-x: auto;
   overflow-y: hidden;
@@ -237,7 +237,7 @@ const GraphMeta = styled.div`
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.body};
+  color: rgba(73, 69, 89, 0.78);
 
   @media (max-width: 560px) {
     flex-direction: column;
@@ -250,7 +250,8 @@ const GraphImg = styled.img`
   min-width: 720px;
   display: block;
   border-radius: 12px;
-  background: ${({ theme }) => theme.colors.surface};
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(73, 69, 89, 0.08);
 `;
 
 const Breakdown = styled.div`

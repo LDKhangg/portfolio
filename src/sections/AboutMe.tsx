@@ -181,7 +181,7 @@ const Avatar = styled.img`
 
 const IntroMeta = styled.div`
   display: grid;
-  gap: 10px;
+  gap: 8px;
 `;
 
 const Eyebrow = styled.p`
@@ -198,36 +198,10 @@ const IntroName = styled.h3`
 `;
 
 const IntroLead = styled.p`
-  max-width: 46ch;
+  max-width: 34ch;
   color: ${({ theme }) => theme.colors.text};
-  line-height: 1.7;
-  font-size: 1rem;
-`;
-
-const IntroRole = styled.p`
-  color: ${({ theme }) => theme.colors.body};
-  line-height: 1.7;
-`;
-
-const FocusRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
-const FocusPill = styled.span`
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background: rgba(255, 255, 255, 0.05);
-  color: ${({ theme }) => theme.colors.text};
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  line-height: 1.55;
+  font-size: 0.98rem;
 `;
 
 const IntroBody = styled.div`
@@ -276,15 +250,7 @@ export function AboutMe() {
                 <IntroMeta>
                   <Eyebrow>Software Engineer</Eyebrow>
                   <IntroName>{content.hero.name}</IntroName>
-                  <IntroLead>Backend-heavy product work, practical system design, and a workflow that stays fast under real use.</IntroLead>
-                  <IntroRole>I spend most of my time around Java and Spring, while actively growing into Go and Python without losing the frontend and product sense needed to ship complete work.</IntroRole>
-                  <FocusRow aria-label="Current focus">
-                    <FocusPill>Java</FocusPill>
-                    <FocusPill>Spring Boot</FocusPill>
-                    <FocusPill>Go</FocusPill>
-                    <FocusPill>Python</FocusPill>
-                    <FocusPill>React</FocusPill>
-                  </FocusRow>
+                  <IntroLead>Backend-heavy engineer focused on practical systems, clean product thinking, and workflows that stay fast under real use.</IntroLead>
                 </IntroMeta>
               </IntroTop>
               <IntroBody>

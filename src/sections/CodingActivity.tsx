@@ -55,7 +55,9 @@ const MainStack = styled.div`
   gap: 14px;
 `;
 
-const ActivityAnchor = styled(SectionAnchor)``;
+const ActivityAnchor = styled(SectionAnchor)`
+  scroll-margin-top: 96px;
+`;
 
 const Panel = styled(motion.article)`
   border: 1px solid ${({ theme }) => theme.colors.line};

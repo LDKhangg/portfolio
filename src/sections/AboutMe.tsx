@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 
+const AboutAnchor = styled(SectionAnchor)`
+  scroll-margin-top: 96px;
+`;
+
 const Wrap = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
@@ -269,7 +273,7 @@ export function AboutMe() {
 
   return (
     <Section>
-      <SectionAnchor id="about">
+      <AboutAnchor id="about">
         <SectionHeading index="02" title={content.about.title} description={content.about.description} />
         <Wrap>
           <Body>
@@ -319,7 +323,7 @@ export function AboutMe() {
             </ContactPanel>
           </SideColumn>
         </Wrap>
-      </SectionAnchor>
+      </AboutAnchor>
     </Section>
   );
 }

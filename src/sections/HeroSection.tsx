@@ -116,8 +116,8 @@ const Action = styled.a`
 
   &:hover {
     text-decoration: none;
-    border-color: rgba(138, 180, 255, 0.6);
-    background: rgba(138, 180, 255, 0.12);
+    border-color: rgba(215, 211, 227, 0.38);
+    background: rgba(215, 211, 227, 0.1);
     transform: translateY(-1px);
   }
 
@@ -130,7 +130,11 @@ const Primary = styled(Action)`
   background: #f4f7ff;
   color: #14131b !important;
   border-color: rgba(255, 255, 255, 0.65);
-  &:hover { background: #dfe9ff; }
+
+  &:hover {
+    background: #ddd9e8;
+    border-color: rgba(215, 211, 227, 0.52);
+  }
 `;
 
 const Ghost = styled(Action)``;

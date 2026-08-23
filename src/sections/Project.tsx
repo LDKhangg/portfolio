@@ -12,7 +12,7 @@ const WorkSection = styled(Section)`
 `;
 
 const WorkContainer = styled(Container)`
-  scroll-margin-top: 104px;
+  scroll-margin-top: 72px;
 `;
 
 const Layout = styled.div`

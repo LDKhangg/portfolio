@@ -67,10 +67,10 @@ const Panel = styled(motion.article)`
 `;
 
 const ProgressPanel = styled(Panel)`
-  padding: 16px 20px;
+  padding: 12px 20px;
   display: grid;
   grid-template-columns: minmax(184px, 248px) minmax(0, 1fr);
-  gap: 18px;
+  gap: 16px;
   align-items: center;
 
   @media (max-width: 760px) {

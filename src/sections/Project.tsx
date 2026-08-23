@@ -8,20 +8,6 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 const WorkSection = styled(Section)`
   position: relative;
   padding-top: clamp(88px, 10vw, 120px);
-
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: clamp(120px, 14vw, 180px);
-    pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(55, 53, 67, 0.14) 0%, rgba(55, 53, 67, 0) 100%),
-      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 38%);
-    opacity: 0.9;
-  }
 `;
 
 const Layout = styled.div`

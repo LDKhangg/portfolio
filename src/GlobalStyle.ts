@@ -29,9 +29,9 @@ const GlobalStyle = createGlobalStyle`
     z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 32%),
-      radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.05), transparent 24%),
-      radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.06), transparent 24%);
+      radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.07), transparent 30%),
+      radial-gradient(circle at 82% 10%, rgba(255, 255, 255, 0.045), transparent 22%),
+      radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.05), transparent 22%);
   }
 
   body::after {
@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.1;
+    opacity: 0.085;
     background-image: radial-gradient(rgba(255, 255, 255, 0.38) 0.6px, transparent 0.6px);
     background-size: 3px 3px;
     mix-blend-mode: soft-light;

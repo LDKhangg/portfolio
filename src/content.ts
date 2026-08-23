@@ -25,10 +25,10 @@ export const content = {
     title: "About",
     description: "A short intro to Kane, the work I ship, and how I like to build.",
     body: [
-      "I'm Kane, a fullstack developer in Ho Chi Minh City with over 1 year of real project experience.",
-      "I like building things that are actually useful, not just nice to look at. Most of my time goes into figuring out cleaner workflows, keeping my hands on the keyboard, and slowly learning how to make the editor work for me instead of the other way around.",
-      "Lately I’ve also been trying to level up beyond my comfort zone, especially by learning Go and sharpening the way I work every day.",
-      "I still like to keep things simple though: less ceremony, more shipping, and enough curiosity left over to keep improving the setup as I go.",
+      "I'm Kane, a software engineer currently working in Ho Chi Minh City.",
+      "I enjoy building software that is actually useful, not just polished on the surface. My work tends to focus on practical systems, cleaner workflows, and tools that make everyday engineering faster and simpler.",
+      "Most of my recent experience has been with Java and Spring, and lately I've been pushing further into Go while continuing to sharpen how I work.",
+      "I value simplicity, speed, and steady improvement over unnecessary complexity.",
     ],
     facts: [
       { label: "Location", value: "Ho Chi Minh City" },

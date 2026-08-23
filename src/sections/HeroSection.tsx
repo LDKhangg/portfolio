@@ -9,10 +9,10 @@ const Wrap = styled.section`
   position: relative;
   isolation: isolate;
   overflow: clip;
-  min-height: calc(100dvh - 72px);
+  min-height: clamp(680px, calc(100dvh - 72px), 860px);
   display: flex;
-  align-items: center;
-  padding: clamp(52px, 9vw, 92px) 0 clamp(72px, 10vw, 120px);
+  align-items: flex-start;
+  padding: clamp(104px, 12vw, 148px) 0 clamp(20px, 3vw, 36px);
   background:
     radial-gradient(circle at 50% 115%, rgba(255, 255, 255, 0.22), transparent 26%),
     linear-gradient(180deg, #14131b 0%, #111018 42%, #171720 100%);
@@ -24,14 +24,14 @@ const Wrap = styled.section`
     left: 0;
     right: 0;
     bottom: -1px;
-    height: clamp(120px, 16vw, 220px);
+    height: clamp(72px, 10vw, 132px);
     z-index: 1;
     pointer-events: none;
     background:
-      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.12), transparent 34%),
-      linear-gradient(180deg, rgba(49, 47, 60, 0) 0%, rgba(49, 47, 60, 0.42) 42%, ${({ theme }) => theme.colors.bg0} 100%);
-    filter: blur(6px);
-    opacity: 0.95;
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 34%),
+      linear-gradient(180deg, rgba(49, 47, 60, 0) 0%, rgba(49, 47, 60, 0.26) 42%, ${({ theme }) => theme.colors.bg0} 100%);
+    filter: blur(4px);
+    opacity: 0.82;
   }
 `;
 
@@ -59,6 +59,7 @@ const HeroShell = styled(Container)`
   z-index: 3;
   display: grid;
   justify-items: center;
+  width: 100%;
 `;
 
 const Copy = styled.div`

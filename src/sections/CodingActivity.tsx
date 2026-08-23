@@ -67,10 +67,10 @@ const Panel = styled(motion.article)`
 `;
 
 const ProgressPanel = styled(Panel)`
-  padding: 12px 20px;
+  padding: 8px 20px;
   display: grid;
   grid-template-columns: minmax(184px, 248px) minmax(0, 1fr);
-  gap: 16px;
+  gap: 14px;
   align-items: center;
 
   @media (max-width: 760px) {
@@ -194,12 +194,12 @@ const Unit = styled.div`
 
 const ProgressMeta = styled.div`
   display: grid;
-  gap: 12px;
+  gap: 10px;
 `;
 
 const LabelBlock = styled.div`
   display: grid;
-  gap: 6px;
+  gap: 4px;
 `;
 
 const ProgressNote = styled.p`

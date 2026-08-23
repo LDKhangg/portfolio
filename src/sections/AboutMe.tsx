@@ -19,43 +19,15 @@ const Wrap = styled.div`
 
 const Body = styled.div`
   display: grid;
-  gap: 20px;
+  gap: 0;
   align-content: start;
   font-size: 1.06rem;
-`;
-
-const IntroShell = styled.div`
-  position: relative;
-  display: grid;
-  gap: 16px;
 `;
 
 const SideColumn = styled.div`
   display: grid;
   gap: 16px;
   align-content: start;
-`;
-
-const BodyCard = styled.div`
-  padding: 22px 24px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 24px;
-  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
-  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 42%);
-    pointer-events: none;
-  }
-
-  p + p {
-    margin-top: 16px;
-  }
 `;
 
 const Panel = styled.aside`
@@ -179,6 +151,17 @@ const IntroCard = styled.div`
   }
 `;
 
+const IntroTop = styled.div`
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 const IntroRail = styled.div`
   position: absolute;
   inset: 0 auto 0 0;
@@ -247,6 +230,15 @@ const FocusPill = styled.span`
   text-transform: uppercase;
 `;
 
+const IntroBody = styled.div`
+  grid-column: 1 / -1;
+  padding-top: 4px;
+
+  p + p {
+    margin-top: 16px;
+  }
+`;
+
 const Fact = styled.div`
   padding: 14px 0;
 
@@ -277,9 +269,9 @@ export function AboutMe() {
         <SectionHeading index="02" title={content.about.title} description={content.about.description} />
         <Wrap>
           <Body>
-            <IntroShell>
-              <IntroCard>
-                <IntroRail aria-hidden="true" />
+            <IntroCard>
+              <IntroRail aria-hidden="true" />
+              <IntroTop>
                 <Avatar src={avatarSrc} alt={content.hero.name} />
                 <IntroMeta>
                   <Eyebrow>Software Engineer</Eyebrow>
@@ -294,13 +286,13 @@ export function AboutMe() {
                     <FocusPill>React</FocusPill>
                   </FocusRow>
                 </IntroMeta>
-              </IntroCard>
-            </IntroShell>
-            <BodyCard>
-              {content.about.body.map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
-            </BodyCard>
+              </IntroTop>
+              <IntroBody>
+                {content.about.body.map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
+                ))}
+              </IntroBody>
+            </IntroCard>
           </Body>
           <SideColumn>
             <Panel>

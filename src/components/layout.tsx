@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DepthText from "./DepthText";
 
 export const Container = styled.div`
   max-width: ${({ theme }) => theme.maxWidth};
@@ -33,6 +34,22 @@ const Index = styled.span`
 const Title = styled.h2`
   font-size: clamp(2rem, 4.6vw, 4rem);
   max-width: 12ch;
+  line-height: 0.92;
+`;
+
+const TitleDepthWrap = styled.span`
+  display: inline-block;
+  max-width: 100%;
+
+  .depth-text__face,
+  .depth-text__layer {
+    font-family: ${({ theme }) => theme.fonts.sans};
+  }
+
+  @media (max-width: 640px) {
+    transform: scale(0.98);
+    transform-origin: left center;
+  }
 `;
 
 const Description = styled.p`
@@ -44,7 +61,26 @@ export function SectionHeading({ index, title, description }: { index: string; t
   return (
     <HeadingWrap>
       <Index>{index}</Index>
-      <Title>{title}</Title>
+      <Title>
+        <TitleDepthWrap>
+          <DepthText
+            text={title}
+            layers={18}
+            depth={1.2}
+            faceColor="#f3f5fb"
+            depthColor="rgba(215, 211, 227, 0.42)"
+            tilt={3.8}
+            pointerTracking={false}
+            smoothing={0.12}
+            perspective={760}
+            autoOrbit={false}
+            orbitSpeed={0}
+            fontSize="clamp(2rem, 4.6vw, 4rem)"
+            fontWeight={850}
+            shadow
+          />
+        </TitleDepthWrap>
+      </Title>
       {description ? <Description>{description}</Description> : null}
     </HeadingWrap>
   );

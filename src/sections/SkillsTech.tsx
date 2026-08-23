@@ -37,73 +37,13 @@ const ConfigGrid = styled.div`
   }
 `;
 
-const StackBoard = styled.div`
-  padding: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 24px;
-  background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
-  box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
-  display: grid;
-  gap: 18px;
-`;
-
-const StackBoardHeader = styled.div`
-  display: grid;
-  gap: 8px;
-
-  p {
-    max-width: 58ch;
-    color: ${({ theme }) => theme.colors.body};
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-`;
-
-const StackTitle = styled.h3`
-  font-size: 1.45rem;
-  line-height: 1.1;
-`;
-
-const StackRows = styled.div`
-  display: grid;
-  gap: 12px;
-`;
-
-const StackRow = styled.div`
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 14px;
-  align-items: start;
-  padding-top: 12px;
-  border-top: 1px solid ${({ theme }) => theme.colors.line};
-
-  &:first-child {
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-`;
-
-const StackCopy = styled.p`
-  color: ${({ theme }) => theme.colors.body};
-  line-height: 1.65;
-`;
-
 const LoopPanel = styled.div`
   display: grid;
   gap: 12px;
-  padding-top: 6px;
 `;
 
 const LoopFrame = styled.div`
-  padding: 14px 16px;
-  border-radius: 18px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background: rgba(255, 255, 255, 0.025);
+  padding: 6px 0;
   overflow: hidden;
 `;
 
@@ -248,38 +188,21 @@ export function SkillsTech() {
               </ConfigCard>
             </ConfigGrid>
 
-            <StackBoard>
-              <StackBoardHeader>
-                <Label>Core stack</Label>
-                <StackTitle>One tighter view of the tools I actually use instead of a wall of scattered chips.</StackTitle>
-              </StackBoardHeader>
-
-              <StackRows>
-                {content.skills.groups.map((g) => (
-                  <StackRow key={g.label}>
-                    <Label>{g.label}</Label>
-                    <StackCopy>{g.items}</StackCopy>
-                  </StackRow>
-                ))}
-              </StackRows>
-
-              <LoopPanel>
-                <Label>Tool loop</Label>
-                <LoopFrame>
-                  <LogoLoop
-                    logos={STACK_LOGOS}
-                    speed={58}
-                    gap={28}
-                    logoHeight={34}
-                    pauseOnHover
-                    fadeOut
-                    fadeOutColor="#403d4d"
-                    scaleOnHover
-                    ariaLabel="Core stack logos"
-                  />
-                </LoopFrame>
-              </LoopPanel>
-            </StackBoard>
+            <LoopPanel>
+              <LoopFrame>
+                <LogoLoop
+                  logos={STACK_LOGOS}
+                  speed={58}
+                  gap={28}
+                  logoHeight={34}
+                  pauseOnHover
+                  fadeOut
+                  fadeOutColor="#403d4d"
+                  scaleOnHover
+                  ariaLabel="Core stack logos"
+                />
+              </LoopFrame>
+            </LoopPanel>
           </Shell>
           <Principles aria-label={content.config.principlesLabel}>
             {content.config.principles.map((principle) => (

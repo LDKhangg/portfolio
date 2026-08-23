@@ -12,7 +12,7 @@ const Wrap = styled.section`
   min-height: max(100svh, 760px);
   display: flex;
   align-items: flex-start;
-  padding: clamp(164px, 16vw, 220px) 0 clamp(36px, 5vw, 56px);
+  padding: clamp(184px, 17vw, 244px) 0 clamp(36px, 5vw, 56px);
   background:
     radial-gradient(circle at 50% 115%, rgba(255, 255, 255, 0.22), transparent 26%),
     linear-gradient(180deg, #14131b 0%, #111018 42%, #171720 100%);

@@ -3,7 +3,7 @@ import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 
 const AboutAnchor = styled(SectionAnchor)`
-  scroll-margin-top: 20px;
+  scroll-margin-top: 30px;
 `;
 
 const Wrap = styled.div`

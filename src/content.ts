@@ -25,7 +25,7 @@ export const content = {
     title: "About",
     description: "A short intro to Kane, the work I ship, and how I like to build.",
     body: [
-      "I'm Kane, a software engineer currently working in Ho Chi Minh City.",
+      "I'm Kane, a software engineer from Ho Chi Minh City.",
       "I enjoy building software that is actually useful, not just polished on the surface. My work tends to focus on practical systems, cleaner workflows, and tools that make everyday engineering faster and simpler.",
       "Most of my recent experience has been with Java and Spring, and lately I've been pushing further into Go while continuing to sharpen how I work.",
       "I value simplicity, speed, and steady improvement over unnecessary complexity.",

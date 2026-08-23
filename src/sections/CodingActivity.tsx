@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
-import { Container, Section, SectionHeading } from "@/components/layout";
+import { Container, Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -54,6 +54,8 @@ const MainStack = styled.div`
   display: grid;
   gap: 14px;
 `;
+
+const ActivityAnchor = styled(SectionAnchor)``;
 
 const Panel = styled(motion.article)`
   border: 1px solid ${({ theme }) => theme.colors.line};
@@ -384,8 +386,8 @@ export function CodingActivity() {
       : content.activity.solvedLabel;
 
   return (
-    <Section id="activity">
-      <Container>
+    <Section>
+      <ActivityAnchor id="activity">
         <SectionHeading index="04" title={content.activity.title} description={content.activity.description} />
         <Shell>
           <MainStack>
@@ -484,7 +486,7 @@ export function CodingActivity() {
             ) : null}
           </LatestPanel>
         </Shell>
-      </Container>
+      </ActivityAnchor>
     </Section>
   );
 }

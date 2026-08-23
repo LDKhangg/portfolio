@@ -40,6 +40,8 @@ const ConfigGrid = styled.div`
 const LoopPanel = styled.div`
   display: grid;
   gap: 12px;
+  justify-items: center;
+  text-align: center;
 `;
 
 const LoopTitle = styled.h3`

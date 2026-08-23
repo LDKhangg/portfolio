@@ -106,7 +106,7 @@ const UpdateItem = styled.a`
 `;
 
 const GraphPanel = styled(Panel)`
-  padding: 20px;
+  padding: 14px 20px 20px;
   display: grid;
   gap: 14px;
 `;
@@ -203,6 +203,7 @@ const LabelBlock = styled.div`
 `;
 
 const ProgressNote = styled.p`
+  margin: 0;
   max-width: 32ch;
   font-size: 0.98rem;
   line-height: 1.55;

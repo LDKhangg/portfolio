@@ -11,7 +11,9 @@ const WorkSection = styled(Section)`
   margin-top: clamp(36px, 5vw, 56px);
 `;
 
-const WorkContainer = styled(SectionAnchor)``;
+const WorkContainer = styled(SectionAnchor)`
+  scroll-margin-top: 124px;
+`;
 
 const Layout = styled.div`
   position: relative;

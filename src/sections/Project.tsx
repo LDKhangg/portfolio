@@ -10,6 +10,10 @@ const WorkSection = styled(Section)`
   padding-top: clamp(156px, 13vw, 208px);
 `;
 
+const WorkContainer = styled(Container)`
+  scroll-margin-top: 104px;
+`;
+
 const Layout = styled.div`
   position: relative;
   z-index: 1;
@@ -669,8 +673,8 @@ export function Project() {
   }, [commandText, reduced]);
 
   return (
-    <WorkSection id="work">
-      <Container>
+    <WorkSection>
+      <WorkContainer id="work">
         <SectionHeading index="01" title={content.projects.title} description={content.projects.description} />
         <Layout>
           <TreePanel>
@@ -781,7 +785,7 @@ export function Project() {
             </ShellBody>
           </Shell>
         </Layout>
-      </Container>
+      </WorkContainer>
     </WorkSection>
   );
 }

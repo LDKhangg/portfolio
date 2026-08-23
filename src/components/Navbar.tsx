@@ -172,8 +172,8 @@ export function Navbar() {
     const section = document.getElementById(id);
     if (!section) return;
 
-    const navHeight = navRef.current?.getBoundingClientRect().height ?? 0;
-    const top = window.scrollY + section.getBoundingClientRect().top - navHeight - 18;
+    const scrollMarginTop = Number.parseFloat(window.getComputedStyle(section).scrollMarginTop || "0") || 0;
+    const top = window.scrollY + section.getBoundingClientRect().top - scrollMarginTop;
 
     window.history.pushState(null, "", `#${id}`);
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });

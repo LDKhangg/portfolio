@@ -163,16 +163,45 @@ const NavLink = styled.a<{ $active: boolean }>`
 
 export function Navbar() {
   const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
-  const [activeId, setActiveId] = useState<string>(NAV_ITEMS[0].id);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   const sectionIds = useMemo(() => NAV_ITEMS.map((item) => item.id), []);
 
   useEffect(() => {
+    let visibleSections = new Map<string, number>();
+
     const updateFromHash = () => {
       const hashId = window.location.hash.replace(/^#/, "");
       if (hashId && sectionIds.includes(hashId)) {
         setActiveId(hashId);
       }
+    };
+
+    const updateFromScroll = () => {
+      const firstSection = document.getElementById(sectionIds[0]);
+
+      if (!firstSection) return;
+
+      const activationY = firstSection.offsetTop - Math.min(window.innerHeight * 0.28, 220);
+
+      if (window.scrollY < activationY) {
+        setActiveId(null);
+        return;
+      }
+
+      const nextActive = [...visibleSections.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+
+      if (nextActive) {
+        setActiveId(nextActive);
+        return;
+      }
+
+      const fallback = [...sectionIds].reverse().find((id) => {
+        const section = document.getElementById(id);
+        return section ? window.scrollY >= section.offsetTop - window.innerHeight * 0.35 : false;
+      });
+
+      setActiveId(fallback ?? sectionIds[0]);
     };
 
     updateFromHash();
@@ -185,13 +214,15 @@ export function Navbar() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]?.target.id) {
-          setActiveId(visible[0].target.id);
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
         }
+
+        updateFromScroll();
       },
       {
         rootMargin: "-25% 0px -55% 0px",
@@ -202,10 +233,15 @@ export function Navbar() {
     for (const section of sections) observer.observe(section);
 
     window.addEventListener("hashchange", updateFromHash);
+    window.addEventListener("scroll", updateFromScroll, { passive: true });
+    window.addEventListener("resize", updateFromScroll);
+    updateFromScroll();
 
     return () => {
       observer.disconnect();
       window.removeEventListener("hashchange", updateFromHash);
+      window.removeEventListener("scroll", updateFromScroll);
+      window.removeEventListener("resize", updateFromScroll);
     };
   }, [sectionIds]);
 

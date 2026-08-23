@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section, SectionHeading } from "@/components/layout";
+import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 
 const Grid = styled.div`
@@ -36,7 +36,7 @@ const Detail = styled.span`
 export function CourseworkCertifications() {
   return (
     <Section>
-      <Container>
+      <SectionAnchor id="study">
         <SectionHeading index="06" title={content.certs.title} description={content.certs.description} />
         <Grid>
           {content.certs.items.map((c) => (
@@ -46,7 +46,7 @@ export function CourseworkCertifications() {
             </Row>
           ))}
         </Grid>
-      </Container>
+      </SectionAnchor>
     </Section>
   );
 }

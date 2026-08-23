@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import { AnimatePresence, motion } from "motion/react";
-import { Container, Section, SectionHeading } from "@/components/layout";
+import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -11,9 +11,7 @@ const WorkSection = styled(Section)`
   margin-top: clamp(36px, 5vw, 56px);
 `;
 
-const WorkContainer = styled(Container)`
-  scroll-margin-top: 72px;
-`;
+const WorkContainer = styled(SectionAnchor)``;
 
 const Layout = styled.div`
   position: relative;

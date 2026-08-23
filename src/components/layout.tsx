@@ -11,6 +11,10 @@ export const Container = styled.div`
   }
 `;
 
+export const SectionAnchor = styled(Container)`
+  scroll-margin-top: 72px;
+`;
+
 export const Section = styled.section`
   padding-top: ${({ theme }) => theme.sectionGap};
   &:last-of-type { padding-bottom: ${({ theme }) => theme.sectionGap}; }

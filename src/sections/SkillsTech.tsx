@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section, SectionHeading } from "@/components/layout";
+import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 
 const Intro = styled.p`
@@ -148,8 +148,8 @@ const Principle = styled.span`
 
 export function SkillsTech() {
   return (
-    <Section id="skills">
-      <Container>
+    <Section>
+      <SectionAnchor id="skills">
         <SectionHeading index="03" title={content.skills.title} description={content.skills.description} />
         <Flow>
           <Intro>{content.config.intro}</Intro>
@@ -196,7 +196,7 @@ export function SkillsTech() {
             ))}
           </Principles>
         </Flow>
-      </Container>
+      </SectionAnchor>
     </Section>
   );
 }

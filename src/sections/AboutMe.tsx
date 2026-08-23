@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section, SectionHeading } from "@/components/layout";
+import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 
 const Wrap = styled.div`
@@ -268,8 +268,8 @@ export function AboutMe() {
   const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
 
   return (
-    <Section id="about">
-      <Container>
+    <Section>
+      <SectionAnchor id="about">
         <SectionHeading index="02" title={content.about.title} description={content.about.description} />
         <Wrap>
           <Body>
@@ -319,7 +319,7 @@ export function AboutMe() {
             </ContactPanel>
           </SideColumn>
         </Wrap>
-      </Container>
+      </SectionAnchor>
     </Section>
   );
 }

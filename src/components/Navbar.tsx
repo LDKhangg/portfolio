@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { content } from "@/content";
 
@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { id: "about", label: content.nav.about, className: "hide-sm hide-md" },
   { id: "skills", label: content.nav.skills, className: "hide-sm hide-md" },
   { id: "experience", label: content.nav.experience, className: "hide-sm hide-md" },
+  { id: "study", label: content.nav.study, className: "hide-sm hide-md" },
 ] as const;
 
 const Bar = styled.header`
@@ -163,8 +164,21 @@ const NavLink = styled.a<{ $active: boolean }>`
 export function Navbar() {
   const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
   const [activeId, setActiveId] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   const sectionIds = useMemo(() => NAV_ITEMS.map((item) => item.id), []);
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    const navHeight = navRef.current?.getBoundingClientRect().height ?? 0;
+    const top = window.scrollY + section.getBoundingClientRect().top - navHeight - 18;
+
+    window.history.pushState(null, "", `#${id}`);
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    setActiveId(id);
+  };
 
   useEffect(() => {
     let visibleSections = new Map<string, number>();
@@ -246,7 +260,7 @@ export function Navbar() {
 
   return (
     <Bar>
-      <Inner>
+        <Inner ref={navRef}>
         <Logo href="#top" aria-label="Kane portfolio">
           <Avatar src={avatarSrc} alt="Kane" />
           <Wordmark>Kane</Wordmark>
@@ -259,6 +273,10 @@ export function Navbar() {
               className={item.className}
               $active={activeId === item.id}
               aria-current={activeId === item.id ? "location" : undefined}
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToSection(item.id);
+              }}
             >
               {item.label}
             </NavLink>

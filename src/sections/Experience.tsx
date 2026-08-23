@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section, SectionHeading } from "@/components/layout";
+import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
 
 const List = styled.div`
@@ -50,8 +50,8 @@ const Note = styled.p`
 
 export function Experience() {
   return (
-    <Section id="experience">
-      <Container>
+    <Section>
+      <SectionAnchor id="experience">
         <SectionHeading index="05" title={content.experience.title} description={content.experience.description} />
         <List>
           {content.experience.items.map((e) => (
@@ -64,7 +64,7 @@ export function Experience() {
             </Item>
           ))}
         </List>
-      </Container>
+      </SectionAnchor>
     </Section>
   );
 }

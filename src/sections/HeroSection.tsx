@@ -17,6 +17,22 @@ const Wrap = styled.section`
     radial-gradient(circle at 50% 115%, rgba(255, 255, 255, 0.22), transparent 26%),
     linear-gradient(180deg, #14131b 0%, #111018 42%, #171720 100%);
   color: rgba(244, 247, 255, 0.88);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: clamp(120px, 16vw, 220px);
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.12), transparent 34%),
+      linear-gradient(180deg, rgba(49, 47, 60, 0) 0%, rgba(49, 47, 60, 0.42) 42%, ${({ theme }) => theme.colors.bg0} 100%);
+    filter: blur(6px);
+    opacity: 0.95;
+  }
 `;
 
 const Background = styled.div`
@@ -40,7 +56,7 @@ const BackgroundVeil = styled.div`
 
 const HeroShell = styled(Container)`
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: grid;
   justify-items: center;
 `;

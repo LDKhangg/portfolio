@@ -23,15 +23,12 @@ const Wrap = styled.section`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1px;
-    height: clamp(72px, 10vw, 132px);
+    bottom: 0;
+    height: clamp(28px, 4vw, 52px);
     z-index: 1;
     pointer-events: none;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 34%),
-      linear-gradient(180deg, rgba(49, 47, 60, 0) 0%, rgba(49, 47, 60, 0.26) 42%, ${({ theme }) => theme.colors.bg0} 100%);
-    filter: blur(4px);
-    opacity: 0.82;
+    background: linear-gradient(180deg, rgba(58, 55, 71, 0) 0%, rgba(58, 55, 71, 0.18) 100%);
+    opacity: 0.55;
   }
 `;
 

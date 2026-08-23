@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { id: "work", label: content.nav.work },
   { id: "about", label: content.nav.about, className: "hide-sm hide-md" },
   { id: "skills", label: content.nav.skills, className: "hide-sm hide-md" },
+  { id: "activity", label: content.nav.activity, className: "hide-sm hide-md" },
   { id: "experience", label: content.nav.experience, className: "hide-sm hide-md" },
   { id: "study", label: content.nav.study, className: "hide-sm hide-md" },
 ] as const;

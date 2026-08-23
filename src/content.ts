@@ -1,5 +1,5 @@
 export const content = {
-  nav: { work: "Work", about: "About", skills: "Skills", experience: "Experience", study: "Study" },
+  nav: { work: "Work", about: "About", skills: "Skills", activity: "Activity", experience: "Experience", study: "Study" },
   hero: {
     greeting: "Based in Ho Chi Minh City",
     name: "Kane",

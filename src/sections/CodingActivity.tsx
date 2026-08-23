@@ -43,7 +43,7 @@ const FALLBACK: ActivityData = {
 const Shell = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-  gap: 18px;
+  gap: 14px;
 
   @media (max-width: 920px) {
     grid-template-columns: 1fr;
@@ -52,21 +52,21 @@ const Shell = styled.div`
 
 const MainStack = styled.div`
   display: grid;
-  gap: 18px;
+  gap: 14px;
 `;
 
 const Panel = styled(motion.article)`
   border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 30px;
+  border-radius: 26px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
 `;
 
 const ProgressPanel = styled(Panel)`
-  padding: 24px;
+  padding: 20px;
   display: grid;
-  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: minmax(200px, 284px) minmax(0, 1fr);
+  gap: 20px;
   align-items: center;
 
   @media (max-width: 760px) {
@@ -75,23 +75,23 @@ const ProgressPanel = styled(Panel)`
 `;
 
 const LatestPanel = styled(Panel)`
-  padding: 24px;
+  padding: 20px;
   display: grid;
-  gap: 14px;
+  gap: 12px;
   align-content: start;
 `;
 
 const UpdatesList = styled.div`
   display: grid;
-  gap: 12px;
+  gap: 10px;
 `;
 
 const UpdateItem = styled.a`
   display: grid;
-  gap: 10px;
-  padding: 16px;
+  gap: 8px;
+  padding: 14px;
   border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 20px;
+  border-radius: 18px;
   background: ${({ theme }) => theme.colors.surface};
   color: inherit;
 
@@ -102,9 +102,9 @@ const UpdateItem = styled.a`
 `;
 
 const GraphPanel = styled(Panel)`
-  padding: 24px;
+  padding: 20px;
   display: grid;
-  gap: 18px;
+  gap: 14px;
 `;
 
 const Kicker = styled.div`
@@ -124,7 +124,7 @@ const GaugeWrap = styled.a`
 
 const GaugeVisual = styled.div`
   position: relative;
-  width: min(100%, 280px);
+  width: min(100%, 236px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -147,7 +147,7 @@ const GaugeRing = styled.div<{ $gradient: string }>`
   &::after {
     content: "";
     position: absolute;
-    inset: 20px;
+    inset: 18px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.surface};
     box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.line};
@@ -155,7 +155,7 @@ const GaugeRing = styled.div<{ $gradient: string }>`
 `;
 
 const Total = styled.div`
-  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 4.2vw, 3.3rem);
   line-height: 0.9;
   letter-spacing: -0.08em;
 `;
@@ -170,23 +170,25 @@ const Unit = styled.div`
 
 const ProgressMeta = styled.div`
   display: grid;
-  gap: 14px;
+  gap: 12px;
 `;
 
 const LabelBlock = styled.div`
   display: grid;
-  gap: 8px;
+  gap: 6px;
 `;
 
 const ProgressNote = styled.p`
-  max-width: 36ch;
+  max-width: 32ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
 `;
 
 const GraphFrame = styled.a`
   display: block;
-  padding: 18px;
+  padding: 14px;
   border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 24px;
+  border-radius: 22px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 247, 244, 0.96) 100%);
   color: inherit;
 
@@ -200,7 +202,7 @@ const GraphMeta = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.72rem;
   letter-spacing: 0.14em;
@@ -216,19 +218,19 @@ const GraphMeta = styled.div`
 const GraphImg = styled.img`
   width: 100%;
   display: block;
-  border-radius: 14px;
+  border-radius: 12px;
   background: ${({ theme }) => theme.colors.surface};
 `;
 
 const Breakdown = styled.div`
   display: grid;
-  gap: 10px;
+  gap: 8px;
 `;
 
 const BreakdownRow = styled.div`
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) auto;
-  gap: 12px;
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+  gap: 10px;
   align-items: center;
 
   @media (max-width: 520px) {
@@ -245,7 +247,7 @@ const BreakdownLabel = styled.span`
 `;
 
 const BreakdownBar = styled.span<{ $color: string; $width: number }>`
-  height: 10px;
+  height: 8px;
   border-radius: 999px;
   background: ${({ theme }) => theme.colors.bg1};
   overflow: hidden;
@@ -268,8 +270,8 @@ const BreakdownValue = styled.span`
 `;
 
 const UpdateMessage = styled.p`
-  font-size: 0.96rem;
-  line-height: 1.65;
+  font-size: 0.92rem;
+  line-height: 1.55;
 `;
 
 const RepoLine = styled.div`

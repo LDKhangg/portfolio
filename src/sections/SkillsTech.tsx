@@ -42,6 +42,12 @@ const LoopPanel = styled.div`
   gap: 12px;
 `;
 
+const LoopTitle = styled.h3`
+  margin: 0;
+  font-size: 1.35rem;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
 const LoopFrame = styled.div`
   padding: 6px 0;
   overflow: hidden;
@@ -128,26 +134,6 @@ const CardCopy = styled.p`
   max-width: 40ch;
 `;
 
-const Principles = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
-const Principle = styled.span`
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background: ${({ theme }) => theme.colors.surfaceSoft};
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-`;
-
 export function SkillsTech() {
   const [neovimCard, ideavimCard] = content.config.cards;
 
@@ -189,6 +175,8 @@ export function SkillsTech() {
             </ConfigGrid>
 
             <LoopPanel>
+              <Label>Core stack</Label>
+              <LoopTitle>Tools I keep reaching for in real product work.</LoopTitle>
               <LoopFrame>
                 <LogoLoop
                   logos={STACK_LOGOS}
@@ -204,11 +192,6 @@ export function SkillsTech() {
               </LoopFrame>
             </LoopPanel>
           </Shell>
-          <Principles aria-label={content.config.principlesLabel}>
-            {content.config.principles.map((principle) => (
-              <Principle key={principle}>{principle}</Principle>
-            ))}
-          </Principles>
         </Flow>
       </SectionAnchor>
     </Section>

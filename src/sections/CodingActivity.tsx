@@ -384,7 +384,7 @@ export function CodingActivity() {
   return (
     <Section id="activity">
       <Container>
-        <SectionHeading index="05" title={content.activity.title} description={content.activity.description} />
+        <SectionHeading index="04" title={content.activity.title} description={content.activity.description} />
         <Shell>
           <MainStack>
             <ProgressPanel

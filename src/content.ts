@@ -1,5 +1,5 @@
 export const content = {
-  nav: { work: "Work", about: "About", config: "Config", skills: "Skills", experience: "Experience" },
+  nav: { work: "Work", about: "About", skills: "Skills", experience: "Experience" },
   hero: {
     greeting: "Based in Ho Chi Minh City",
     name: "Kane",
@@ -128,8 +128,8 @@ export const content = {
     ],
   },
   skills: {
-    title: "Stack",
-    description: "A compact view of the stack I use most often across backend, frontend, data, cloud delivery, and the Go work I am picking up now.",
+    title: "Stack and workflow",
+    description: "The stack I use most, plus the editor and config habits that keep the day-to-day workflow fast.",
     groups: [
       { label: "Backend", items: "Java · Spring Boot · Go · Spring Security · JPA/Hibernate · MyBatis · QueryDSL · REST" },
       { label: "Frontend", items: "React · TypeScript · Zustand · TanStack Query · styled-components · Tailwind" },

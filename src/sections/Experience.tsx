@@ -52,7 +52,7 @@ export function Experience() {
   return (
     <Section id="experience">
       <Container>
-        <SectionHeading index="06" title={content.experience.title} description={content.experience.description} />
+        <SectionHeading index="05" title={content.experience.title} description={content.experience.description} />
         <List>
           {content.experience.items.map((e) => (
             <Item key={e.org}>

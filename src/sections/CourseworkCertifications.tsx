@@ -37,7 +37,7 @@ export function CourseworkCertifications() {
   return (
     <Section>
       <Container>
-        <SectionHeading index="07" title={content.certs.title} description={content.certs.description} />
+        <SectionHeading index="06" title={content.certs.title} description={content.certs.description} />
         <Grid>
           {content.certs.items.map((c) => (
             <Row key={c.name}>

@@ -34,18 +34,55 @@ const SideColumn = styled.div`
   align-content: start;
 `;
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-`;
-
-const Cell = styled.div`
+const StackBoard = styled.div`
   padding: 24px;
   border: 1px solid ${({ theme }) => theme.colors.line};
   border-radius: 24px;
   background: linear-gradient(180deg, ${({ theme }) => theme.colors.surface} 0%, ${({ theme }) => theme.colors.surfaceSoft} 100%);
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
+  display: grid;
+  gap: 18px;
+`;
+
+const StackBoardHeader = styled.div`
+  display: grid;
+  gap: 8px;
+
+  p {
+    max-width: 58ch;
+    color: ${({ theme }) => theme.colors.body};
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+`;
+
+const StackTitle = styled.h3`
+  font-size: 1.45rem;
+  line-height: 1.1;
+`;
+
+const StackRows = styled.div`
+  display: grid;
+  gap: 12px;
+`;
+
+const StackRow = styled.div`
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding-top: 12px;
+  border-top: 1px solid ${({ theme }) => theme.colors.line};
+
+  &:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 `;
 
 const RepoLinks = styled.div`
@@ -84,7 +121,6 @@ const Label = styled.div`
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.accent};
-  margin-bottom: 14px;
 `;
 
 const Items = styled.div`
@@ -95,11 +131,11 @@ const Items = styled.div`
   span {
     border: 1px solid ${({ theme }) => theme.colors.line};
     border-radius: 999px;
-    padding: 6px 10px;
+    padding: 5px 10px;
     font-family: ${({ theme }) => theme.fonts.mono};
     font-size: 0.7rem;
     color: ${({ theme }) => theme.colors.text};
-    background: ${({ theme }) => theme.colors.surfaceSoft};
+    background: rgba(255, 255, 255, 0.03);
   }
 `;
 
@@ -162,18 +198,25 @@ export function SkillsTech() {
           </RepoLinks>
           <Shell>
             <MainColumn>
-              <Grid>
-                {content.skills.groups.map((g) => (
-                  <Cell key={g.label}>
-                    <Label>{g.label}</Label>
-                    <Items>
-                      {g.items.split(" · ").map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
-                    </Items>
-                  </Cell>
-                ))}
-              </Grid>
+              <StackBoard>
+                <StackBoardHeader>
+                  <Label>Core stack</Label>
+                  <StackTitle>Grouped tighter so the stack reads fast instead of scattering across the page.</StackTitle>
+                </StackBoardHeader>
+
+                <StackRows>
+                  {content.skills.groups.map((g) => (
+                    <StackRow key={g.label}>
+                      <Label>{g.label}</Label>
+                      <Items>
+                        {g.items.split(" · ").map((item) => (
+                          <span key={item}>{item}</span>
+                        ))}
+                      </Items>
+                    </StackRow>
+                  ))}
+                </StackRows>
+              </StackBoard>
             </MainColumn>
 
             <SideColumn>

@@ -7,7 +7,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const WorkSection = styled(Section)`
   position: relative;
-  padding-top: clamp(36px, 5vw, 56px);
+  padding-top: clamp(72px, 8vw, 104px);
 `;
 
 const Layout = styled.div`

@@ -38,85 +38,6 @@ const Panel = styled.aside`
   box-shadow: 0 18px 40px ${({ theme }) => theme.colors.shadow};
 `;
 
-const ContactPanel = styled(Panel)`
-  display: grid;
-  gap: 14px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.06), transparent 36%);
-    pointer-events: none;
-  }
-`;
-
-const ContactEyebrow = styled.p`
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.accent};
-`;
-
-const ContactBlurb = styled.p`
-  color: ${({ theme }) => theme.colors.body};
-  line-height: 1.7;
-`;
-
-const ContactEmail = styled.a`
-  width: fit-content;
-  max-width: 100%;
-  font-family: ${({ theme }) => theme.fonts.serif};
-  font-size: clamp(1rem, 2.2vw, 1.55rem);
-  line-height: 1.12;
-  color: ${({ theme }) => theme.colors.text};
-  letter-spacing: -0.025em;
-  overflow-wrap: anywhere;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-    text-decoration: none;
-  }
-`;
-
-const ContactLinks = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-const ContactLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 13px;
-  border-radius: 999px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background: ${({ theme }) => theme.colors.surfaceSoft};
-  color: ${({ theme }) => theme.colors.text};
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  &:hover {
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.accent};
-    border-color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-
-const ContactFoot = styled.div`
-  font-family: ${({ theme }) => theme.fonts.mono};
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.body};
-`;
-
 const IntroCard = styled.div`
   position: relative;
   display: grid;
@@ -234,6 +155,16 @@ const FactValue = styled.div`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const FactLink = styled.a`
+  color: ${({ theme }) => theme.colors.text};
+  overflow-wrap: anywhere;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+    text-decoration: none;
+  }
+`;
+
 export function AboutMe() {
   const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
 
@@ -268,17 +199,13 @@ export function AboutMe() {
                   <FactValue>{fact.value}</FactValue>
                 </Fact>
               ))}
+              <Fact>
+                <FactLabel>{content.contact.title}</FactLabel>
+                <FactValue>
+                  <FactLink href={`mailto:${content.contact.email}`}>{content.contact.email}</FactLink>
+                </FactValue>
+              </Fact>
             </Panel>
-            <ContactPanel>
-              <ContactEyebrow>{content.contact.title}</ContactEyebrow>
-              <ContactBlurb>{content.contact.blurb}</ContactBlurb>
-              <ContactEmail href={`mailto:${content.contact.email}`}>{content.contact.email}</ContactEmail>
-              <ContactLinks>
-                <ContactLink href="https://github.com/LDKhangg" target="_blank" rel="noreferrer">GitHub</ContactLink>
-                <ContactLink href="https://www.linkedin.com/in/kane06092004/" target="_blank" rel="noreferrer">LinkedIn</ContactLink>
-              </ContactLinks>
-              <ContactFoot>{content.contact.footer}</ContactFoot>
-            </ContactPanel>
           </SideColumn>
         </Wrap>
       </AboutAnchor>

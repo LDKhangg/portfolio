@@ -155,6 +155,16 @@ const ConfigCard = styled.article`
   gap: 14px;
 `;
 
+const CardRepoLinks = styled(RepoLinks)`
+  gap: 8px;
+`;
+
+const CardRepoLink = styled(RepoLink)`
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 0.68rem;
+`;
+
 const ConfigTitle = styled.h3`
   font-size: 1.55rem;
   margin: 0;
@@ -206,19 +216,19 @@ export function SkillsTech() {
       <SectionAnchor id="skills">
         <SectionHeading index="03" title={content.skills.title} />
         <Flow>
-          <RepoLinks aria-label="Configuration repositories">
-            {content.config.repoLinks.map((repo) => (
-              <RepoLink key={repo.href} href={repo.href} target="_blank" rel="noreferrer">
-                {repo.label}
-              </RepoLink>
-            ))}
-          </RepoLinks>
           <Shell>
             <ConfigGrid>
               <ConfigCard>
                 <Label>{neovimCard.kicker}</Label>
                 <ConfigTitle>{neovimCard.title}</ConfigTitle>
                 <CardCopy>My main editor for fast navigation, early feedback, and a quiet coding flow.</CardCopy>
+                <CardRepoLinks aria-label="Configuration repositories">
+                  {content.config.repoLinks.map((repo) => (
+                    <CardRepoLink key={repo.href} href={repo.href} target="_blank" rel="noreferrer">
+                      {repo.label}
+                    </CardRepoLink>
+                  ))}
+                </CardRepoLinks>
                 <ConfigList>
                   <p>LSP, completion, and diagnostics tuned to surface issues early.</p>
                   <p>grep-heavy navigation and quick file movement across projects.</p>

@@ -128,7 +128,7 @@ export const content = {
     ],
   },
   skills: {
-    title: "Stack and workflow",
+    title: "Skills and config",
     description: "The stack I use most, plus the editor and config habits that keep the day-to-day workflow fast.",
     groups: [
       { label: "Backend", items: "Java · Spring Boot · Go · Spring Security · JPA/Hibernate · MyBatis · QueryDSL · REST" },

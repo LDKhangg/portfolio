@@ -102,7 +102,7 @@ const Avatar = styled.img`
 
 const IntroMeta = styled.div`
   display: grid;
-  gap: 8px;
+  gap: 6px;
 `;
 
 const Eyebrow = styled.p`
@@ -116,13 +116,6 @@ const Eyebrow = styled.p`
 const IntroName = styled.h3`
   font-size: clamp(1.5rem, 4vw, 2.2rem);
   line-height: 1;
-`;
-
-const IntroLead = styled.p`
-  max-width: 34ch;
-  color: ${({ theme }) => theme.colors.text};
-  line-height: 1.55;
-  font-size: 0.98rem;
 `;
 
 const IntroBody = styled.div`
@@ -179,9 +172,8 @@ export function AboutMe() {
               <IntroTop>
                 <Avatar src={avatarSrc} alt={content.hero.name} />
                 <IntroMeta>
-                  <Eyebrow>Software Engineer</Eyebrow>
                   <IntroName>{content.hero.name}</IntroName>
-                  <IntroLead>Backend-heavy engineer focused on practical systems, clean product thinking, and workflows that stay fast under real use.</IntroLead>
+                  <Eyebrow>Software Engineer</Eyebrow>
                 </IntroMeta>
               </IntroTop>
               <IntroBody>

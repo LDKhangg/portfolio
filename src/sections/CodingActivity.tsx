@@ -111,6 +111,26 @@ const GraphPanel = styled(Panel)`
   gap: 14px;
 `;
 
+const GraphCopy = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const GraphAside = styled.div`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.body};
+`;
+
 const Kicker = styled.div`
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.7rem;
@@ -190,15 +210,21 @@ const ProgressNote = styled.p`
 
 const GraphFrame = styled.a`
   display: block;
-  padding: 14px;
+  padding: 16px 16px 12px;
   border: 1px solid ${({ theme }) => theme.colors.line};
   border-radius: 22px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 247, 244, 0.96) 100%);
   color: inherit;
+  overflow-x: auto;
+  overflow-y: hidden;
 
   &:hover {
     text-decoration: none;
   }
+`;
+
+const GraphScroll = styled.div`
+  min-width: 720px;
 `;
 
 const GraphMeta = styled.div`
@@ -221,6 +247,7 @@ const GraphMeta = styled.div`
 
 const GraphImg = styled.img`
   width: 100%;
+  min-width: 720px;
   display: block;
   border-radius: 12px;
   background: ${({ theme }) => theme.colors.surface};
@@ -276,6 +303,44 @@ const BreakdownValue = styled.span`
 const UpdateMessage = styled.p`
   font-size: 0.92rem;
   line-height: 1.55;
+`;
+
+const UpdateTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const RepoBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: rgba(255, 255, 255, 0.04);
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const DateBadge = styled.span`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.body};
+`;
+
+const CommitMessage = styled.p`
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const RepoLine = styled.div`
@@ -445,16 +510,21 @@ export function CodingActivity() {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
-              <LabelBlock>
-                <Kicker>{content.activity.contributionLabel}</Kicker>
-                <ProgressNote>{content.activity.contributionNote}</ProgressNote>
-              </LabelBlock>
+              <GraphCopy>
+                <LabelBlock>
+                  <Kicker>{content.activity.contributionLabel}</Kicker>
+                  <ProgressNote>{content.activity.contributionNote}</ProgressNote>
+                </LabelBlock>
+                <GraphAside>{status === "ready" ? `Snapshot ${formatDate(data.generatedAt)}` : content.activity.loadingLabel}</GraphAside>
+              </GraphCopy>
               <GraphFrame href={GITHUB_PROFILE_URL} target="_blank" rel="noreferrer">
-                <GraphMeta>
-                  <span>LDKhangg</span>
-                  <span>{content.activity.contributionAction}</span>
-                </GraphMeta>
-                <GraphImg src={CONTRIBUTION_GRAPH_URL} alt={content.activity.contributionAlt} loading="lazy" />
+                <GraphScroll>
+                  <GraphMeta>
+                    <span>LDKhangg</span>
+                    <span>{content.activity.contributionAction}</span>
+                  </GraphMeta>
+                  <GraphImg src={CONTRIBUTION_GRAPH_URL} alt={content.activity.contributionAlt} loading="lazy" />
+                </GraphScroll>
               </GraphFrame>
             </GraphPanel>
           </MainStack>
@@ -473,11 +543,11 @@ export function CodingActivity() {
               latestUpdates.length > 0 ? <UpdatesList>
                 {latestUpdates.slice(0, 4).map((update) => (
                   <UpdateItem key={`${update.repo}-${update.pushedAt}`} href={update.url} target="_blank" rel="noreferrer">
-                    <RepoLine>
-                      <span>{update.repoLabel || update.relativeRepo}</span>
-                      <span>{formatDate(update.pushedAt)}</span>
-                    </RepoLine>
-                    <UpdateMessage>{update.message}</UpdateMessage>
+                    <UpdateTop>
+                      <RepoBadge>{update.repoLabel || update.relativeRepo}</RepoBadge>
+                      <DateBadge>{formatDate(update.pushedAt)}</DateBadge>
+                    </UpdateTop>
+                    <CommitMessage>{update.message}</CommitMessage>
                     <RepoLine>
                       <span>{content.activity.latestListLabel}</span>
                       <span>{content.activity.latestAction} ↗</span>

@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -115,6 +116,42 @@ async function fetchRecentRepoUpdates(limit = 4) {
   return updates.filter((update) => update.available && update.pushedAt);
 }
 
+function readLocalPortfolioUpdate() {
+  try {
+    const sha = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
+    const message = execFileSync("git", ["log", "-1", "--pretty=%s"], { cwd: root, encoding: "utf8" }).trim();
+    const pushedAt = execFileSync("git", ["log", "-1", "--pretty=%cI"], { cwd: root, encoding: "utf8" }).trim();
+
+    return {
+      repo: "portfolio",
+      repoLabel: "portfolio",
+      url: `https://github.com/${USER}/portfolio/commit/${sha}`,
+      message,
+      pushedAt,
+      relativeRepo: "portfolio",
+      available: true,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function mergePortfolioFallback(existing) {
+  const localPortfolio = readLocalPortfolioUpdate();
+  const latestUpdates = Array.isArray(existing?.latestUpdates) ? [...existing.latestUpdates] : [];
+
+  if (localPortfolio) {
+    const withoutPortfolio = latestUpdates.filter((update) => update.repo !== "portfolio");
+    latestUpdates.splice(0, latestUpdates.length, localPortfolio, ...withoutPortfolio);
+  }
+
+  return {
+    ...(existing ?? defaultActivity()),
+    generatedAt: new Date().toISOString(),
+    latestUpdates: latestUpdates.slice(0, 4),
+  };
+}
+
 async function buildActivity() {
   const existing = await readExisting();
 
@@ -140,7 +177,7 @@ async function buildActivity() {
   } catch (error) {
     console.warn("[activity] Falling back to existing activity data.");
     console.warn(error instanceof Error ? error.message : error);
-    return existing ?? defaultActivity();
+    return mergePortfolioFallback(existing);
   }
 }
 

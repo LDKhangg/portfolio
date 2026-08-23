@@ -1,6 +1,21 @@
 import styled from "styled-components";
+import LogoLoop, { type LogoLoopItem } from "@/components/LogoLoop";
 import { Section, SectionAnchor, SectionHeading } from "@/components/layout";
 import { content } from "@/content";
+
+const STACK_LOGOS: LogoLoopItem[] = [
+  { src: `${import.meta.env.BASE_URL}tech-logos/openjdk.svg`, alt: "Java", href: "https://openjdk.org/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/spring.svg`, alt: "Spring", href: "https://spring.io/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/go.svg`, alt: "Go", href: "https://go.dev/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/react.svg`, alt: "React", href: "https://react.dev/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/typescript.svg`, alt: "TypeScript", href: "https://www.typescriptlang.org/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/postgresql.svg`, alt: "PostgreSQL", href: "https://www.postgresql.org/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/mysql.svg`, alt: "MySQL", href: "https://www.mysql.com/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/redis.svg`, alt: "Redis", href: "https://redis.io/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/rabbitmq.svg`, alt: "RabbitMQ", href: "https://www.rabbitmq.com/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/docker.svg`, alt: "Docker", href: "https://www.docker.com/" },
+  { src: `${import.meta.env.BASE_URL}tech-logos/githubactions.svg`, alt: "GitHub Actions", href: "https://github.com/features/actions" },
+];
 
 const Intro = styled.p`
   max-width: 760px;
@@ -85,6 +100,25 @@ const StackRow = styled.div`
   }
 `;
 
+const StackCopy = styled.p`
+  color: ${({ theme }) => theme.colors.body};
+  line-height: 1.65;
+`;
+
+const LoopPanel = styled.div`
+  display: grid;
+  gap: 12px;
+  padding-top: 6px;
+`;
+
+const LoopFrame = styled.div`
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+`;
+
 const RepoLinks = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -121,22 +155,6 @@ const Label = styled.div`
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.accent};
-`;
-
-const Items = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-
-  span {
-    border: 1px solid ${({ theme }) => theme.colors.line};
-    border-radius: 999px;
-    padding: 5px 10px;
-    font-family: ${({ theme }) => theme.fonts.mono};
-    font-size: 0.7rem;
-    color: ${({ theme }) => theme.colors.text};
-    background: rgba(255, 255, 255, 0.03);
-  }
 `;
 
 const ConfigCard = styled.article`
@@ -198,25 +216,38 @@ export function SkillsTech() {
           </RepoLinks>
           <Shell>
             <MainColumn>
-              <StackBoard>
-                <StackBoardHeader>
-                  <Label>Core stack</Label>
-                  <StackTitle>Grouped tighter so the stack reads fast instead of scattering across the page.</StackTitle>
-                </StackBoardHeader>
+                <StackBoard>
+                  <StackBoardHeader>
+                    <Label>Core stack</Label>
+                    <StackTitle>One tighter view of the tools I actually use instead of a wall of scattered chips.</StackTitle>
+                  </StackBoardHeader>
 
-                <StackRows>
-                  {content.skills.groups.map((g) => (
-                    <StackRow key={g.label}>
-                      <Label>{g.label}</Label>
-                      <Items>
-                        {g.items.split(" · ").map((item) => (
-                          <span key={item}>{item}</span>
-                        ))}
-                      </Items>
-                    </StackRow>
-                  ))}
-                </StackRows>
-              </StackBoard>
+                  <StackRows>
+                    {content.skills.groups.map((g) => (
+                      <StackRow key={g.label}>
+                        <Label>{g.label}</Label>
+                        <StackCopy>{g.items}</StackCopy>
+                      </StackRow>
+                    ))}
+                  </StackRows>
+
+                  <LoopPanel>
+                    <Label>Tool loop</Label>
+                    <LoopFrame>
+                      <LogoLoop
+                        logos={STACK_LOGOS}
+                        speed={58}
+                        gap={28}
+                        logoHeight={34}
+                        pauseOnHover
+                        fadeOut
+                        fadeOutColor="#403d4d"
+                        scaleOnHover
+                        ariaLabel="Core stack logos"
+                      />
+                    </LoopFrame>
+                  </LoopPanel>
+                </StackBoard>
             </MainColumn>
 
             <SideColumn>
